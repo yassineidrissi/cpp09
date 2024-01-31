@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:24:43 by yassine           #+#    #+#             */
-/*   Updated: 2024/01/31 15:47:25 by yassine          ###   ########.fr       */
+/*   Updated: 2024/01/31 16:37:11 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int main(int ac, char **av)
 {
+    std::map<std::string, double> bitcointExchange;
     if (ac == 2)
     {
         std::ifstream data(av[1]);
@@ -25,7 +26,8 @@ int main(int ac, char **av)
         std::string line;
         while(std::getline(data, line))
         {
-            std::cout << line << std::endl;
+            bitcoinExchange(bitcointExchange, line);
+            //std::cout << line << std::endl;
         }
         data.close();
     }
