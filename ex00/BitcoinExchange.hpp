@@ -6,10 +6,12 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/01/28 21:27:40 by yassine          ###   ########.fr       */
+/*   Updated: 2024/01/29 22:27:39 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <map>
+#include <string>
