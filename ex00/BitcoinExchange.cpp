@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:16 by yassine           #+#    #+#             */
-/*   Updated: 2024/01/31 16:51:52 by yassine          ###   ########.fr       */
+/*   Updated: 2024/02/14 19:47:36 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <sstream>
 
-void bitcoinexchange(std::map<std::string, double>& bitcointExchange, std::string& line)
+void bitcoinExchange(std::map<std::string, double>& bitcointExchange, std::string& line)
 {
     std::istringstream ss(line);
     std::string date;
-    double value;
+    __unused double value;
+   (void) bitcointExchange;
     
     // if(std::getline(ss, date, ',') && ss >> value)
     //     bitcointExchange[date] = value;
