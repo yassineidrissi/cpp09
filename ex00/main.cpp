@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:24:43 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/24 02:37:22 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/24 04:20:50 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ int main(int ac, char **av)
     std::map<std::string, double> bitcoinExchange;
     if (ac == 2)
     {
-        std::ifstream data(av[1]);
-        if(!data.is_open())
+        std::ifstream input(av[1]);
+        std::ifstream data("./data.csv");
+        if(!input.is_open() || !data.is_open()) 
         {
             std::cout << "Could not open file " << std::endl;
             return 1;
         }
-        bitcoinExchange = fill(bitcoinExchange, data);
+        bitcoinExchange = fillData(bitcoinExchange, data);
+        
     }
     else
     {

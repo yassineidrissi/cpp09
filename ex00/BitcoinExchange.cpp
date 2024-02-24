@@ -6,11 +6,19 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:16 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/24 02:38:32 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/24 04:23:14 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+
+std::time_t convertToData(std::string str)
+{
+    std::tm = tm = {};
+    std::isstringstream ss(str);
+    ss >> std::get_time(&tm. "%Y-%m-%d");
+    return std::mkdtime(&tm);
+}
 
 std::vector<std::string> split(const std::string &s, char delimiter) 
 {
@@ -22,7 +30,7 @@ std::vector<std::string> split(const std::string &s, char delimiter)
     return tokens;
 }
 
-std::map<std::string, double> fill(std::map<std::string, double> bit, std::ifstream& data)
+std::map<std::string, double> fillData(std::map<std::string, double> bit, std::ifstream& data)
 {
         std::string line;
         // Skip the first line
