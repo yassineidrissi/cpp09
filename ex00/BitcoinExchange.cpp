@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:16 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/24 07:12:02 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/24 08:10:35 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,22 @@ std::map<std::time_t, double> fillData(std::map<std::time_t, double> bit, std::i
 std::map<std::time_t, double> fillInput(std::map<std::time_t, double> bitInput, std::string input)
 {
     std::string line;
-    std::getline(bitInput, line);//skip first line
-    while(std::getline())
+    (void) bitInput;
+    // std::getline(bitInput, line);//skip first line
+    while(std::getline(input, line))
     {
         std::vector<std::string> splitLine  = split(line, '|');
         if(splitLine.size() == 2)
         {
-            
+           std::cout << splitLine[0] << " " << splitLine[1] << std::endl;
         }
         else
         {
-            std::err << "Error : not input =>  " << splitline[0] << std::endl; 
+            std::cerr << "Error : not input =>  " << splitLine[0] << std::endl; 
             exit(-1);
         }
     }
+    return bitInput;
 }
 
 //     std::istringstream ss(line);

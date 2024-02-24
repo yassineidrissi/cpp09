@@ -5,9 +5,9 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
-      "args": [],
+      "args": ["../data.csv"],
       "cwd": "/Users/yassine/Desktop/cpp09/ex00",
-      "program": "/Users/yassine/Desktop/cpp09/ex00/build/Debug/outDebug"
+      "program": "/Users/yassine/Desktop/cpp09/ex00/btc"
     }
   ]
 }
