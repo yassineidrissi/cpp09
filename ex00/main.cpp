@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:24:43 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/24 04:20:50 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/24 05:38:27 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main(int ac, char **av)
 {
-    std::map<std::string, double> bitcoinExchange;
+    std::map<std::time_t, double> bitData;
+    std::map<std::time_t, double> bitInput;
     if (ac == 2)
     {
         std::ifstream input(av[1]);
@@ -24,8 +25,8 @@ int main(int ac, char **av)
             std::cout << "Could not open file " << std::endl;
             return 1;
         }
-        bitcoinExchange = fillData(bitcoinExchange, data);
-        
+        bitData = fillData(bitData, data);
+        bitInput = fillInput(bitInput, input);
     }
     else
     {
@@ -37,7 +38,7 @@ int main(int ac, char **av)
 
 // int main(int ac, char **av)
 // {
-//     std::map<std::string, double> bitcointExchange;
+//     std::map<std::time_t, double> bitcointExchange;
 //     if (ac == 2)
 //     {
 //         std::ifstream data(av[1]);
@@ -61,7 +62,7 @@ int main(int ac, char **av)
 //     else
 //         std::cout << "Invalid arguments : Add data file in parametre" << std::endl;
 // }
-    // std::map<std::string, double> bitcointExchange;
+    // std::map<std::time_t, double> bitcointExchange;
     // bitcointExchange["2023-01-01"] = 50000.0;
     // bitcointExchange["2023-01-02"] = 55000.0;
 
@@ -71,7 +72,7 @@ int main(int ac, char **av)
     // // else
     // //     std::cout << test << " not exist " << std::endl;
     // double value = 5500;
-    // for(std::map<std::string, double>::iterator it = bitcointExchange.begin(); it != bitcointExchange.end(); ++it)
+    // for(std::map<std::time_t, double>::iterator it = bitcointExchange.begin(); it != bitcointExchange.end(); ++it)
     // {
     //     // if(it->second == value)
     //         // break;

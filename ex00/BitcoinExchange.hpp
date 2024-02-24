@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/24 02:37:30 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/24 07:12:32 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <vector>
 #include <sstream>
 #include <thread>
+#include <ctime>
 
-std::map<std::string, double> fill(std::map<std::string, double> bit, std::ifstream& data);
+std::map<std::time_t, double> fillData(std::map<std::time_t, double> bit, std::ifstream& data);
 std::vector<std::string> split(const std::string &s, char delimiter);
+std::map<std::time_t, double> fillInput(std::map<std::time_t, double> bitInput, std::string input);

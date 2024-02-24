@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:16 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/24 04:23:14 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/24 07:12:02 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 std::time_t convertToData(std::string str)
 {
-    std::tm = tm = {};
-    std::isstringstream ss(str);
-    ss >> std::get_time(&tm. "%Y-%m-%d");
-    return std::mkdtime(&tm);
+    std::tm tm;
+    memset(&tm, 0, sizeof(std::tm)); // Initialize all fields to zero
+    std::istringstream ss(str);
+    ss >> std::get_time(&tm, "%Y-%m-%d");
+    return std::mktime(&tm);
 }
 
 std::vector<std::string> split(const std::string &s, char delimiter) 
@@ -30,28 +31,32 @@ std::vector<std::string> split(const std::string &s, char delimiter)
     return tokens;
 }
 
-std::map<std::string, double> fillData(std::map<std::string, double> bit, std::ifstream& data)
+std::map<std::time_t, double> fillData(std::map<std::time_t, double> bit, std::ifstream& data)
 {
         std::string line;
         // Skip the first line
-        std::getline(data, line);
+        std::getline(data, line); // Skip the first line
         while(std::getline(data, line))
         {
             std::vector<std::string> splitLine = split(line, ',');
-            std::cout << line << std::endl;
+            // std::cout << line << std::endl;
             // std::cout << splitLine[1] << std::endl;
             if (splitLine.size() == 2) 
             {
-                std::string key = splitLine[0];
+                std::time_t key = convertToData(splitLine[0]);
                 try {
                     double value = std::stod(splitLine[1]);
                     bit[key] = value;
                     std::cout << key << std::endl;
                     std::cout << value << std::endl;
                     std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
-                } catch (std::invalid_argument const &e) {
+                }//! im not sure if we need to catch here 
+                catch (std::invalid_argument const &e) 
+                {
                     std::cout << "Invalid argument: " << splitLine[1] << " is not a number.\n";
-                } catch (std::out_of_range const &e) {
+                } 
+                catch (std::out_of_range const &e) 
+                {
                     std::cout << "Out of range: " << splitLine[1] << " is too big.\n";
                 }
             }
@@ -59,6 +64,26 @@ std::map<std::string, double> fillData(std::map<std::string, double> bit, std::i
         data.close();
         return bit;
 }
+
+std::map<std::time_t, double> fillInput(std::map<std::time_t, double> bitInput, std::string input)
+{
+    std::string line;
+    std::getline(bitInput, line);//skip first line
+    while(std::getline())
+    {
+        std::vector<std::string> splitLine  = split(line, '|');
+        if(splitLine.size() == 2)
+        {
+            
+        }
+        else
+        {
+            std::err << "Error : not input =>  " << splitline[0] << std::endl; 
+            exit(-1);
+        }
+    }
+}
+
 //     std::istringstream ss(line);
 //     std::string date;
 //     __unused double value;
