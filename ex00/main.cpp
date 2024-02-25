@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:24:43 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/24 08:08:18 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/25 06:39:49 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int main(int ac, char **av)
             return 1;
         }
         bitData = fillData(bitData, data);
-        bitInput = fillInput(bitInput, input);
+        // bitInput = fillInput(bitInput, input, bitData);
     }
     else
     {
-        std::cout << "Invalid arguments : Add data file in parameter" << std::endl;
+        std::cerr << "Invalid arguments : Add data file in parameter" << std::endl;
         return 1;
     }
     return 0;
