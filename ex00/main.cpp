@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:24:43 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/25 06:39:49 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/25 07:34:42 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,12 @@ int main(int ac, char **av)
         std::ifstream input(av[1]);
         std::ifstream data("data.csv");
         if(!input.is_open() || !data.is_open()) 
-        {
-            std::cout << "Could not open file " << std::endl;
-            return 1;
-        }
-        bitData = fillData(bitData, data);
-        // bitInput = fillInput(bitInput, input, bitData);
+            return (printErr("Error: could not open file.",1));
+        fillData(bitData, data);
+        fillInput(bitInput, input, bitData);
     }
     else
-    {
-        std::cerr << "Invalid arguments : Add data file in parameter" << std::endl;
-        return 1;
-    }
+        return (printErr("Error: could not open file.",1));
     return 0;
 }
 

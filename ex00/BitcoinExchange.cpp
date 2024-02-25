@@ -12,10 +12,18 @@
 
 #include "BitcoinExchange.hpp"
 
-int printErr(int i)
+int printErr(std::string st,int op)
 {
-    if (i == 0)
-        std::cerr << RED << "E"
+    const char *str = st.c_str();
+    if (op == 1)
+        std::cerr << RED << str << RESET << std::endl;
+    else if (op == 2)
+        std::cerr << RED << "Error: bad input => " << str << RESET << std::endl;
+    else if(op == 3)
+        std::cerr << RED << "Error: not a positive number." << RESET << std::endl;
+    else
+        std::cerr << RED << "Error: too large a number." << RESET << std::endl;
+    return 1;
 }
 
 void printTime(time_t &tm)
@@ -45,7 +53,7 @@ std::vector<std::string> split(const std::string &s, char delimiter)
     return tokens;
 }
 
-std::map<std::time_t, double> fillData(std::map<std::time_t, double> bit, std::ifstream& data)
+void fillData(std::map<std::time_t, double>& bit, std::ifstream& data)
 {
         std::string line;
         // time_t tm;
@@ -58,7 +66,7 @@ std::map<std::time_t, double> fillData(std::map<std::time_t, double> bit, std::i
             // std::cout << splitLine[1] << std::endl;
             // if (splitLine.size() == 2) 
             // {
-                tm = convertToData(splitLine[1]);
+                // tm = convertToData(splitLine[1]);
                 std::time_t key = convertToData(splitLine[0]);
                 try {
                     double value = std::stod(splitLine[1]);
@@ -78,7 +86,7 @@ std::map<std::time_t, double> fillData(std::map<std::time_t, double> bit, std::i
             // }
         }
         data.close();
-        return bit;
+        // return bit;
 }
 
 void printTwoparam(std::vector<std::string> &splitLine)
