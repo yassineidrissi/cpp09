@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/25 09:22:41 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/25 22:51:29 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define RESET "\033[0m"
 
 typedef struct bit_t {
-	std::map<std::time_t, double> bigData;
+	std::map<std::time_t, double> bitData;
 	std::map<std::time_t, double> bitInput;
 	std::ifstream input;
 	std::ifstream data;
@@ -37,6 +37,6 @@ typedef struct bit_t {
 }bit;
 
 int printErr(std::string str,int op);
-void fillData(std::map<std::time_t, double>& bit, std::ifstream& data);
+void fillData(bit &b);
 void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input, std::ifstream& data);
 std::vector<std::string> split(const std::string &s, char delimiter);

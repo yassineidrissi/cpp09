@@ -70,8 +70,9 @@ void fillData(bit &b)
                 std::time_t key = convertToData(splitLine[0]);
                 try {
                     double value = std::stod(splitLine[1]);
-                    b.bit[key] = value;
-                    // std::cout << key << std::endl;
+                    b.bitData[key] = value;
+                    // // std::cout << key << std::endl;
+                    // printTime(key);
                     // std::cout << value << std::endl;
                     // std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
                 }//! im not sure if we need to catch here 
@@ -85,7 +86,7 @@ void fillData(bit &b)
                 }
             // }
         }
-        data.close();
+        b.data.close();
         // return bit;
 }
 
