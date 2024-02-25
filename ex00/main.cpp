@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:24:43 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/25 07:34:42 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/25 09:19:23 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int main(int ac, char **av)
 {
-    std::map<std::time_t, double> bitData;
-    std::map<std::time_t, double> bitInput;
+    
     if (ac == 2)
     {
-        std::ifstream input(av[1]);
-        std::ifstream data("data.csv");
-        if(!input.is_open() || !data.is_open()) 
+        bit bit;
+        bit.input.open(av[1]);
+        bit.data.open("./data.csv");
+        if(!bit.input.is_open() || !bit.data.is_open()) 
             return (printErr("Error: could not open file.",1));
-        fillData(bitData, data);
-        fillInput(bitInput, input, bitData);
+        fillData(bit);
+        // fillInput(bitInput, input, data);
     }
     else
         return (printErr("Error: could not open file.",1));

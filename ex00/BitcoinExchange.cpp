@@ -53,13 +53,13 @@ std::vector<std::string> split(const std::string &s, char delimiter)
     return tokens;
 }
 
-void fillData(std::map<std::time_t, double>& bit, std::ifstream& data)
+void fillData(bit &b)
 {
         std::string line;
         // time_t tm;
         // Skip the first line
-        std::getline(data, line); // Skip the first line
-        while(std::getline(data, line))
+        std::getline(b.data, line); // Skip the first line
+        while(std::getline(b.data, line))
         {
             std::vector<std::string> splitLine = split(line, ',');
             // std::cout << line << std::endl;
@@ -70,7 +70,7 @@ void fillData(std::map<std::time_t, double>& bit, std::ifstream& data)
                 std::time_t key = convertToData(splitLine[0]);
                 try {
                     double value = std::stod(splitLine[1]);
-                    bit[key] = value;
+                    b.bit[key] = value;
                     // std::cout << key << std::endl;
                     // std::cout << value << std::endl;
                     // std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
@@ -101,10 +101,11 @@ void printTwoparam(std::vector<std::string> &splitLine)
 }
 
 // std::map<std::time_t, double>
-// void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input)
+// void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input, std::ifstream& data)
 // {
 //     std::string line;
-//     (void) input;
+//     (void) bitInput;
+//     (void) data;
 //     std::getline(input, line);//skip first line
 //     while(std::getline(input, line))
 //     {
@@ -112,13 +113,12 @@ void printTwoparam(std::vector<std::string> &splitLine)
 //         std::vector<std::string> splitLine  = split(line, '|');
 //         if (splitLine.size() == 2)
 //             printTwoparam(splitLine);
-//         else if(splitLine.size() == 1)
-//             std::cerr << "Error : bad input => " << splitLine[0].c_str() << std::endl;
 //         else
 //             std::cerr << "Error : not input =>  " << splitLine[0].c_str() << std::endl; 
-//         }
+//         // else if(splitLine.size() == 1)
+//         //     std::cerr << "Error : bad input => " << splitLine[0].c_str() << std::endl;
 //     }
-//     return bitInput;
+//     // return bitInput;
 // }
 
 //     std::istringstream ss(line);
