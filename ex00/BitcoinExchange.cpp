@@ -31,7 +31,7 @@ void printTime(time_t &tm)
     std::tm* tm_ptr = std::localtime(&tm);
     std::stringstream ss;
     ss << std::put_time(tm_ptr, "%Y-%m-%d");
-    std::cout << "Time: " << ss.str() << std::endl;
+    std::cout << ss.str();
 }
 
 std::time_t stot(std::string str)
@@ -94,15 +94,25 @@ void fillData(bit &b)
         // return bit;
 }
 
-void printTwoparam(std::vector<std::string> &splitLine)
+// double get_value(bit& b,time_t t)
+// {
+//     std::cout << t << std::endl;
+//     return atof(b)
+// }
+
+void printTwoparam(bit& b,time_t t, double value)
 {
-        // double num = spl
-        if (std::atof(splitLine[1].c_str()) >= 0)
-        {
-           std::cout << splitLine[0] << " " << splitLine[1] << std::endl;
-        }
-        else if(splitLine.size() == 2 && std::atof(splitLine[1].c_str()) < 0)
-            std::cerr << RED <<"Error : not a postif number" << RESET << std::endl;
+    printTime(t);
+    // (void) value;
+    // (void) b;
+    std::cout << GREEN << " => " << value << " Max Data : " ;
+    printTime(b.maxData);
+    std::cout << " min data ";
+    printTime(b.minData);
+    std::cout << RESET << std::endl;
+    // double new_v = get_value(b, t);
+
+    
 }
 
 // std::map<std::time_t, double>
@@ -110,7 +120,7 @@ void printTwoparam(std::vector<std::string> &splitLine)
 
 int checkLine(std::string l)
 {
-    std::cout << l << "and size :" << l.size() << std::endl;
+    // std::cout << l << "and size :" << l.size() << std::endl;
     if (l.size() != 10 && l[4] == '-' && l[7] != '-')
         return 0;
     for(int i = 0; i < 10; i++)
@@ -124,21 +134,27 @@ void fillInput(bit &b)
 {
     std::string line;
     std::getline(b.input, line);//skip first line
+    if(std::strcmp(line.c_str(), "date | value") == 0)
+        std::cerr << RED <<"bad Header" << RESET << std::endl;
     while(std::getline(b.input, line))
     {
-        
         std::vector<std::string> splitLine  = split(line, ',');
         std::time_t key = stot(splitLine[0]);
-        if (checkLine(splitLine[0]))
-            std::cerr << "IS correct " << std::endl;
+        if(atof(splitLine[1].c_str()) < 0)
+            printErr(splitLine[1], 3);
+        else if (atof(splitLine[1].c_str()) > INT_MAX)
+            printErr(splitLine[1], 4);
+        else if (splitLine.size() == 2 && checkLine(splitLine[0]) && key < b.maxData && key > b.minData)
+            printTwoparam(b, key, atof(splitLine[1].c_str()));
         else
-            std::cerr << "walo walo walo" << std::endl;
-        printTime(key);
-        std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
-        if (splitLine.size() == 2)
-            printTwoparam(splitLine);
-        else
-            std::cerr << "Error : not input =>  " << splitLine[0].c_str() << std::endl; 
+            printErr(splitLine[0], 2);
+            // std::cerr << "Error : not input =>  " << splitLine[0].c_str() << std::endl; 
+        //     std::cerr << "IS correct " << std::endl;
+        //     std::cerr << "walo walo walo" << std::endl;
+        // printTime(key);
+        // std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
+        // if ()
+        // else
         // else if(splitLine.size() == 1)
         //     std::cerr << "Error : bad input => " << splitLine[0].c_str() << std::endl;
     }
