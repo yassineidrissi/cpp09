@@ -34,12 +34,12 @@ void printTime(time_t &tm)
     std::cout << "Time: " << ss.str() << std::endl;
 }
 
-std::time_t convertToData(std::string str)
+std::time_t stot(std::string str)
 {
     std::tm tm;
     memset(&tm, 0, sizeof(std::tm)); // Initialize all fields to zero
     std::istringstream ss(str);
-    ss >> std::get_time(&tm, "%Y-%m-%d");
+    ss >> std::get_time(&tm,  "%Y-%m-%d");
     return std::mktime(&tm);
 }
 
@@ -66,11 +66,15 @@ void fillData(bit &b)
             // std::cout << splitLine[1] << std::endl;
             // if (splitLine.size() == 2) 
             // {
-                // tm = convertToData(splitLine[1]);
-                std::time_t key = convertToData(splitLine[0]);
+                // tm = stot(splitLine[1]);
+                std::time_t key = stot(splitLine[0]);
                 try {
                     double value = std::stod(splitLine[1]);
                     b.bitData[key] = value;
+                    if(key > b.maxData)
+                        b.maxData = key;
+                    if(key < b.minData)
+                        b.minData = key;
                     // // std::cout << key << std::endl;
                     // printTime(key);
                     // std::cout << value << std::endl;
@@ -103,24 +107,43 @@ void printTwoparam(std::vector<std::string> &splitLine)
 
 // std::map<std::time_t, double>
 // void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input, std::ifstream& data)
-// {
-//     std::string line;
-//     (void) bitInput;
-//     (void) data;
-//     std::getline(input, line);//skip first line
-//     while(std::getline(input, line))
-//     {
+
+int checkLine(std::string l)
+{
+    std::cout << l << "and size :" << l.size() << std::endl;
+    if (l.size() != 10 && l[4] == '-' && l[7] != '-')
+        return 0;
+    for(int i = 0; i < 10; i++)
+        if (i != 4 && i != 7 && !isnumber(l[i]))
+            return(0);
+            // std::cout << "************** => "<< i << " " << l[i] << std::endl;
+    return (1);
+}
+
+void fillInput(bit &b)
+{
+    std::string line;
+    std::getline(b.input, line);//skip first line
+    while(std::getline(b.input, line))
+    {
         
-//         std::vector<std::string> splitLine  = split(line, '|');
-//         if (splitLine.size() == 2)
-//             printTwoparam(splitLine);
-//         else
-//             std::cerr << "Error : not input =>  " << splitLine[0].c_str() << std::endl; 
-//         // else if(splitLine.size() == 1)
-//         //     std::cerr << "Error : bad input => " << splitLine[0].c_str() << std::endl;
-//     }
-//     // return bitInput;
-// }
+        std::vector<std::string> splitLine  = split(line, ',');
+        std::time_t key = stot(splitLine[0]);
+        if (checkLine(splitLine[0]))
+            std::cerr << "IS correct " << std::endl;
+        else
+            std::cerr << "walo walo walo" << std::endl;
+        printTime(key);
+        std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
+        if (splitLine.size() == 2)
+            printTwoparam(splitLine);
+        else
+            std::cerr << "Error : not input =>  " << splitLine[0].c_str() << std::endl; 
+        // else if(splitLine.size() == 1)
+        //     std::cerr << "Error : bad input => " << splitLine[0].c_str() << std::endl;
+    }
+    // return bitInput;
+}
 
 //     std::istringstream ss(line);
 //     std::string date;

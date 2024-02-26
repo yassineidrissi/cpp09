@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/25 22:51:29 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:59:01 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ typedef struct bit_t {
 	std::map<std::time_t, double> bitInput;
 	std::ifstream input;
 	std::ifstream data;
-	double maxData;
-	double minData;
+	time_t maxData;
+	time_t minData;
 }bit;
 
 int printErr(std::string str,int op);
 void fillData(bit &b);
-void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input, std::ifstream& data);
+void fillInput(bit &b);
+void printTime(time_t &tm);
+// void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input, std::ifstream& data);
 std::vector<std::string> split(const std::string &s, char delimiter);

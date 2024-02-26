@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:24:43 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/25 22:59:02 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:01:27 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ int main(int ac, char **av)
         bit bit;
         bit.input.open(av[1]);
         bit.data.open("./data.csv");
+        bit.maxData = INT_MAX;
+        bit.minData = 0;
+        // printTime(bit.maxData); 
+        // printTime(bit.minData);
         if(!bit.input.is_open() || !bit.data.is_open()) 
             return (printErr("Error: could not open file.",1));
         fillData(bit);
-        // fillInput(bitInput, input, data);
+        fillInput(bit);
     }
     else
         return (printErr("Error: could not open file.",1));
