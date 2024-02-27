@@ -18,7 +18,7 @@ int printErr(std::string st,int op)
     if (op == 1)
         std::cerr << RED << str << RESET << std::endl;
     else if (op == 2)
-        std::cerr << RED << "Error: bad input => " << str << RESET << std::endl;
+        std::cerr << RED << "Error: bad input => " << RESET << str << std::endl;
     else if(op == 3)
         std::cerr << RED << "Error: not a positive number." << RESET << std::endl;
     else
@@ -83,17 +83,13 @@ void fillData(bit &b)
 }
 
 std::time_t findClosestTime(bit& b, std::time_t inputTime) {
-    std::time_t closestTime = b.minData;
-    double smallestDiff = std::fabs(std::difftime(inputTime, closestTime));
-
-    for (std::map<std::time_t, double>::const_iterator it = b.bitData.begin(); it != b.bitData.end(); ++it) {
-        double diff = std::fabs(std::difftime(inputTime, it->first));
-        if (diff < smallestDiff) {
-            smallestDiff = diff;
-            closestTime = it->first;
-        }
+    std::time_t closestTime = 0; // Initialize to an invalid value
+    for (std::map<std::time_t, double>::const_iterator it = b.bitData.begin(); it != b.bitData.end(); ++it) 
+    {
+        if (it->first > inputTime)
+            break;
+        closestTime = it->first;
     }
-
     return closestTime;
 }
 
@@ -109,7 +105,7 @@ void printTwoparam(bit& b,time_t t, double value)
 
 int checkLine(std::string l)
 {
-    if (l.size() != 10 && l[4] == '-' && l[7] != '-')
+    if (l.size() != 11 || l[4] != '-' ||  l[7] != '-' || l[10] != ' ')
         return 0;
     for(int i = 0; i < 10; i++)
         if (i != 4 && i != 7 && !isnumber(l[i]))

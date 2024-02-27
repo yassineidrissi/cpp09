@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/27 19:35:51 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:20:48 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 #include <map>
 #include <string>
 #include <fstream>
-#include <vector>
 #include <sstream>
-#include <thread>
 #include <ctime>
-#include <fstream>
 #include <cmath>
+#include <vector>
+#include <string>
 
 #define RED "\033[31m"
 #define YELLOW "\033[33m"
@@ -39,7 +38,10 @@ typedef struct bit_t {
 	double value;
 }bit;
 
+//************* print Functions ***********//
 int printErr(std::string str,int op);
+void printTime(time_t &tm);
+
 void fillData(bit &b);
 void fillInput(bit &b);
 void printTime(time_t &tm);
