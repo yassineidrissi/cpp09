@@ -68,7 +68,7 @@ void fillData(bit &b)
                     b.maxData = key;
                 if(key < b.minData)
                     b.minData = key;
-                b.data[key] = value; // insert new data into b.data
+                b.bitData[key] = value; // insert new data into b.data
             }//! im not sure if we need to catch here 
             catch (std::invalid_argument const &e) 
             {
@@ -82,28 +82,28 @@ void fillData(bit &b)
         b.data.close();
 }
 
-// std::time_t findClosestTime(bit& b, std::time_t inputTime) {
-//     std::time_t closestTime = b.minData;
-//     double smallestDiff = std::abs(std::difftime(inputTime, closestTime));
+std::time_t findClosestTime(bit& b, std::time_t inputTime) {
+    std::time_t closestTime = b.minData;
+    double smallestDiff = std::fabs(std::difftime(inputTime, closestTime));
 
-//     for (const auto& pair : b.bitData) {
-//         double diff = std::abs(std::difftime(inputTime, pair.first));
-//         if (diff < smallestDiff) {
-//             smallestDiff = diff;
-//             closestTime = pair.first;
-//         }
-//     }
+    for (std::map<std::time_t, double>::const_iterator it = b.bitData.begin(); it != b.bitData.end(); ++it) {
+        double diff = std::fabs(std::difftime(inputTime, it->first));
+        if (diff < smallestDiff) {
+            smallestDiff = diff;
+            closestTime = it->first;
+        }
+    }
 
-//     return closestTime;
-// }
+    return closestTime;
+}
 
 void printTwoparam(bit& b,time_t t, double value)
 {
     printTime(t);
     (void) b;
     std::cout << GREEN << " => " << RESET << value << GREEN << " = " << RESET;
-    // b.closesttime = findClosestTime(b, t); 
-    // std::cout << YELLOW << value*b.data[b.closecttime] << RESET;
+    b.closecttime = findClosestTime(b, t); 
+    std::cout << YELLOW << value*b.bitData[b.closecttime] << RESET;
     std::cout << RESET << std::endl;
 }
 
@@ -121,7 +121,7 @@ void fillInput(bit &b)
 {
     std::string line;
     std::getline(b.input, line);//skip first line
-    if(std::strcmp(line.c_str(), "date | value") == 0)
+    if(std::strcmp(line.c_str(), "date | value") != 0)
         std::cerr << RED <<"bad Header" << RESET << std::endl;
     while(std::getline(b.input, line))
     {

@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/27 19:20:07 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:35:51 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <thread>
 #include <ctime>
 #include <fstream>
+#include <cmath>
 
 #define RED "\033[31m"
 #define YELLOW "\033[33m"
