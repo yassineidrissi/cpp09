@@ -56,77 +56,64 @@ std::vector<std::string> split(const std::string &s, char delimiter)
 void fillData(bit &b)
 {
         std::string line;
-        // time_t tm;
-        // Skip the first line
         std::getline(b.data, line); // Skip the first line
         while(std::getline(b.data, line))
         {
             std::vector<std::string> splitLine = split(line, ',');
-            // std::cout << line << std::endl;
-            // std::cout << splitLine[1] << std::endl;
-            // if (splitLine.size() == 2) 
-            // {
-                // tm = stot(splitLine[1]);
-                std::time_t key = stot(splitLine[0]);
-                try {
-                    double value = std::stod(splitLine[1]);
-                    b.bitData[key] = value;
-                    if(key > b.maxData)
-                        b.maxData = key;
-                    if(key < b.minData)
-                        b.minData = key;
-                    // // std::cout << key << std::endl;
-                    // printTime(key);
-                    // std::cout << value << std::endl;
-                    // std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
-                }//! im not sure if we need to catch here 
-                catch (std::invalid_argument const &e) 
-                {
-                    std::cout << "Invalid argument: " << splitLine[1] << " is not a number.\n";
-                } 
-                catch (std::out_of_range const &e) 
-                {
-                    std::cout << "Out of range: " << splitLine[1] << " is too big.\n";
-                }
-            // }
+            std::time_t key = stot(splitLine[0]);
+            try {
+                double value = std::stod(splitLine[1]);
+                b.bitData[key] = value;
+                if(key > b.maxData)
+                    b.maxData = key;
+                if(key < b.minData)
+                    b.minData = key;
+                b.data[key] = value; // insert new data into b.data
+            }//! im not sure if we need to catch here 
+            catch (std::invalid_argument const &e) 
+            {
+                std::cout << "Invalid argument: " << splitLine[1] << " is not a number.\n";
+            } 
+            catch (std::out_of_range const &e) 
+            {
+                std::cout << "Out of range: " << splitLine[1] << " is too big.\n";
+            }
         }
         b.data.close();
-        // return bit;
 }
 
-// double get_value(bit& b,time_t t)
-// {
-//     std::cout << t << std::endl;
-//     return atof(b)
+// std::time_t findClosestTime(bit& b, std::time_t inputTime) {
+//     std::time_t closestTime = b.minData;
+//     double smallestDiff = std::abs(std::difftime(inputTime, closestTime));
+
+//     for (const auto& pair : b.bitData) {
+//         double diff = std::abs(std::difftime(inputTime, pair.first));
+//         if (diff < smallestDiff) {
+//             smallestDiff = diff;
+//             closestTime = pair.first;
+//         }
+//     }
+
+//     return closestTime;
 // }
 
 void printTwoparam(bit& b,time_t t, double value)
 {
     printTime(t);
-    // (void) value;
-    // (void) b;
-    std::cout << GREEN << " => " << value << " Max Data : " ;
-    printTime(b.maxData);
-    std::cout << " min data ";
-    printTime(b.minData);
+    (void) b;
+    std::cout << GREEN << " => " << RESET << value << GREEN << " = " << RESET;
+    // b.closesttime = findClosestTime(b, t); 
+    // std::cout << YELLOW << value*b.data[b.closecttime] << RESET;
     std::cout << RESET << std::endl;
-    // double new_v = get_value(b, t);
-
-    
 }
-
-// std::map<std::time_t, double>
-// void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input, std::ifstream& data)
 
 int checkLine(std::string l)
 {
-    // std::cout << l << "and size :" << l.size() << std::endl;
     if (l.size() != 10 && l[4] == '-' && l[7] != '-')
         return 0;
     for(int i = 0; i < 10; i++)
         if (i != 4 && i != 7 && !isnumber(l[i]))
             return(0);
-            // std::cout << "************** => "<< i << " " << l[i] << std::endl;
     return (1);
 }
 
@@ -138,7 +125,7 @@ void fillInput(bit &b)
         std::cerr << RED <<"bad Header" << RESET << std::endl;
     while(std::getline(b.input, line))
     {
-        std::vector<std::string> splitLine  = split(line, ',');
+        std::vector<std::string> splitLine  = split(line, '|');
         std::time_t key = stot(splitLine[0]);
         if(atof(splitLine[1].c_str()) < 0)
             printErr(splitLine[1], 3);
@@ -148,31 +135,5 @@ void fillInput(bit &b)
             printTwoparam(b, key, atof(splitLine[1].c_str()));
         else
             printErr(splitLine[0], 2);
-            // std::cerr << "Error : not input =>  " << splitLine[0].c_str() << std::endl; 
-        //     std::cerr << "IS correct " << std::endl;
-        //     std::cerr << "walo walo walo" << std::endl;
-        // printTime(key);
-        // std::this_thread::sleep_for(std::chrono::seconds(1)); // Add this line
-        // if ()
-        // else
-        // else if(splitLine.size() == 1)
-        //     std::cerr << "Error : bad input => " << splitLine[0].c_str() << std::endl;
     }
-    // return bitInput;
 }
-
-//     std::istringstream ss(line);
-//     std::string date;
-//     __unused double value;
-//    (void) bitcointExchange;
-//     // if(std::getline(ss, date, ',') && ss >> value)
-//     //     bitcointExchange[date] = value;
-// std::vector<std::string> *split(const std::string &s, char delimiter) {
-//     std::vector<std::string> tokens;
-//     std::string token;
-//     std::istringstream tokenStream(s);
-//     while (std::getline(tokenStream, token, delimiter)) {
-//         tokens.push_back(token);
-//     }
-//     return &tokens;
-// }

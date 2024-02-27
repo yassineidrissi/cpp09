@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/26 16:59:01 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:20:07 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct bit_t {
 	std::ifstream data;
 	time_t maxData;
 	time_t minData;
+	time_t closecttime;
+	double value;
 }bit;
 
 int printErr(std::string str,int op);
