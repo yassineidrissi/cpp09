@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:50:01 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/02/29 01:06:09 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/29 01:08:02 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int parsing(char *av)
 
 int main(int ac, char **av)
 {
-	
+	RPN 
 	if(ac == 2)
 		if(parsing(av[0]))
 			

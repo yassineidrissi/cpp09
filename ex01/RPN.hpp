@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/29 00:50:00 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/29 01:07:50 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 typedef struct RPN_t
 {
-	char 
+	std::string name;
 }RPN;
 
 //********* Colors *****************//

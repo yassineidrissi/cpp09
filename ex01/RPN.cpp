@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:52:43 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/02/29 00:36:19 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/02/29 01:16:29 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ std::vector<std::string> split(const std::string &s, char delimiter)
     while (std::getline(tokenStream, token, delimiter)) 
         tokens.push_back(token);
     return tokens;
+}
+
+int check_v(std::vector<std::string>& c)
+{
+		
 }
