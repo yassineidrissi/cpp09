@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:50:01 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/02/29 01:08:02 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/01 04:56:30 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-int parsing(char *av)
+int parsing(char *av, RPN& r)
 {
-	std::vector<std::string> c = split(av, " ");
-	if (check_v(c))
+	r.c = split(av, ' ');
+	if (check_v(r.c))
 		return 0;
 	else
 		return 1;
@@ -23,10 +23,10 @@ int parsing(char *av)
 
 int main(int ac, char **av)
 {
-	RPN 
+	RPN r;
 	if(ac == 2)
-		if(parsing(av[0]))
-			
+		if(parsing(av[1], r))
+			return 1;
 	else
 		std::cerr << RED << "Wrong parameters" << RESET << std::endl;
 	return 0;

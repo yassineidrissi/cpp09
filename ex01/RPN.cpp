@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:52:43 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/02/29 01:16:29 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/01 05:21:38 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@ std::vector<std::string> split(const std::string &s, char delimiter)
 
 int check_v(std::vector<std::string>& c)
 {
-		
+    for (std::vector<std::string>::iterator it = c.begin(); it != c.end(); ++it)
+        if (*it.size() != 1 || (!isnumber(str[0]) && str[0] != '-' && str[0] != '*' && str[0] != '+' && str[0] != '/'))
+            return 0;
+    return 1;
 }

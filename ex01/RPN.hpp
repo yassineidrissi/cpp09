@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/29 01:07:50 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/01 04:55:48 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef struct RPN_t
 {
 	std::string name;
+	std::vector<std::string> c;
 }RPN;
 
 //********* Colors *****************//
@@ -39,3 +40,4 @@ typedef struct RPN_t
 
 //************ Functions ******************//
 std::vector<std::string> split(const std::string &s, char delimiter);
+int check_v(std::vector<std::string>& c);
