@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:52:43 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/01 22:44:19 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/02 19:40:15 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ std::vector<std::string> split(const std::string &s, char delimiter)
     return tokens;
 }
 
-int check_v(std::vector<std::string>& c)
+int calculNumber(RPN& r)
 {
-    for (std::vector<std::string>::iterator it = c.begin(); it != c.end(); ++it)
+    
+}
+
+int check_v(RPN& r)
+{
+    for (std::vector<std::string>::iterator it = r.c.begin(); it != r.c.end(); ++it)
         if (it->size() != 1 || (!std::isdigit((*it)[0]) && (*it)[0] != '-' && (*it)[0] != '*' && (*it)[0] != '+' && (*it)[0] != '/'))
-            return 0;
+            return calculNumber(r);
     return 1;
 }
