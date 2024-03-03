@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:50:01 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/02 19:39:16 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/03 11:46:56 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 int parsing(char *av, RPN& r)
 {
-	r.c = split(av, ' ');
-	if (check_v(r))
-		return 1;
-	else
-		return 0;
+	r.ln = split(av, ' ');
+	for(size_t i =0 ; i < r.ln.size(); i++)
+	{
+		if(r.ln[i].size() == 1 && (r.ln[i][0] == '-' || r.ln[i][0] == '*' || r.ln[i][0] == '+' || r.ln[i][0] == '/'))
+			r.op.push_back(r.ln[i][0]);
+		else if (r.ln[i].size() == 1 && std::isdigit(r.ln[i][0]))
+			r.nm.push_back(r.ln[i][0] - '0');
+		else
+			return(printErreur(2));
+	}
+	if(r.op.size() < 1 || r.op.size() != r.nm.size() - 1)
+		return(printErreur(2));
+	return 0;
 }
 
 int main(int ac, char **av)
@@ -27,6 +35,7 @@ int main(int ac, char **av)
 	if(ac == 2)
 		if(parsing(av[1], r))
 			return 1;
-	std::cerr << RED << "Error" << RESET << std::endl;
+	operation(r);
+	// std::cerr << RED << "Error" << RESET << std::endl;
 	return 0;
 }

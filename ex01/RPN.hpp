@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/03/02 19:33:27 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/03 11:40:50 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 typedef struct RPN_t
 {
 	std::string name;
-	std::vector<std::string> c;
-	double num;
+	std::deque<int> nm;
+	std::deque<int> op;
+	std::deque<std::string> ln;
 }RPN;
 
 //********* Colors *****************//
@@ -40,5 +41,7 @@ typedef struct RPN_t
 
 
 //************ Functions ******************//
-std::vector<std::string> split(const std::string &s, char delimiter);
+std::deque<std::string> split(const std::string &s, char delimiter) ;
 int check_v(std::vector<std::string>& c);
+int printErreur(int i);
+void operation(RPN_t& r);
