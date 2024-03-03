@@ -43,13 +43,14 @@ std::time_t stot(std::string str)
     return std::mktime(&tm);
 }
 
-std::vector<std::string> split(const std::string &s, char delimiter) 
+std::map<int, std::string> split(const std::string &s, char delimiter) 
 {
-    std::vector<std::string> tokens;
+    std::map<int, std::string> tokens;
     std::string token;
     std::istringstream tokenStream(s);
+    int index = 0;
     while (std::getline(tokenStream, token, delimiter)) 
-        tokens.push_back(token);
+        tokens[index++] = token;
     return tokens;
 }
 
@@ -59,7 +60,7 @@ void fillData(bit &b)
         std::getline(b.data, line); // Skip the first line
         while(std::getline(b.data, line))
         {
-            std::vector<std::string> splitLine = split(line, ',');
+            std::map<int , std::string> splitLine = split(line, ',');
             std::time_t key = stot(splitLine[0]);
             try {
                 double value = std::stod(splitLine[1]);
@@ -121,7 +122,7 @@ void fillInput(bit &b)
         std::cerr << RED <<"bad Header" << RESET << std::endl;
     while(std::getline(b.input, line))
     {
-        std::vector<std::string> splitLine  = split(line, '|');
+        std::map<int, std::string> splitLine  = split(line, '|');
         std::time_t key = stot(splitLine[0]);
         if(atof(splitLine[1].c_str()) < 0)
             printErr(splitLine[1], 3);

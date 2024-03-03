@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/02/27 22:20:48 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/03 08:47:40 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,4 @@ void fillData(bit &b);
 void fillInput(bit &b);
 void printTime(time_t &tm);
 // void fillInput(std::map<std::time_t, double> &bitInput, std::ifstream& input, std::ifstream& data);
-std::vector<std::string> split(const std::string &s, char delimiter);
+std::map<int, std::string> split(const std::string &s, char delimiter);
