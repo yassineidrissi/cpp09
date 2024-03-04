@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/03/03 11:40:50 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/04 22:20:31 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,4 @@ typedef struct RPN_t
 std::deque<std::string> split(const std::string &s, char delimiter) ;
 int check_v(std::vector<std::string>& c);
 int printErreur(int i);
-void operation(RPN_t& r);
+int operation(RPN_t& r);

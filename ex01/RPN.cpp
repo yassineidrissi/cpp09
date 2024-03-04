@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:52:43 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/03 11:48:15 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/04 22:19:32 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,37 @@ int printErreur(int i)
 
 }
 
-void operation(RPN_t& r)
+int operation(RPN_t& r)
 {
-    double n = static_cast<double>(r.nm[0]);
-    for (size_t i = 0; i < r.op.size(); i++)
+    if(r.nm.size() < 2)
     {
-        if(r.op[i] == '+')
-            n += static_cast<double>(r.nm[i + 1]);
-        else if(r.op[i] == '-')
-            n -= static_cast<double>(r.nm[i + 1]);
-        else if(r.op[i] == '*')
-            n *= static_cast<double>(r.nm[i + 1]);
-        else if(r.op[i] == '/')
-            n /= static_cast<double>(r.nm[i + 1]);
+        printErreur(1);
+        return 1;
     }
-    std::cout << n << std::endl;
+
+    int nm1 = 0;
+    if (r.op[0] == '+')
+        nm1 = r.nm[r.nm.size() -2] + r.nm[r.nm.size() -1];
+    else if (r.op[0] == '-')
+        nm1 = r.nm[r.nm.size() -2] - r.nm[r.nm.size() -1];
+    else if (r.op[0] == '*')
+        nm1 = r.nm[r.nm.size() -2] * r.nm[r.nm.size() -1];
+    else if (r.op[0] == '/')
+        nm1 = r.nm[r.nm.size() -2] / r.nm[r.nm.size() -1];
+    std::cout << "the first :" << r.nm[r.nm.size() -2] << std::endl; 
+    std::cout << "the second :" << r.nm[r.nm.size() -1] << std::endl;
+    r.op.pop_back();
+    r.nm.pop_back();
+    r.nm.pop_back();
+    r.nm.push_back(nm1);
+    std::cout << YELLOW << "After : the first :" << r.nm[r.nm.size() -1] << RESET << std::endl; 
+    return 0;
+    // std::cout << "AFTER the second :" << r.nm[r.nm.size() -2] << RESET << std::endl;
+    // std::cout << "the first :" << r.nm[0] << std::endl;
+    // std::cout << "the second :" << r.nm[1] << std::endl;
+    // std::cout << "the op :" << r.op[0] << std::endl;
 }
+
 // int calculNumber(RPN& r)
 // {
     
@@ -56,7 +71,7 @@ void operation(RPN_t& r)
 // int check_v(RPN& r)
 // {
 //     for (std::deque<int>::iterator it = r.c.begin(); it != r.c.end(); ++it)
-//         if (it->size() != 1 || (!std::isdigit((*it)[0]) && (*it)[0] != '-' && (*it)[0] != '*' && (*it)[0] != '+' && (*it)[0] != '/'))
+//         if (it->size() != 1 || (!std::isdigit((*it)[r.nm.size() -1]) && (*it)[r.nm.size() -1] != '-' && (*it)[r.nm.size() -1] != '*' && (*it)[r.nm.size() -1] != '+' && (*it)[r.nm.size() -1] != '/'))
 //             return calculNumber(r);
 //     return 1;
 // }
