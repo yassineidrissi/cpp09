@@ -1,18 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RPN.cpp                                            :+:      :+:    :+:   */
+/*   r.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:52:43 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/04 22:52:29 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:38:46 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-std::deque<std::string> split(const std::string &s, char delimiter) 
+RPN::RPN()
+{
+
+};
+
+RPN::~RPN()
+{
+
+};
+
+RPN::RPN(const RPN &r)
+{
+    *this = r;
+};
+
+RPN &RPN::operator=(const RPN &r)
+{
+    this->name = r.name;
+    this->nm = r.nm;
+    this->op = r.op;
+    this->ln = r.ln;
+    return *this;
+};
+
+
+
+std::deque<std::string> RPN::split(std::string &s, char delimiter) 
 {
     std::deque<std::string> lines;
     std::string ln;
@@ -32,7 +58,9 @@ int printErreur(int i)
 
 }
 
-int operation(RPN_t& r)
+// int RPN::operation()
+
+int RPN::opert(RPN& r)
 {
     if(r.nm.size() < 2)
     {

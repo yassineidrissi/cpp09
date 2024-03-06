@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/03/04 22:20:31 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:11:26 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,31 @@
 #include <vector>
 #include <string>
 
-typedef struct RPN_t
+class RPN
 {
-	std::string name;
-	std::deque<int> nm;
-	std::deque<int> op;
-	std::deque<std::string> ln;
-}RPN;
+//! check if we need to add variables to private part
+	public:
+		std::string name;
+		std::deque<int> nm;
+		std::deque<int> op;
+		std::deque<std::string> ln;
+		RPN();
+		~RPN();
+		RPN(const RPN &r);
+		RPN &operator=(const RPN &r);
+		std::deque<std::string> split(std::string &s, char delimiter) ;
+		int check_v(std::vector<std::string>& c);
+		int opert(RPN& r);
+};
+
+class RPNException : public std::exception
+{
+	public:
+		virtual const char* what() const throw()
+		{
+			return "Error";
+		}
+};
 
 //********* Colors *****************//
 #define RED "\033[31m"
@@ -37,11 +55,8 @@ typedef struct RPN_t
 #define RESET "\033[0m"
 
 //************* print Functions ***********//
+		int printErreur(int i);
 
 
 
-//************ Functions ******************//
-std::deque<std::string> split(const std::string &s, char delimiter) ;
-int check_v(std::vector<std::string>& c);
-int printErreur(int i);
-int operation(RPN_t& r);
+//************ Functions ******************//std::deque<std::string> split(const std::string &s, char delimiter) 

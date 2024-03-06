@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:50:01 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/04 22:34:27 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:19:47 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 int parsing(char *av, RPN& r)
 {
 	int check = 0;
-	r.ln = split(av, ' ');
+	std::string l = av;
+	r.ln = r.split(l, ' ');
 	for(size_t i =0 ; i < r.ln.size() && !check; i++)
 	{
 		if(r.ln[i].size() == 1 && (r.ln[i][0] == '-' || r.ln[i][0] == '*' || r.ln[i][0] == '+' || r.ln[i][0] == '/'))
 		{
 			r.op.push_back(r.ln[i][0]);
-			check = operation(r);
+			check = r.opert(r);
 		}
 		else if (r.ln[i].size() == 1 && std::isdigit(r.ln[i][0]))
 			r.nm.push_back(r.ln[i][0] - '0');
