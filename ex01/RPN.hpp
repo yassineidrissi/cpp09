@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/03/06 12:11:26 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:41:03 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,3 @@ class RPNException : public std::exception
 #define YELLOW "\033[33m"
 #define GREEN "\033[32m"
 #define RESET "\033[0m"
-
-//************* print Functions ***********//
-		int printErreur(int i);
-
-
-
-//************ Functions ******************//std::deque<std::string> split(const std::string &s, char delimiter) 

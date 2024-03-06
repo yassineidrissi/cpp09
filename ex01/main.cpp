@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:50:01 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/06 12:19:47 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:40:17 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int parsing(char *av, RPN& r)
 		else if (r.ln[i].size() == 1 && std::isdigit(r.ln[i][0]))
 			r.nm.push_back(r.ln[i][0] - '0');
 		else
-			return(printErreur(2));
+			throw RPNException();
+			
 	}
 	return check;
 }
@@ -35,9 +36,18 @@ int parsing(char *av, RPN& r)
 int main(int ac, char **av)
 {
 	RPN r;
-	if(ac == 2)
-		if(parsing(av[1], r))
-			return 1;
-	std::cout << GREEN << r.nm[0] << RESET << std::endl;
+	try
+	{
+		if(ac == 2)
+			if(parsing(av[1], r))
+				return 1;
+		for (size_t i = 0; i < r.nm.size(); i++)
+			std::cout << GREEN << r.nm[i] << RESET << std::endl;	
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+	
 	return 0;
 }

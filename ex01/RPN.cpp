@@ -48,26 +48,10 @@ std::deque<std::string> RPN::split(std::string &s, char delimiter)
     return lines;
 }
 
-int printErreur(int i)
-{
-    if (i == 1)
-        std::cerr << RED << "Error" << RESET << std::endl;
-    else if (i == 2)
-        std::cerr << RED << "Error" << RESET << std::endl;
-    return 1;
-
-}
-
-// int RPN::operation()
-
 int RPN::opert(RPN& r)
 {
     if(r.nm.size() < 2)
-    {
-        printErreur(1);
-        return 1;
-    }
-
+        throw RPNException();
     int nm1 = 0;
     if (r.op[0] == '+')
         nm1 = r.nm[r.nm.size() -2] + r.nm[r.nm.size() -1];
