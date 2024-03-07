@@ -6,31 +6,29 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:50:01 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/06 12:40:17 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:46:12 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-int parsing(char *av, RPN& r)
+void parsing(char *av, RPN& r)
 {
 	int check = 0;
 	std::string l = av;
-	r.ln = r.split(l, ' ');
-	for(size_t i =0 ; i < r.ln.size() && !check; i++)
+	r.set_ln(r.split(l, ' '));
+	for(size_t i =0 ; i < r.get_ln().size() && !check; i++)
 	{
-		if(r.ln[i].size() == 1 && (r.ln[i][0] == '-' || r.ln[i][0] == '*' || r.ln[i][0] == '+' || r.ln[i][0] == '/'))
+		if(r.get_ln()[i].size() == 1 && (r.get_ln()[i][0] == '-' || r.get_ln()[i][0] == '*' || r.get_ln()[i][0] == '+' || r.get_ln()[i][0] == '/'))
 		{
-			r.op.push_back(r.ln[i][0]);
-			check = r.opert(r);
+			r.set_op((r.get_ln()[i][0]));
+			check = r.opert();
 		}
-		else if (r.ln[i].size() == 1 && std::isdigit(r.ln[i][0]))
-			r.nm.push_back(r.ln[i][0] - '0');
+		else if (r.get_ln()[i].size() == 1 && std::isdigit(r.get_ln()[i][0]))
+			r.set_nm(r.get_ln()[i][0] - '0');
 		else
 			throw RPNException();
-			
 	}
-	return check;
 }
 
 int main(int ac, char **av)
@@ -38,16 +36,15 @@ int main(int ac, char **av)
 	RPN r;
 	try
 	{
-		if(ac == 2)
-			if(parsing(av[1], r))
-				return 1;
-		for (size_t i = 0; i < r.nm.size(); i++)
-			std::cout << GREEN << r.nm[i] << RESET << std::endl;	
+		if(ac != 2)
+			throw RPNException();
+		parsing(av[1], r);
+		for (size_t i = 0; i < r.get_nm().size(); i++)
+			std::cout << GREEN << r.get_nm()[i] << RESET << std::endl;	
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << RED << e.what() << RESET << std::endl;
-	}
-	
+	}	
 	return 0;
 }
