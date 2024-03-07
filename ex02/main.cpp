@@ -6,19 +6,28 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:34:36 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/05 01:46:06 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/07 20:00:48 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+
 int main(int ac, char **av)
 {
-	if (ac == 1)
+	pm p;
+	try
 	{
-		std::cerr << RED << "Error: No arguments" << RESET << std::endl;
-		return 1;
+		pm p;
+		if (ac < 2)
+			throw 
+		else
+		{
+			p.parcing(av);
+		}
 	}
-	else
-		std::cout << "Arguments: " << av[1] << std::endl;
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}	
 }

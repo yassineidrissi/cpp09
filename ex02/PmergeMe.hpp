@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/03 13:32:05 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:57:36 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,26 @@
 #include <vector>
 #include <string>
 
-typedef struct pm_t
+class pm
 {
-	
-}pm;
+	private:
+		int size;
+		std::vector<std::string> ln;
+		std::vector<int> v;
+		std::list<int>   l;
+	public:
+		pm();
+		~pm();
+		pm(pm const &p);
+		pm &operator=(pm const &p);
+		void parcing();
+        std::vector<std::string> get_ln();
+		void set_ln(std::vector<std::string> ln);
+		std::vector<int> get_v();
+		void set_v(std::vector<int> v);
+		std::list<int> get_l();
+		void set_l(std::list<int> l);
+};
 
 //********* Colors *****************//
 #define RED "\033[31m"
