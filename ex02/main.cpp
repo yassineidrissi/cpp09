@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:34:36 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/07 20:00:48 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:40:24 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int ac, char **av)
 	{
 		pm p;
 		if (ac < 2)
-			throw 
+			throw pm::pmException() ; 
 		else
 		{
 			p.parcing(av);
