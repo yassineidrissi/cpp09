@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/07 19:57:36 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/08 01:03:58 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-#include <map>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <ctime>
 #include <cmath>
 #include <vector>
+#include <list>
 #include <string>
 
 class pm
@@ -28,7 +28,7 @@ class pm
 		int size;
 		std::vector<std::string> ln;
 		std::vector<int> v;
-		std::list<int>   l;
+		std::list<int> l;
 	public:
 		pm();
 		~pm();
@@ -36,7 +36,7 @@ class pm
 		pm &operator=(pm const &p);
 		void parcing();
         std::vector<std::string> get_ln();
-		void set_ln(std::vector<std::string> ln);
+		void set_ln(std::string l);
 		std::vector<int> get_v();
 		void set_v(std::vector<int> v);
 		std::list<int> get_l();
