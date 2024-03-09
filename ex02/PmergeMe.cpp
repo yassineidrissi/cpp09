@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/09 12:21:09 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:03:41 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ void  pm::parcing(char **av)
     }
 	this->size = j;
 	this->fill();
-	
-		// for (size_t i = 0; i < this->get_v().size(); i++)
-		// 	std::cout << RED << this->get_v()[i] << RESET << std::endl;
+
+	// 	for (size_t i = 0; i < this->get_v().size(); i++)
+	// 		std::cout << RED << this->get_v()[i] << RESET << std::endl;
 	// this->print_l();
 }
 
