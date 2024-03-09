@@ -6,12 +6,13 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/09 11:26:51 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:21:09 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+//********* Orthodox Methodes ************//
 pm::pm()
 {
 }
@@ -33,7 +34,8 @@ pm &pm::operator=(pm const &p)
 	return *this;
 }
 
-std::vector<std::string> pm::get_ln()
+//************ Seters and Geters ************//
+std::vector<std::string>& pm::get_ln()
 {
 	return this->ln;
 }
@@ -43,7 +45,7 @@ void pm::set_ln(std::string l)
 	this->ln.push_back(l);
 }
 
-std::vector<int> pm::get_v()
+std::vector<int>& pm::get_v()
 {
 	return this->v;
 }
@@ -53,7 +55,7 @@ void pm::set_v(int v)
 	this->v.push_back(v);
 }
 
-std::list<int> pm::get_l()
+std::list<int>& pm::get_l()
 {
 	return this->l;
 }
@@ -63,6 +65,7 @@ void pm::set_l(int l)
 	this->l.push_back(l);
 }
 
+//************** Functions *****************//
 void pm::split()
 {
 	std::vector<std::string> lines;
@@ -75,34 +78,11 @@ void pm::split()
 
 void pm::fill(void)
 {
-	// std::cout << BLUE << this->get_ln().size() << RESET << std::endl;
-	int size = 0;
 	for (size_t i = 0; i < this->get_ln().size(); i++)
 	{
 		this->set_v(std::stoi(this->get_ln()[i]));	
 		this->set_l(std::stoi(this->get_ln()[i]));
-		size++;
 	}
-}
-
-void pm::print_l(void)
-{
-	for (std::list<int>::iterator it = this->get_l().begin(); it != this->get_l().end(); it++)
-		std::cout << GREEN << *it << RESET << std::endl;
-}
-
-void pm::print_v(void)
-{
-	for (size_t i = 0; i < this->get_v().size(); i++)
-		std::cout << GREEN << this->get_v()[i] << " ";
-	std::cout << RESET << std::endl;
-}
-
-void pm::print_ln(void)
-{
-	for (size_t i = 0; i < this->get_ln().size(); i++)
-		std::cout << YELLOW << this->get_ln()[i] << " ";
-	std::cout << RESET << std::endl;
 }
 
 void  pm::parcing(char **av)
@@ -129,6 +109,28 @@ void  pm::parcing(char **av)
 	// this->print_l();
 }
 
+//************* Print Functions ***************//
+void pm::print_l(void)
+{
+	for (std::list<int>::iterator it = this->get_l().begin(); it != this->get_l().end(); it++)
+		std::cout << GREEN << *it << RESET << std::endl;
+}
+
+void pm::print_v(void)
+{
+	for (size_t i = 0; i < this->get_v().size(); i++)
+		std::cout << GREEN << this->get_v()[i] << " ";
+	std::cout << RESET << std::endl;
+}
+
+void pm::print_ln(void)
+{
+	for (size_t i = 0; i < this->get_ln().size(); i++)
+		std::cout << YELLOW << this->get_ln()[i] << " ";
+	std::cout << RESET << std::endl;
+}
+
+
 void pm::printBefor(void)
 {
 	std::cout << YELLOW << "Before :  ";
@@ -141,6 +143,13 @@ void pm::printAfter(void)
 	this->print_v();
 }
 
+void pm::printTime(void)
+{
+	std::cout << YELLOW << 	"Time to proccess a range of    " << this->size << " elements with std::vector : " << this->Vtime.count() << " us" << RESET << std::endl;
+	std::cout << GREEN << "Time to proccess a range of " << this->size << " elements with std::List : " << this->Ltime.count() << " us" << RESET << std::endl;
+}
+
+//*************** Sort Functions **************//
 void pm::merge(int l,int m,int b)
 {
 	int n1 = m - l + 1;
@@ -212,8 +221,16 @@ void pm::sort_l(void)
 
 void pm::sort(void)
 {
-	// std::chrono
-	// std::cout << this->size << std::endl;
+	std::chrono::high_resolution_clock::time_point start;
+	std::chrono::high_resolution_clock::time_point end;
+	
+	start = std::chrono::high_resolution_clock::now();
 	this->sort_v(0, this->size - 1);
+	end = std::chrono::high_resolution_clock::now();
+	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+	
+    start = std::chrono::high_resolution_clock::now();
 	// this->sort_l();
+	end = std::chrono::high_resolution_clock::now();
+	this->Ltime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }

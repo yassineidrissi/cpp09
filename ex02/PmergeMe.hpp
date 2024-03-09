@@ -6,13 +6,14 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/09 10:58:07 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:10:27 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <chrono>
 #include <list>
 #include <string>
 #include <fstream>
@@ -30,6 +31,8 @@ class pm
 		std::vector<std::string> ln;
 		std::vector<int> v;
 		std::list<int> l;
+		std::chrono::microseconds Vtime;
+		std::chrono::microseconds Ltime;
 	public:
 		//***** Orthodox Methodes *********//
 		pm();
@@ -37,11 +40,11 @@ class pm
 		pm(pm const &p);
 		pm &operator=(pm const &p);
 		//******** seters and getters ****//
-        std::vector<std::string> get_ln();
+        std::vector<std::string>& get_ln();
 		void set_ln(std::string l);
-		std::vector<int> get_v();
+		std::vector<int>& get_v();
 		void set_v(int v);
-		std::list<int> get_l();
+		std::list<int>& get_l();
 		void set_l(int l);
 		//******** Functions *************//	
 		void fill(void);
@@ -54,6 +57,7 @@ class pm
 		void print_v(void);
 		void printBefor(void);
 		void printAfter(void);
+		void printTime(void);
 
 		//******* Sort Functions ********//
 		void sort(void);
