@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/08 18:39:23 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/09 09:36:02 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 #include <cmath>
 #include <vector>
 #include <string>
+#include <algorithm> // Include this at the top of your file
 
 class pm
 {
 	private:
-		// int size;
+		int size;
 		std::vector<std::string> ln;
 		std::vector<int> v;
 		std::list<int> l;
@@ -43,8 +44,23 @@ class pm
 		std::list<int> get_l();
 		void set_l(int l);
 		//******** Functions *************//	
+		void fill(void);
 		void split(void);
 		void parcing(char **av);
+		
+		//******* Print Functions ********//
+		void print_l(void);
+		void print_ln(void);
+		void print_v(void);
+		void printBefor(void);
+		void printAfter(void);
+
+		//******* Sort Functions ********//
+		void sort(void);
+		void sort_v(void);
+		void sort_l(void);
+		void merge(void);
+		
 		///******* Exeception ************//
 		class pmException : public std::exception
 		{
@@ -60,6 +76,7 @@ class pm
 #define RED "\033[31m"
 #define YELLOW "\033[33m"
 #define GREEN "\033[32m"
+#define BLUE "\033[33m"
 #define RESET "\033[0m"
 
 //************* print Functions ***********//

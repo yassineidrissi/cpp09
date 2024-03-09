@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/08 18:46:53 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/09 09:50:58 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,44 +73,90 @@ void pm::split()
 	
 }
 
-// void handl(char **av)
-// {
-// 	std::string line;
-// 	for(int i = 1; av[i]; ++i)
-// 		while(std::getline(std::ifstream(av[i]), line))
-// 			p.ln.push_back(line);
-// 	for (size_t i = 0; i < p.ln.size(); i++)
-// 	{
-// 		std::vector<int> m = split(RPN.ln[i], ' ');
-// 		pair temp;
-// 		// temp.f = std::stoi(m[0]);
-// 		// temp.s = std::stoi(m[1]);
-// 		RPN.v.push_back(temp);
-// 	}
-// 	for (size_t i = 0; i < p.v.size(); i++)
-// 		std::cout << RPN.v[i].f << " " << RPN.v[i].s << std::endl;
-// }
+void pm::fill(void)
+{
+	// std::cout << BLUE << this->get_ln().size() << RESET << std::endl;
+	int size = 0;
+	for (size_t i = 0; i < this->get_ln().size(); i++)
+	{
+		this->set_v(std::stoi(this->get_ln()[i]));	
+		this->set_l(std::stoi(this->get_ln()[i]));
+		size++;
+	}
+}
+
+void pm::print_l(void)
+{
+	for (std::list<int>::iterator it = this->get_l().begin(); it != this->get_l().end(); it++)
+		std::cout << GREEN << *it << RESET << std::endl;
+}
+
+void pm::print_v(void)
+{
+	for (size_t i = 0; i < this->get_v().size(); i++)
+		std::cout << GREEN << this->get_v()[i] << RESET << std::endl;
+}
+
+void pm::print_ln(void)
+{
+	for (size_t i = 0; i < this->get_ln().size(); i++)
+		std::cout << YELLOW << this->get_ln()[i] << " ";
+	std::cout << RESET << std::endl;
+}
 
 void  pm::parcing(char **av)
 {
+	int j = 0;
     for(int i = 1; av[i]; ++i)
     {
 		std::string line(av[i]);
 		std::istringstream iss(line);
 		std::string token;
 		while(std::getline(iss, token, ' '))
+		{
 			this->set_ln(token);
-			// std::cout << YELLOW << token << RESET << std::endl;
+			j++;
+		}
+		if (j > 3000)
+			throw pm::pmException();
     }
-	// std::cout << this->get_ln()[0].size() << std::endl;
-	for (size_t i = 0; i < this->get_ln().size(); i++)
-	{
-		this->set_v(std::stoi(this->get_ln()[i]));
-		// this->set_l(std::stoi(this->get_v()[i]));
-		std::cout << RED << get_ln()[i] << RESET << std::endl;
-		std::cout << GREEN << get_v()[i] << RESET << std::endl;
-	}
-	// for (size_t i = 0; i < p.v.size(); i++)
-	// 	std::cout << RPN.v[i].f << " " << RPN.v[i].s << std::endl;
+	this->fill();
+	
+		// for (size_t i = 0; i < this->get_v().size(); i++)
+		// 	std::cout << RED << this->get_v()[i] << RESET << std::endl;
+	// this->print_l();
+}
 
+void pm::printBefor(void)
+{
+	std::cout << YELLOW << "Before :  ";
+	this->print_ln();
+}
+
+void pm::sort_v(int l, int b)
+{
+	if(b - l + 1 < 2)
+	{
+
+	}
+	else
+	{
+		int m = (l + b) / 2;
+		this->sort_v(l, m);
+		this->sort_v(m + 1, b);
+		
+	}
+}
+
+void pm::sort_l(void)
+{
+	this->get_l().sort();
+	this->print_l();
+}
+
+void pm::sort(void)
+{
+	std::chrono
+	this->sort_v(0, this->size - 1);
+	// this->sort_l();
 }
