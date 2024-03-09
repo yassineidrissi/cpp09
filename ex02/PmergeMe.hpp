@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/09 09:36:02 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/09 10:58:07 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ class pm
 
 		//******* Sort Functions ********//
 		void sort(void);
-		void sort_v(void);
+		void sort_v(int l, int b);
 		void sort_l(void);
-		void merge(void);
+		void merge(int l, int m, int b);
 		
 		///******* Exeception ************//
 		class pmException : public std::exception
