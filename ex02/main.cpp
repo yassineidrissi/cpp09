@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:34:36 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/09 12:22:23 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/10 13:33:59 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main(int ac, char **av)
 		else
 		{
 			p.parcing(av);
-			// p.print_l();
 			p.printBefor();
 			p.sort();
 			p.printAfter();

@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/09 12:10:27 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:29:14 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class pm
 		int size;
 		std::vector<std::string> ln;
 		std::vector<int> v;
+		std::vector<std::vector<int> > vs;
 		std::list<int> l;
 		std::chrono::microseconds Vtime;
 		std::chrono::microseconds Ltime;
@@ -46,10 +47,12 @@ class pm
 		void set_v(int v);
 		std::list<int>& get_l();
 		void set_l(int l);
+		std::vector<std::vector<int> >& get_vs();
 		//******** Functions *************//	
 		void fill(void);
 		void split(void);
 		void parcing(char **av);
+		void fill_double_v(void);
 		
 		//******* Print Functions ********//
 		void print_l(void);

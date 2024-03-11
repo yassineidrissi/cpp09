@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/09 16:03:41 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:28:05 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,29 @@ void pm::split()
 	
 }
 
+std::vector<std::vector<int> >& pm::get_vs()
+{
+	return this->vs;
+}
+
+void pm::fill_double_v(void)
+{
+	std::vector<std::vector<int> > vs = this->get_vs();
+	for(size_t i = 0; i < get_v().size(); ++i)
+	{
+		std::vector<int> v;
+		v.push_back(get_v()[i]);
+		vs.push_back(v);
+	}
+}
+
 void pm::fill(void)
 {
 	for (size_t i = 0; i < this->get_ln().size(); i++)
 	{
 		this->set_v(std::stoi(this->get_ln()[i]));	
 		this->set_l(std::stoi(this->get_ln()[i]));
+		this->fill_double_v();
 	}
 }
 
@@ -218,6 +235,8 @@ void pm::sort_l(void)
 	this->get_l().sort();
 	this->print_l();
 }
+
+
 
 void pm::sort(void)
 {
