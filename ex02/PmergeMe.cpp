@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/14 01:34:35 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/14 01:37:12 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,11 @@ void pop_front(std::vector<T>& vec) {
 // 		this->merge(l, m , b);
 // 	}
 // }
+
+void sort_v(int l, int b)
+{
+	//add the code of the sort_v functions here 
+}
 
 void pm::sort_l(void)
 {
