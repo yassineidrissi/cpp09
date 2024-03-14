@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/14 01:37:12 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/14 04:09:58 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,8 @@ void pm::printTime(void)
 
 
 template <typename T>
-void pop_front(std::vector<T>& vec) {
-    if (!vec.empty()) {
+void pop_front(std::vector<T>& vec, int i) {
+    if (!vec.empty()  && i >= 0 && i < vec.size()) {
         vec.erase(vec.begin());
     }
 }
@@ -239,9 +239,48 @@ void pop_front(std::vector<T>& vec) {
 // 	}
 // }
 
-void sort_v(int l, int b)
+void pm::merge(int l)
 {
-	//add the code of the sort_v functions here 
+	if(this->get_vs()[l].end() > this->get_vs()[l + 1].end())
+	{
+		int indexFrom = l + 1; // Assuming you want to merge from this index...
+    	int indexTo = l; // ...into this index.
+
+	    // Check if indices are valid
+ 	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
+  	      // Append all values from this->get_vs()[indexFrom] to this->get_vs()[indexTo]
+   	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
+
+	        // Optional: Remove the source element if no longer needed
+ 	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
+  	  } else {
+   	     std::cout << "Invalid indices provided." << std::endl;
+      }
+	}
+	else
+	{
+		int indexFrom = l; // Assuming you want to merge from this index...
+    	int indexTo = l + 1; // ...into this index.
+
+	    // Check if indices are valid
+ 	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
+  	      // Append all values from this->get_vs()[indexFrom] to this->get_vs()[indexTo]
+   	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
+
+	        // Optional: Remove the source element if no longer needed
+ 	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
+  	  } else {
+   	     std::cout << "Invalid indices provided." << std::endl;
+      }
+	}
+	
+}
+
+void pm::sort_v(void)
+{
+	for (size_t i = 0; i < (this->size/2); ++i)
+		merge(i);
+		
 }
 
 void pm::sort_l(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/11 12:29:14 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/14 04:10:12 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ class pm
 
 		//******* Sort Functions ********//
 		void sort(void);
-		void sort_v(int l, int b);
+		void sort_v(void);
 		void sort_l(void);
-		void merge(int l, int m, int b);
+		void merge(int l);
 		
 		///******* Exeception ************//
 		class pmException : public std::exception
