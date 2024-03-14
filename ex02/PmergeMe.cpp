@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/11 12:28:05 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/14 01:32:39 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,15 @@ void pm::printTime(void)
 }
 
 //*************** Sort Functions **************//
+
+
+template <typename T>
+void pop_front(std::vector<T>& vec) {
+    if (!vec.empty()) {
+        vec.erase(vec.begin());
+    }
+}
+
 void pm::merge(int l,int m,int b)
 {
 	int n1 = m - l + 1;
