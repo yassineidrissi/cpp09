@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/14 01:32:39 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/14 01:34:35 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,68 +176,68 @@ void pop_front(std::vector<T>& vec) {
     }
 }
 
-void pm::merge(int l,int m,int b)
-{
-	int n1 = m - l + 1;
-	int n2 = b - m;
-	int L[n1], R[n2];
-	for (int i = 0; i < n1; i++)
-		L[i] = this->get_v()[l + i];
-	for (int j = 0; j < n2; j++)
-		R[j] = this->get_v()[m + 1 + j];
-	int i = 0;
-	int j = 0;
-	int k = l;
-	while (i < n1 && j < n2)
-	{
-		if (L[i] <= R[j])
-		{
-			this->get_v()[k] = L[i]; //33 482
-			i++;
-		}
-		else
-		{
-			this->get_v()[k] = R[j];//320 498
-			j++;
-		}
-		k++;
-	}
-	while (i < n1)
-	{
-		this->get_v()[k] = L[i];
-		i++;
-		k++;
-	}
-	while (j < n2)
-	{
-		this->get_v()[k] = R[j];
-		j++;
-		k++;
-	}
-}
+// void pm::merge(int l,int m,int b)
+// {
+// 	int n1 = m - l + 1;
+// 	int n2 = b - m;
+// 	int L[n1], R[n2];
+// 	for (int i = 0; i < n1; i++)
+// 		L[i] = this->get_v()[l + i];
+// 	for (int j = 0; j < n2; j++)
+// 		R[j] = this->get_v()[m + 1 + j];
+// 	int i = 0;
+// 	int j = 0;
+// 	int k = l;
+// 	while (i < n1 && j < n2)
+// 	{
+// 		if (L[i] <= R[j])
+// 		{
+// 			this->get_v()[k] = L[i]; //33 482
+// 			i++;
+// 		}
+// 		else
+// 		{
+// 			this->get_v()[k] = R[j];//320 498
+// 			j++;
+// 		}
+// 		k++;
+// 	}
+// 	while (i < n1)
+// 	{
+// 		this->get_v()[k] = L[i];
+// 		i++;
+// 		k++;
+// 	}
+// 	while (j < n2)
+// 	{
+// 		this->get_v()[k] = R[j];
+// 		j++;
+// 		k++;
+// 	}
+// }
 
-void pm::sort_v(int l, int b)
-{
-	if (b - l + 1 < 2)
-	{
-		for(int j = l;j < b; ++j)
-		{
-			if(this->get_v()[j] > this->get_v()[j + 1])
-			{
-				int temp = this->get_v()[j];
-				this->get_v()[j] = this->get_v()[j + 1];
-				this->get_v()[j + 1] = temp;
-			}
-		}
-	}
-	else
-	{
-		int m = (l + b) / 2;
-		this->sort_v(l, m);
-		this->sort_v(m + 1, b);
-		this->merge(l, m , b);
-	}
-}
+// void pm::sort_v(int l, int b)
+// {
+// 	if (b - l + 1 < 2)
+// 	{
+// 		for(int j = l;j < b; ++j)
+// 		{
+// 			if(this->get_v()[j] > this->get_v()[j + 1])
+// 			{
+// 				int temp = this->get_v()[j];
+// 				this->get_v()[j] = this->get_v()[j + 1];
+// 				this->get_v()[j + 1] = temp;
+// 			}
+// 		}
+// 	}
+// 	else
+// 	{
+// 		int m = (l + b) / 2;
+// 		this->sort_v(l, m);
+// 		this->sort_v(m + 1, b);
+// 		this->merge(l, m , b);
+// 	}
+// }
 
 void pm::sort_l(void)
 {
