@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/14 04:09:58 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:28:45 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,16 +241,21 @@ void pop_front(std::vector<T>& vec, int i) {
 
 void pm::merge(int l)
 {
+	if(l < this->get_vs().size() && !this->get_vs()[l].empty()) {
+    std::cout << "merge: " << this->get_vs()[l][0] << std::endl;
+} else {
+    std::cout << "Invalid index or empty vector." << std::endl;
+}
 	if(this->get_vs()[l].end() > this->get_vs()[l + 1].end())
 	{
-		int indexFrom = l + 1; // Assuming you want to merge from this index...
-    	int indexTo = l; // ...into this index.
+		std::cout << "merge: " << this->get_vs()[l].size() << " " << this->get_vs()[l + 1].size() << std::endl;
+		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
+    	unsigned long indexTo = l; // ...into this index.
 
 	    // Check if indices are valid
  	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
   	      // Append all values from this->get_vs()[indexFrom] to this->get_vs()[indexTo]
    	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
-
 	        // Optional: Remove the source element if no longer needed
  	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
   	  } else {
@@ -259,8 +264,9 @@ void pm::merge(int l)
 	}
 	else
 	{
-		int indexFrom = l; // Assuming you want to merge from this index...
-    	int indexTo = l + 1; // ...into this index.
+		std::cout << "merge: " << this->get_vs()[l].size() << " " << this->get_vs()[l + 1].size() << std::endl;
+		unsigned long indexFrom = l; // Assuming you want to merge from this index...
+    	unsigned long indexTo = l + 1; // ...into this index.
 
 	    // Check if indices are valid
  	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
@@ -276,11 +282,24 @@ void pm::merge(int l)
 	
 }
 
+void pm::print_vs(void)
+{
+	for(unsigned long i = 0; i < this->get_vs().size(); ++i) {
+		std::cout << "indice " << i << std::endl;
+		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j) {
+			std::cout << this->get_vs()[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+
+}
+
 void pm::sort_v(void)
 {
-	for (size_t i = 0; i < (this->size/2); ++i)
-		merge(i);
-		
+	// for (size_t i = 0; i < (this->size/2); ++i)
+		// std::cout << "im here" << std::endl;
+		merge(0);
+		print_vs();
 }
 
 void pm::sort_l(void)
@@ -297,7 +316,7 @@ void pm::sort(void)
 	std::chrono::high_resolution_clock::time_point end;
 	
 	start = std::chrono::high_resolution_clock::now();
-	this->sort_v(0, this->size - 1);
+	this->sort_v();
 	end = std::chrono::high_resolution_clock::now();
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	
