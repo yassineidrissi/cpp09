@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/14 22:28:45 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:54:19 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,14 @@ std::vector<std::vector<int> >& pm::get_vs()
 
 void pm::fill_double_v(void)
 {
-	std::vector<std::vector<int> > vs = this->get_vs();
+	// std::vector<std::vector<int> > vs = this->get_vs();
 	for(size_t i = 0; i < get_v().size(); ++i)
 	{
 		std::vector<int> v;
 		v.push_back(get_v()[i]);
-		vs.push_back(v);
+		this->get_vs().push_back(v);
 	}
+	// std::cout << "get_vs size :" << this->get_vs().size() << std::endl;
 }
 
 void pm::fill(void)
@@ -98,7 +99,7 @@ void pm::fill(void)
 	{
 		this->set_v(std::stoi(this->get_ln()[i]));	
 		this->set_l(std::stoi(this->get_ln()[i]));
-		this->fill_double_v();
+		// this->fill_double_v();
 	}
 }
 
@@ -120,7 +121,8 @@ void  pm::parcing(char **av)
     }
 	this->size = j;
 	this->fill();
-
+	this->fill_double_v();
+	// print_vs();
 	// 	for (size_t i = 0; i < this->get_v().size(); i++)
 	// 		std::cout << RED << this->get_v()[i] << RESET << std::endl;
 	// this->print_l();
@@ -157,7 +159,7 @@ void pm::printBefor(void)
 void pm::printAfter(void)
 {
 	std::cout << GREEN << "After  :  ";
-	this->print_v();
+	this->print_vs();
 }
 
 void pm::printTime(void)
@@ -241,7 +243,8 @@ void pop_front(std::vector<T>& vec, int i) {
 
 void pm::merge(int l)
 {
-	if(l < this->get_vs().size() && !this->get_vs()[l].empty()) {
+	unsigned long i = (unsigned long)l;
+	if(i < this->get_vs().size() && !this->get_vs()[l].empty()) {
     std::cout << "merge: " << this->get_vs()[l][0] << std::endl;
 } else {
     std::cout << "Invalid index or empty vector." << std::endl;
@@ -284,6 +287,7 @@ void pm::merge(int l)
 
 void pm::print_vs(void)
 {
+	// std::cout << "size is " << this->get_vs().size() << std::endl;
 	for(unsigned long i = 0; i < this->get_vs().size(); ++i) {
 		std::cout << "indice " << i << std::endl;
 		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j) {
@@ -298,8 +302,8 @@ void pm::sort_v(void)
 {
 	// for (size_t i = 0; i < (this->size/2); ++i)
 		// std::cout << "im here" << std::endl;
-		merge(0);
-		print_vs();
+		// merge(0);
+		// print_vs();
 }
 
 void pm::sort_l(void)
