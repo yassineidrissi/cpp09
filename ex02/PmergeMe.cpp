@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 03:56:34 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/15 04:31:35 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,15 +243,17 @@ void pop_front(std::vector<T>& vec, int i) {
 
 void pm::merge(int l)
 {
-	unsigned long i = (unsigned long)l;
-	if(i < this->get_vs().size() && !this->get_vs()[l].empty()) {
-    std::cout << "merge: " << this->get_vs()[l][0] << std::endl;
-} else {
-    std::cout << "Invalid index or empty vector." << std::endl;
-}
-	if(this->get_vs()[l].end() > this->get_vs()[l + 1].end())
+// 	unsigned long i = (unsigned long)l;
+// 	if(i < this->get_vs().size() && !this->get_vs()[l].empty()) {
+//     std::cout << "merge: " << this->get_vs()[l][0] << std::endl;
+// } else {
+//     std::cout << "Invalid index or empty vector." << std::endl;
+// }
+	std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
+	std::cout << "end of vector :"<< l + 1 << " " << get_vs()[l + 1][this->get_vs()[l + 1].size() -1] << std::endl;
+	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
 	{
-		std::cout << "merge: " << this->get_vs()[l].size() << " " << this->get_vs()[l + 1].size() << std::endl;
+		// std::cout << "merge: " << this->get_vs()[l][this->get_vs()[l].size() - 1] << " " << this->get_vs()[l + 1].size() << std::endl;
 		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
     	unsigned long indexTo = l; // ...into this index.
 
@@ -267,7 +269,7 @@ void pm::merge(int l)
 	}
 	else
 	{
-		std::cout << "merge: " << this->get_vs()[l].size() << " " << this->get_vs()[l + 1].size() << std::endl;
+		// std::cout << "merge 1: " << this->get_vs()[l].size() << " " << this->get_vs()[l + 1].size() << std::endl;
 		unsigned long indexFrom = l; // Assuming you want to merge from this index...
     	unsigned long indexTo = l + 1; // ...into this index.
 
@@ -282,7 +284,8 @@ void pm::merge(int l)
    	     std::cout << "Invalid indices provided." << std::endl;
       }
 	}
-	
+	std::cout << "l merge :" <<l << std::endl;
+	print_vs();	
 }
 
 void pm::print_vs(void)
@@ -301,8 +304,9 @@ void pm::print_vs(void)
 void pm::sort_v(void)
 {
 		// std::cout << "im here" << std::endl;
-	for (int i = 0; i < (this->size/2); ++i)
-		merge(i);
+	for (int j = 0; this->get_vs().size() > 3; j++)
+		for (int i = 0; i < (this->size/2); ++i)
+			merge(i);
 		// print_vs();
 }
 
