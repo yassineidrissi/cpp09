@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 04:31:35 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/15 20:06:30 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void  pm::parcing(char **av)
 	this->size = j;
 	this->fill();
 	this->fill_double_v();
+	this->limit = 0;
 	// print_vs();
 	// 	for (size_t i = 0; i < this->get_v().size(); i++)
 	// 		std::cout << RED << this->get_v()[i] << RESET << std::endl;
@@ -304,9 +305,14 @@ void pm::print_vs(void)
 void pm::sort_v(void)
 {
 		// std::cout << "im here" << std::endl;
-	for (int j = 0; this->get_vs().size() > 3; j++)
+	int j = 0;
+	for (; this->get_vs().size() > 3; j++)
 		for (int i = 0; i < (this->size/2); ++i)
 			merge(i);
+	if(!this->limit)
+		this->limit = j;
+	else
+		this->limit--;
 		// print_vs();
 }
 

@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/14 20:57:21 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:58:53 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ class pm
 		std::vector<int> v;
 		std::vector<std::vector<int> > vs;
 		std::list<int> l;
+		std::vector<std::vector<int> > vs_main;
+		std::vector<std::vector<int< > vs_pend;
 		std::chrono::microseconds Vtime;
 		std::chrono::microseconds Ltime;
 	public:
+		int limit;
 		//***** Orthodox Methodes *********//
 		pm();
 		~pm();
