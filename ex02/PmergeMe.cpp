@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 03:54:19 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/15 03:56:34 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,9 +300,9 @@ void pm::print_vs(void)
 
 void pm::sort_v(void)
 {
-	// for (size_t i = 0; i < (this->size/2); ++i)
 		// std::cout << "im here" << std::endl;
-		// merge(0);
+	for (int i = 0; i < (this->size/2); ++i)
+		merge(i);
 		// print_vs();
 }
 
