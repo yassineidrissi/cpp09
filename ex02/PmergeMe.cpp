@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 20:06:30 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:27:41 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ std::list<int>& pm::get_l()
 void pm::set_l(int l)
 {
 	this->l.push_back(l);
+}
+
+std::vector<std::vector<int> >& pm::get_vs_main()
+{
+	return this->vs_main;
+}
+
+std::vector<std::vector<int> >& pm::get_vs_pend()
+{
+	return this->vs_pend;
 }
 
 //************** Functions *****************//
@@ -321,8 +331,6 @@ void pm::sort_l(void)
 	this->get_l().sort();
 	this->print_l();
 }
-
-
 
 void pm::sort(void)
 {

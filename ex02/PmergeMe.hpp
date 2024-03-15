@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 20:58:53 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:27:27 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class pm
 		std::vector<std::vector<int> > vs;
 		std::list<int> l;
 		std::vector<std::vector<int> > vs_main;
-		std::vector<std::vector<int< > vs_pend;
+		std::vector<std::vector<int> > vs_pend;
 		std::chrono::microseconds Vtime;
 		std::chrono::microseconds Ltime;
 	public:
@@ -51,6 +51,8 @@ class pm
 		std::list<int>& get_l();
 		void set_l(int l);
 		std::vector<std::vector<int> >& get_vs();
+		std::vector<std::vector<int> >& get_vs_main();
+		std::vector<std::vector<int> >& get_vs_pend();
 		//******** Functions *************//	
 		void fill(void);
 		void split(void);
