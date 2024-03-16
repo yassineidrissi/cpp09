@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 23:30:28 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:26:42 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ class pm
 		~pm();
 		pm(pm const &p);
 		pm &operator=(pm const &p);
+		
 		//******** seters and getters ****//
         std::vector<std::string>& get_ln();
 		void set_ln(std::string l);
@@ -54,12 +55,15 @@ class pm
 		std::vector<std::vector<int> >& get_vs();
 		std::vector<std::vector<int> >& get_vs_main();
 		std::vector<std::vector<int> >& get_vs_pend();
+		
 		//******** Functions *************//	
 		void fill(void);
 		void split(void);
 		void parcing(char **av);
 		void fill_double_v(void);
 		void fill_vs_main();
+		void fill_vs_pend();
+		
 		//******* Print Functions ********//
 		void print_l(void);
 		void print_ln(void);
@@ -74,6 +78,7 @@ class pm
 		void sort_v(void);
 		void sort_l(void);
 		void merge(int l);
+		void baniry_sort();
 		
 		///******* Exeception ************//
 		class pmException : public std::exception

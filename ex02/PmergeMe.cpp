@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/16 01:17:51 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:50:44 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,8 +316,35 @@ void pm::print_vs(void)
 
 void pm::fill_vs_main()
 {
-	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
+	this->get_vs_main().clear();
+	this->get_vs_main().push_back(this->get_vs()[0]);
+	this->get_vs_main().push_back(this->get_vs()[1]);
+	for(unsigned long i = 3; i < this->get_vs().size(); i+=2)
 		this->get_vs_main().push_back(this->get_vs()[i]);
+}
+
+void pm::fill_vs_pend()
+{
+	this->get_vs_pend().clear();
+	for(unsigned long i = 2; i < this->get_vs().size(); i+=2)
+		this->get_vs_pend().push_back(this->get_vs()[i]);
+}
+
+void pm::baniry_sort()
+{
+	std::vector<std::vector<int> >& m = this->get_vs_main();
+	std::vector<std::vector<int> >& p = this->get_vs_pend();
+	for(unsigned long i = 0; i < p.size(); ++i)
+	{
+		for(unsigned long j = 0; j < m.size(); ++j)
+		{
+			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
+			{
+				m.insert(m.begin() + j, p[i]);
+				p.erase(p.begin() + i);
+			}
+		}
+	}
 }
 
 void pm::sort_v(void)
@@ -327,10 +354,22 @@ void pm::sort_v(void)
 	for (; this->get_vs().size() > 3; j++)
 		for (int i = 0; i < (this->size/2); ++i)
 			merge(i);
-	
 	this->limit = j;
 	
-	fill_vs_main();
+	this->get_vs_main().clear();
+	this->get_vs_main().push_back(this->get_vs[0]);
+	this->get_vs_main().push_back(this->get_vs[1]);
+	for(unsigned long i = 2; i < this->get_vs().size(); ++i)
+	{
+		if(i % 2 == 1)
+			this->get_vs_main().push_back(this->get_vs()[i]);
+		else
+			this->get_vs_pend().push_back(this->get_vs()[i]);
+	}
+	this->get_vs() = this->get_vs_main();
+	baniry_sort();
+	// fill_vs_main();
+	// fill_vs_pend();
     // for(int i = 0; is < this->limit; --this->limit)
 	// {
 	// 	if()
