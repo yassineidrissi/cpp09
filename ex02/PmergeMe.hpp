@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 22:27:27 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/15 23:30:28 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class pm
 		std::list<int> l;
 		std::vector<std::vector<int> > vs_main;
 		std::vector<std::vector<int> > vs_pend;
+		std::vector<std::vector<int> > vs_odd;
 		std::chrono::microseconds Vtime;
 		std::chrono::microseconds Ltime;
 	public:
@@ -58,7 +59,7 @@ class pm
 		void split(void);
 		void parcing(char **av);
 		void fill_double_v(void);
-		
+		void fill_vs_main();
 		//******* Print Functions ********//
 		void print_l(void);
 		void print_ln(void);

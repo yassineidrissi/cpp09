@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/15 22:27:41 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:17:51 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 //********* Orthodox Methodes ************//
 pm::pm()
 {
+	
 }
 
 pm::~pm()
 {
+	
 }
 
 pm::pm(pm const &p)
@@ -181,7 +183,6 @@ void pm::printTime(void)
 
 //*************** Sort Functions **************//
 
-
 template <typename T>
 void pop_front(std::vector<T>& vec, int i) {
     if (!vec.empty()  && i >= 0 && i < vec.size()) {
@@ -270,6 +271,7 @@ void pm::merge(int l)
 
 	    // Check if indices are valid
  	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
+		//hello how do you think about this project all this need to do...
   	      // Append all values from this->get_vs()[indexFrom] to this->get_vs()[indexTo]
    	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
 	        // Optional: Remove the source element if no longer needed
@@ -312,6 +314,12 @@ void pm::print_vs(void)
 
 }
 
+void pm::fill_vs_main()
+{
+	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
+		this->get_vs_main().push_back(this->get_vs()[i]);
+}
+
 void pm::sort_v(void)
 {
 		// std::cout << "im here" << std::endl;
@@ -319,10 +327,17 @@ void pm::sort_v(void)
 	for (; this->get_vs().size() > 3; j++)
 		for (int i = 0; i < (this->size/2); ++i)
 			merge(i);
-	if(!this->limit)
-		this->limit = j;
-	else
-		this->limit--;
+	
+	this->limit = j;
+	
+	fill_vs_main();
+    // for(int i = 0; is < this->limit; --this->limit)
+	// {
+	// 	if()
+	// }
+	// if(!this->limit)
+	// else
+	// 	this->limit--;
 		// print_vs();
 }
 
