@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/17 00:10:59 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:39:21 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void pm::fill_double_v(void)
 		v.push_back(get_v()[i]);
 		this->get_vs().push_back(v);
 	}
-	// std::cout << "get_vs size :" << this->get_vs().size() << std::endl;
+	std::cout << "get_vs size :" << this->get_vs().size() << std::endl;
 }
 
 void pm::fill(void)
@@ -256,14 +256,8 @@ void pop_front(std::vector<T>& vec, int i) {
 
 void pm::merge(int l)
 {
-// 	unsigned long i = (unsigned long)l;
-// 	if(i < this->get_vs().size() && !this->get_vs()[l].empty()) {
-//     std::cout << "merge: " << this->get_vs()[l][0] << std::endl;
-// } else {
-//     std::cout << "Invalid index or empty vector." << std::endl;
-// }
 	std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
-	std::cout << "end of vector :"<< l + 1 << " " << get_vs()[l + 1][this->get_vs()[l + 1].size() -1] << std::endl;
+	// std::cout << "end of vector :"<< l + 1 << " " << get_vs()[l + 1][this->get_vs()[l + 1].size() -1] << std::endl;
 	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
 	{
 		// std::cout << "merge: " << this->get_vs()[l][this->get_vs()[l].size() - 1] << " " << this->get_vs()[l + 1].size() << std::endl;
@@ -298,7 +292,7 @@ void pm::merge(int l)
    	     std::cout << "Invalid indices provided." << std::endl;
       }
 	}
-	std::cout << "l merge :" <<l << std::endl;
+	std::cout << "l merge :" << l << std::endl;
 	print_vs();	
 }
 
@@ -312,6 +306,9 @@ void pm::print_vs(void)
 		}
 		std::cout << std::endl;
 	}
+	if(this->get_vs_pend().size())
+		for(unsigned long i = 0; i < this->get_vs_pend()[0].size(); ++i)
+			std::cout << RED << "pend :" << this->get_vs_pend()[0][i] << " " << RESET << std::endl;
 
 }
 
@@ -405,35 +402,51 @@ void pm::generate_vs()
 
 void pm::handl_vs()
 {
-	int j = 0;
-	for (; this->get_vs().size() > 3; j++)
-		for (int i = 0; i < (this->size/2); ++i)
-			merge(i);
-	this->limit = j;
-	if(this->get_vs().size() == 3)
-		this->get_vs_pend().push_back(this->get_vs()[2]);
+    int j = 0;
+    for (; this->get_vs().size() > 3; j++)
+        for (int i = 0; i < (this->size/2); ++i)
+            merge(i);
+    this->limit = j;
+    if(this->get_vs().size() == 3)
+    {
+        this->get_vs_pend().push_back(this->get_vs()[2]);
+        this->get_vs().erase(this->get_vs().begin() + 2);
+    }
+}
+void pm::vstov()
+{
+	std::vector<int> tmp;
+	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
+		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
+		{
+			tmp.push_back(this->get_vs()[i][j]);
+		}
+	this->get_v() = tmp;
 }
 
 void pm::sort_v(void)
 {
 	handl_vs();
+	vstov();
+	std::cout << RED << "PRINT V" <<  RESET << std::endl;
+	print_v();
 	std::cout << RED << "now vs is full" << RESET << std::endl;
-	generate_vs();
+	// generate_vs();
 	// for (int i = 0; j > 0; j--)
 	// {
-	fill_double_v();
-	handl_vs();
-	std::cout << RED << "1" << RESET << std::endl;
-	print_vs();
-	split_mp();
-	std::cout << RED << "now vs is spleated" << RESET << std::endl;
-	baniry_sort();
-	print_vs();
-	std::cout << RED << "2" << RESET << std::endl;
-	std::cout << RED << "now vs is sorted" << RESET << std::endl;
-	merge(0);
-	std::cout << RED << "3" << RESET << std::endl;
-	print_vs();
+	// fill_double_v();
+	// handl_vs();
+	// std::cout << RED << "1" << RESET << std::endl;
+	// print_vs();
+	// split_mp();
+	// std::cout << RED << "now vs is spleated" << RESET << std::endl;
+	// baniry_sort();
+	// print_vs();
+	// std::cout << RED << "2" << RESET << std::endl;
+	// std::cout << RED << "now vs is sorted" << RESET << std::endl;
+	// merge(0);
+	// std::cout << RED << "3" << RESET << std::endl;
+	// print_vs();
 		
 	// }
 	// fill_vs_main();
