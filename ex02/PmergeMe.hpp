@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/16 01:26:42 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/17 00:02:25 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ class pm
 		void fill_double_v(void);
 		void fill_vs_main();
 		void fill_vs_pend();
+		void generate_vs();;
 		
 		//******* Print Functions ********//
 		void print_l(void);
@@ -72,6 +73,8 @@ class pm
 		void printAfter(void);
 		void printTime(void);
 		void print_vs(void);
+		void print_vs_main();
+		void print_vs_pend();
 
 		//******* Sort Functions ********//
 		void sort(void);
@@ -79,6 +82,8 @@ class pm
 		void sort_l(void);
 		void merge(int l);
 		void baniry_sort();
+		void split_mp();
+		void handl_vs();
 		
 		///******* Exeception ************//
 		class pmException : public std::exception
@@ -97,5 +102,6 @@ class pm
 #define GREEN "\033[32m"
 #define BLUE "\033[33m"
 #define RESET "\033[0m"
+#define GREE "\033[33m"
 
 //************* print Functions ***********//

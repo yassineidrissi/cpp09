@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/16 01:50:44 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/17 00:10:59 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ std::vector<std::vector<int> >& pm::get_vs()
 void pm::fill_double_v(void)
 {
 	// std::vector<std::vector<int> > vs = this->get_vs();
+	this->get_vs().clear();
 	for(size_t i = 0; i < get_v().size(); ++i)
 	{
 		std::vector<int> v;
@@ -314,6 +315,31 @@ void pm::print_vs(void)
 
 }
 
+void pm::print_vs_main()
+{
+	std::cout << GREE;
+	for(unsigned long i = 0; i < this->get_vs_main().size(); ++i) {
+		std::cout << "indice " << i << std::endl;
+		for(unsigned long j = 0; j < this->get_vs_main()[i].size(); ++j) {
+			std::cout << this->get_vs_main()[i][j] << " ";
+		}
+		std::cout << RESET << std::endl;
+	}
+
+}
+
+void pm::print_vs_pend()
+{
+	std::cout << YELLOW;
+	for(unsigned long i = 0; i < this->get_vs_pend().size(); ++i) {
+		std::cout << "indice " << i << std::endl;
+		for(unsigned long j = 0; j < this->get_vs_pend()[i].size(); ++j) {
+			std::cout << this->get_vs_pend()[i][j] << " ";
+		}
+		std::cout << RESET << std::endl;
+	}
+}
+
 void pm::fill_vs_main()
 {
 	this->get_vs_main().clear();
@@ -339,35 +365,77 @@ void pm::baniry_sort()
 		for(unsigned long j = 0; j < m.size(); ++j)
 		{
 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
-			{
 				m.insert(m.begin() + j, p[i]);
-				p.erase(p.begin() + i);
-			}
 		}
 	}
+	p.clear();
 }
 
-void pm::sort_v(void)
+void pm::split_mp()
 {
-		// std::cout << "im here" << std::endl;
-	int j = 0;
-	for (; this->get_vs().size() > 3; j++)
-		for (int i = 0; i < (this->size/2); ++i)
-			merge(i);
-	this->limit = j;
-	
+	std::cout << GREEN << "im in split" << RESET << std::endl;
 	this->get_vs_main().clear();
-	this->get_vs_main().push_back(this->get_vs[0]);
-	this->get_vs_main().push_back(this->get_vs[1]);
+	this->get_vs_main().push_back(this->get_vs()[0]);
+	std::cout << BLUE << "get_vs  " << 0 << " " << this->get_vs()[0][this->get_vs()[0].size() - 1] << RESET << std::endl;
+	this->get_vs_main().push_back(this->get_vs()[1]);
+	std::cout << BLUE << "get_vs  " << 1 << " " << this->get_vs()[1][this->get_vs()[1].size() - 1] << RESET << std::endl;
 	for(unsigned long i = 2; i < this->get_vs().size(); ++i)
 	{
 		if(i % 2 == 1)
 			this->get_vs_main().push_back(this->get_vs()[i]);
 		else
 			this->get_vs_pend().push_back(this->get_vs()[i]);
+		std::cout << BLUE << "get_vs  " << i << " " << this->get_vs()[i][this->get_vs()[i].size() - 1] << RESET << std::endl;
 	}
 	this->get_vs() = this->get_vs_main();
+	this->get_vs().push_back(this->get_vs_pend()[0]);
+}
+
+void pm::generate_vs()
+{
+	// std::vector<std::vector<int> >tmp;
+	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
+		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
+		{
+			get_v().push_back(this->get_vs()[i][j]);
+			// std::cout << GREEN << "tmp " << i + j << " " << tmp[i + j][0] << RESET << std::endl;
+		}
+	// this->get_vs() = tmp;
+}
+
+void pm::handl_vs()
+{
+	int j = 0;
+	for (; this->get_vs().size() > 3; j++)
+		for (int i = 0; i < (this->size/2); ++i)
+			merge(i);
+	this->limit = j;
+	if(this->get_vs().size() == 3)
+		this->get_vs_pend().push_back(this->get_vs()[2]);
+}
+
+void pm::sort_v(void)
+{
+	handl_vs();
+	std::cout << RED << "now vs is full" << RESET << std::endl;
+	generate_vs();
+	// for (int i = 0; j > 0; j--)
+	// {
+	fill_double_v();
+	handl_vs();
+	std::cout << RED << "1" << RESET << std::endl;
+	print_vs();
+	split_mp();
+	std::cout << RED << "now vs is spleated" << RESET << std::endl;
 	baniry_sort();
+	print_vs();
+	std::cout << RED << "2" << RESET << std::endl;
+	std::cout << RED << "now vs is sorted" << RESET << std::endl;
+	merge(0);
+	std::cout << RED << "3" << RESET << std::endl;
+	print_vs();
+		
+	// }
 	// fill_vs_main();
 	// fill_vs_pend();
     // for(int i = 0; is < this->limit; --this->limit)
