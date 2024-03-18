@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/17 02:39:21 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/18 22:08:42 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void  pm::parcing(char **av)
 			throw pm::pmException();
     }
 	this->size = j;
+	this->limit = j - 1;
 	this->fill();
 	this->fill_double_v();
 	this->limit = 0;
@@ -406,11 +407,11 @@ void pm::handl_vs()
     for (; this->get_vs().size() > 3; j++)
         for (int i = 0; i < (this->size/2); ++i)
             merge(i);
-    this->limit = j;
+    this->limit--;
     if(this->get_vs().size() == 3)
     {
         this->get_vs_pend().push_back(this->get_vs()[2]);
-        this->get_vs().erase(this->get_vs().begin() + 2);
+        // this->get_vs().erase(this->get_vs().begin() + 2);
     }
 }
 void pm::vstov()
@@ -427,10 +428,34 @@ void pm::vstov()
 void pm::sort_v(void)
 {
 	handl_vs();
-	vstov();
-	std::cout << RED << "PRINT V" <<  RESET << std::endl;
-	print_v();
+	fill_vs_main();
+	std::cout << RED << "print_vs_main()" << RESET << std::endl;
+	print_vs_main();
+	std::cout << RED << "print_vs_pend()" << RESET << std::endl;
+	fill_vs_pend();
+	print_vs_pend();
 	std::cout << RED << "now vs is full" << RESET << std::endl;
+	vstov();
+	fill_double_v();
+	handl_vs();
+	fill_vs_main();
+	std::cout << RED << "print_vs_main()" << RESET << std::endl;
+	print_vs_main();
+	std::cout << RED << "print_vs_pend()" << RESET << std::endl;
+	fill_vs_pend();
+	print_vs_pend();
+	// std::cout << RED << "now vs is full" << RESET << std::endl;
+	// handl_vs();
+	// fill_vs_main();
+	// std::cout << RED << "print_vs_main()" << RESET << std::endl;
+	// print_vs_main();
+	// std::cout << RED << "print_vs_pend()" << RESET << std::endl;
+	// fill_vs_pend();
+	// print_vs_pend();
+	// std::cout << RED << "now vs is full" << RESET << std::endl;	
+	
+	std::cout << RED << "PRINT V" <<  RESET << std::endl;
+	// print_v();
 	// generate_vs();
 	// for (int i = 0; j > 0; j--)
 	// {
@@ -447,6 +472,7 @@ void pm::sort_v(void)
 	// merge(0);
 	// std::cout << RED << "3" << RESET << std::endl;
 	// print_vs();
+	std::cout << RED << "******************************************" << RESET << std::endl;
 		
 	// }
 	// fill_vs_main();
