@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/18 22:08:42 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/18 22:48:22 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void  pm::parcing(char **av)
 	this->limit = j - 1;
 	this->fill();
 	this->fill_double_v();
-	this->limit = 0;
+	// this->limit = 0;
 	// print_vs();
 	// 	for (size_t i = 0; i < this->get_v().size(); i++)
 	// 		std::cout << RED << this->get_v()[i] << RESET << std::endl;
@@ -425,25 +425,54 @@ void pm::vstov()
 	this->get_v() = tmp;
 }
 
+void pm::sort_vs()
+{
+	std::vector<std::vector<int> >& m = this->get_vs_main();
+	std::vector<std::vector<int> >& p = this->get_vs_pend();
+	std::vector<std::vector<int> >& tmp = this->get_vs();
+	tmp.clear();
+	if (tmp.size() > 2)
+	{
+		tmp.push_back(m[0]);
+		tmp.push_back(m[1]);
+	}
+	for(unsigned long i = 2; i < p.size(); ++i)
+	{
+		for(unsigned long j = 0; j < m.size(); ++j)
+		{
+			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
+				m.insert(m.begin() + j, p[i]);
+	}
+	p.clear();
+}
+
 void pm::sort_v(void)
 {
-	handl_vs();
-	fill_vs_main();
-	std::cout << RED << "print_vs_main()" << RESET << std::endl;
-	print_vs_main();
-	std::cout << RED << "print_vs_pend()" << RESET << std::endl;
-	fill_vs_pend();
-	print_vs_pend();
-	std::cout << RED << "now vs is full" << RESET << std::endl;
-	vstov();
-	fill_double_v();
-	handl_vs();
-	fill_vs_main();
-	std::cout << RED << "print_vs_main()" << RESET << std::endl;
-	print_vs_main();
-	std::cout << RED << "print_vs_pend()" << RESET << std::endl;
-	fill_vs_pend();
-	print_vs_pend();
+	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
+	for(int i = 0; this->limit > 0; i++)
+	{
+		handl_vs();
+		fill_vs_main();
+		std::cout << RED << "print_vs_main()" << RESET << std::endl;
+		print_vs_main();
+		std::cout << RED << "print_vs_pend()" << RESET << std::endl;
+		fill_vs_pend();
+		print_vs_pend();
+		std::cout << RED << "now vs is full " << i << " And the limit is " << this->limit << RESET << std::endl;
+		// sort_vs();
+		vstov();		
+	}
+	// fill_double_v();
+	// handl_vs();
+	// fill_vs_main();
+	// std::cout << RED << "print_vs_main()" << RESET << std::endl;
+	// print_vs_main();
+	// std::cout << RED << "print_vs_pend()" << RESET << std::endl;
+	// fill_vs_pend();
+	// print_vs_pend();
+	// vstov();
+	// std::cout << RED << "print_v" << RESET << std::endl;
+	// print_v();
 	// std::cout << RED << "now vs is full" << RESET << std::endl;
 	// handl_vs();
 	// fill_vs_main();
