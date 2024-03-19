@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/19 21:11:00 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:12:11 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ std::vector<std::vector<int> >& pm::get_vs_main()
 std::vector<std::vector<int> >& pm::get_vs_pend()
 {
 	return this->vs_pend;
+}
+
+std::vector<std::vector<int> >& pm::get_vs_odd()
+{
+	return this->vs_odd;
 }
 
 //************** Functions *****************//
@@ -354,20 +359,20 @@ void pm::fill_vs_pend()
 		this->get_vs_pend().push_back(this->get_vs()[i]);
 }
 
-void pm::baniry_sort()
-{
-	std::vector<std::vector<int> >& m = this->get_vs_main();
-	std::vector<std::vector<int> >& p = this->get_vs_pend();
-	for(unsigned long i = 0; i < p.size(); ++i)
-	{
-		for(unsigned long j = 0; j < m.size(); ++j)
-		{
-			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
-				m.insert(m.begin() + j, p[i]);
-		}
-	}
-	p.clear();
-}
+// void pm::baniry_sort()
+// {
+// 	std::vector<std::vector<int> >& m = this->get_vs_main();
+// 	std::vector<std::vector<int> >& p = this->get_vs_pend();
+// 	for(unsigned long i = 0; i < p.size(); ++i)
+// 	{
+// 		for(unsigned long j = 0; j < m.size(); ++j)
+// 		{
+// 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
+// 				m.insert(m.begin() + j, p[i]);
+// 		}
+// 	}
+// 	p.clear();
+// }
 
 void pm::split_mp()
 {
@@ -410,10 +415,7 @@ void pm::handl_vs()
             merge(i);
     this->limit--;
     if(this->get_vs().size() == 3)
-    {
         this->get_vs_pend().push_back(this->get_vs()[2]);
-        // this->get_vs().erase(this->get_vs().begin() + 2);
-    }
 }
 void pm::vstov()
 {
@@ -430,27 +432,57 @@ void pm::baniry_sort()
 {
 	std::vector<std::vector<int> >& m = this->get_vs_main();
 	std::vector<std::vector<int> >& p = this->get_vs_pend();
+	std::vector<std::vector<int> >& odd = this->get_vs_odd();
 	std::vector<std::vector<int> >& tmp = this->get_vs();
 	tmp.clear();
-	if (tmp.size() > 1)
-		tmp.push_back(m[0]);
-	if (tmp.size() > 2)
-		tmp.push_back(m[1]);
-	for(unsigned long i = 2; i < p.size(); ++i)
+	for(unsigned long i = 0; i < p.size(); ++i)
 	{
 		for(unsigned long j = 0; j < m.size(); ++j)
 		{
 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
+			{
 				m.insert(m.begin() + j, p[i]);
+				p[i].clear(); //! need to check
+			}
 		}
-		p.clear();
 	}
+	if(this->get_vs_odd().size() > 0)
+	{
+		for(unsigned long i = 0; i < odd.size(); ++i)
+		{
+			if( odd[0][odd[0].size() -1] < p[i][p[i].size() -1])
+			{
+				odd.insert(odd.begin() + i, p[0]);
+				p[0].clear(); //! need to check
+				break ;
+			}
+		}
+	}
+	for(unsigned long i = 0; i < m.size(); ++i)
+		tmp.push_back(m[i]);
+	m.clear();
+}
+
+void pm::handl_vs_first()
+{
+	int j = 0;
+	 for (;this->get_vs().size() > 3 ; j++)
+        for (int i = 0; i < (this->size/2); ++i)
+            merge(i);
+    this->limit = j;
+    if(this->get_vs().size() == 3)
+    {
+        this->get_vs_pend().push_back(this->get_vs()[2]);
+        // this->get_vs().erase(this->get_vs().begin() + 2);
+    }	
 }
 
 void pm::sort_v(void)
 {
 	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
-	for(int i = 0; this->limit > 0; i++)
+	handl_vs_first();
+	vstov();
+	for(int i = 0; this->limit > 1; i++)
 	{
 		handl_vs();
 		fill_vs_main();
