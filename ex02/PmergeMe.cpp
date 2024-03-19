@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/18 22:48:22 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:11:00 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -403,8 +403,9 @@ void pm::generate_vs()
 
 void pm::handl_vs()
 {
-    int j = 0;
-    for (; this->get_vs().size() > 3; j++)
+	std::cout << GREEN << "******************** handl_vs " << this->limit << " " << RESET << std::endl;
+
+    for (int j = 0; j < this->limit ; j++)
         for (int i = 0; i < (this->size/2); ++i)
             merge(i);
     this->limit--;
@@ -425,25 +426,25 @@ void pm::vstov()
 	this->get_v() = tmp;
 }
 
-void pm::sort_vs()
+void pm::baniry_sort()
 {
 	std::vector<std::vector<int> >& m = this->get_vs_main();
 	std::vector<std::vector<int> >& p = this->get_vs_pend();
 	std::vector<std::vector<int> >& tmp = this->get_vs();
 	tmp.clear();
-	if (tmp.size() > 2)
-	{
+	if (tmp.size() > 1)
 		tmp.push_back(m[0]);
+	if (tmp.size() > 2)
 		tmp.push_back(m[1]);
-	}
 	for(unsigned long i = 2; i < p.size(); ++i)
 	{
 		for(unsigned long j = 0; j < m.size(); ++j)
 		{
 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
 				m.insert(m.begin() + j, p[i]);
+		}
+		p.clear();
 	}
-	p.clear();
 }
 
 void pm::sort_v(void)
@@ -458,7 +459,9 @@ void pm::sort_v(void)
 		std::cout << RED << "print_vs_pend()" << RESET << std::endl;
 		fill_vs_pend();
 		print_vs_pend();
+	    baniry_sort();
 		std::cout << RED << "now vs is full " << i << " And the limit is " << this->limit << RESET << std::endl;
+		baniry_sort();
 		// sort_vs();
 		vstov();		
 	}
