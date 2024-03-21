@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/19 22:12:11 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:44:47 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,16 +266,10 @@ void pm::merge(int l)
 	// std::cout << "end of vector :"<< l + 1 << " " << get_vs()[l + 1][this->get_vs()[l + 1].size() -1] << std::endl;
 	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
 	{
-		// std::cout << "merge: " << this->get_vs()[l][this->get_vs()[l].size() - 1] << " " << this->get_vs()[l + 1].size() << std::endl;
 		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
     	unsigned long indexTo = l; // ...into this index.
-
-	    // Check if indices are valid
  	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
-		//hello how do you think about this project all this need to do...
-  	      // Append all values from this->get_vs()[indexFrom] to this->get_vs()[indexTo]
    	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
-	        // Optional: Remove the source element if no longer needed
  	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
   	  } else {
    	     std::cout << "Invalid indices provided." << std::endl;
@@ -410,12 +404,12 @@ void pm::handl_vs()
 {
 	std::cout << GREEN << "******************** handl_vs " << this->limit << " " << RESET << std::endl;
 
-    for (int j = 0; j < this->limit ; j++)
+    for (int j = 0; j < this->limit - 1; j++)
         for (int i = 0; i < (this->size/2); ++i)
             merge(i);
     this->limit--;
-    if(this->get_vs().size() == 3)
-        this->get_vs_pend().push_back(this->get_vs()[2]);
+    // if(this->get_vs().size() == 3)
+        // this->get_vs_pend().push_back(this->get_vs()[2]);
 }
 void pm::vstov()
 {
@@ -482,21 +476,36 @@ void pm::sort_v(void)
 	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
 	handl_vs_first();
 	vstov();
-	for(int i = 0; this->limit > 1; i++)
-	{
-		handl_vs();
-		fill_vs_main();
-		std::cout << RED << "print_vs_main()" << RESET << std::endl;
-		print_vs_main();
-		std::cout << RED << "print_vs_pend()" << RESET << std::endl;
-		fill_vs_pend();
-		print_vs_pend();
-	    baniry_sort();
-		std::cout << RED << "now vs is full " << i << " And the limit is " << this->limit << RESET << std::endl;
-		baniry_sort();
-		// sort_vs();
-		vstov();		
-	}
+	std::cout << "First sort " << std::endl;
+	print_v();
+    vstov();
+	fill_double_v();
+	handl_vs();
+	std::cout << GREEN << ">>>>>****************************************************************" << RESET << std::endl;
+	print_vs();
+	fill_vs_main();
+	std::cout << YELLOW << "main print" << RESET << std::endl;
+	print_vs_main();
+	fill_vs_pend();
+	std::cout << YELLOW << "pend print" << RESET << std::endl;
+	print_vs_pend();
+	// baniry_sort();
+	
+	// for(int i = 0; this->limit > 1; i++)
+	// {
+	// handl_vs();
+	// fill_vs_main();
+	// 	std::cout << RED << "print_vs_main()" << RESET << std::endl;
+	// 	print_vs_main();
+	// 	std::cout << RED << "print_vs_pend()" << RESET << std::endl;
+	// 	fill_vs_pend();
+	// 	print_vs_pend();
+	//     baniry_sort();
+	// 	std::cout << RED << "now vs is full " << i << " And the limit is " << this->limit << RESET << std::endl;
+	// 	baniry_sort();
+	// 	// sort_vs();
+	// 	vstov();		
+	// }
 	// fill_double_v();
 	// handl_vs();
 	// fill_vs_main();
