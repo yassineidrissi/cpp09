@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/22 04:41:14 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/22 18:14:58 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,13 +433,14 @@ void pm::handl_vs()
 }
 void pm::vstov()
 {
-	std::vector<int> tmp;
+	std::vector<int> tmp = this->get_v();
+	tmp.clear();
 	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
 		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
 		{
 			tmp.push_back(this->get_vs()[i][j]);
 		}
-	this->get_v() = tmp;
+	// this->get_v() = tmp;
 }
 
 void pm::baniry_sort()
@@ -489,17 +490,17 @@ void pm::handl_vs_first()
             merge(i);
     this->limit = j;
 	// std::cout << "size id size : " << this->get_vs().size() << std::endl;
-//     if(this->get_vs().size() == 3)
-//     {
-// 		std::vector<int> v = this->get_vs()[2];
-// 		std::vector<std::vector<int> > vodd = this->get_vs_odd();
-// 		// for(unsigned int i = 0; i < v.size(); ++i)
-// 		// {
-// 		// 	vodd[0].push_back(v[i]);
-// 		// 	std::cout << "this odd : " << v[i] << std::endl;
-// 		// }
-//         // this->get_vs().erase(this->get_vs().begin() + 2);
-//     }	
+    // if(this->get_vs().size() == 3)
+    // {
+	// 	std::vector<int> v = this->get_vs()[2];
+	// 	std::vector<std::vector<int> > vodd = this->get_vs_odd();
+	// 	for(unsigned int i = 0; i < v.size(); ++i)
+	// 	{
+	// 		vodd[0].push_back(v[i]);
+	// 		std::cout << "this odd : " << v[i] << std::endl;
+	// 	}
+    //     this->get_vs().erase(this->get_vs().begin() + 2);
+    // }	
 }
 
 void pm::sort_v(void)
@@ -526,7 +527,7 @@ void pm::sort_v(void)
 	print_vs_pend();
 	vstov();
 	std::cout << RED << "finish loop " << RESET << std::endl;
-	fill_vs_odd();
+	// fill_vs_odd();
 	print_v();
 	// print_vs_odd();
 	// for(int i = 0; this->limit > 1; i++)
