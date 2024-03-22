@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/21 21:44:47 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/22 02:53:27 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,9 +306,9 @@ void pm::print_vs(void)
 		}
 		std::cout << std::endl;
 	}
-	if(this->get_vs_pend().size())
-		for(unsigned long i = 0; i < this->get_vs_pend()[0].size(); ++i)
-			std::cout << RED << "pend :" << this->get_vs_pend()[0][i] << " " << RESET << std::endl;
+	// if(this->get_vs_pend().size())
+	// 	for(unsigned long i = 0; i < this->get_vs_pend()[0].size(); ++i)
+	// 		std::cout << RED << "pend :" << this->get_vs_pend()[0][i] << " " << RESET << std::endl;
 
 }
 
@@ -337,6 +337,17 @@ void pm::print_vs_pend()
 	}
 }
 
+void pm::print_vs_odd()
+{
+	std::cout << RED;
+		std::cout << "indice 0 " << std::endl;
+	for(unsigned long i = 0; i < this->get_vs_odd()[0].size(); ++i)
+	{
+		std::cout << this->get_vs_odd()[0][i] << std::endl;
+	}
+	std::cout << RESET << std::endl;
+}
+
 void pm::fill_vs_main()
 {
 	this->get_vs_main().clear();
@@ -349,7 +360,7 @@ void pm::fill_vs_main()
 void pm::fill_vs_pend()
 {
 	this->get_vs_pend().clear();
-	for(unsigned long i = 2; i < this->get_vs().size(); i+=2)
+	for(unsigned long i = 2; i < this->get_vs().size() - 1 ; i+=2)           
 		this->get_vs_pend().push_back(this->get_vs()[i]);
 }
 
@@ -426,9 +437,10 @@ void pm::baniry_sort()
 {
 	std::vector<std::vector<int> >& m = this->get_vs_main();
 	std::vector<std::vector<int> >& p = this->get_vs_pend();
-	std::vector<std::vector<int> >& odd = this->get_vs_odd();
+	// std::vector<std::vector<int> >& odd = this->get_vs_odd();
 	std::vector<std::vector<int> >& tmp = this->get_vs();
 	tmp.clear();
+	// int j = 0;
 	for(unsigned long i = 0; i < p.size(); ++i)
 	{
 		for(unsigned long j = 0; j < m.size(); ++j)
@@ -437,24 +449,27 @@ void pm::baniry_sort()
 			{
 				m.insert(m.begin() + j, p[i]);
 				p[i].clear(); //! need to check
+				j++;
 			}
 		}
 	}
-	if(this->get_vs_odd().size() > 0)
-	{
-		for(unsigned long i = 0; i < odd.size(); ++i)
-		{
-			if( odd[0][odd[0].size() -1] < p[i][p[i].size() -1])
-			{
-				odd.insert(odd.begin() + i, p[0]);
-				p[0].clear(); //! need to check
-				break ;
-			}
-		}
-	}
-	for(unsigned long i = 0; i < m.size(); ++i)
-		tmp.push_back(m[i]);
-	m.clear();
+	//! i will neeed this after 
+	// if(this->get_vs_odd().size() > 0)
+	// {
+	// 	for(unsigned long i = 0; i < odd.size(); ++i)
+	// 	{
+	// 		if( odd[0][odd[0].size() -1] < p[i][p[i].size() -1])
+	// 		{
+	// 			odd.insert(odd.begin() + i, p[0]);
+	// 			p[0].clear(); //! need to check
+	// 			break ;
+	// 		}
+	// 	}
+	// }
+	// int size 
+	// for(unsigned long i = j; i < m.size(); ++i)
+	// 	tmp.push_back(m[i]);
+	// m.clear();
 }
 
 void pm::handl_vs_first()
@@ -464,11 +479,18 @@ void pm::handl_vs_first()
         for (int i = 0; i < (this->size/2); ++i)
             merge(i);
     this->limit = j;
-    if(this->get_vs().size() == 3)
-    {
-        this->get_vs_pend().push_back(this->get_vs()[2]);
-        // this->get_vs().erase(this->get_vs().begin() + 2);
-    }	
+	// std::cout << "size id size : " << this->get_vs().size() << std::endl;
+//     if(this->get_vs().size() == 3)
+//     {
+// 		std::vector<int> v = this->get_vs()[2];
+// 		std::vector<std::vector<int> > vodd = this->get_vs_odd();
+// 		// for(unsigned int i = 0; i < v.size(); ++i)
+// 		// {
+// 		// 	vodd[0].push_back(v[i]);
+// 		// 	std::cout << "this odd : " << v[i] << std::endl;
+// 		// }
+//         // this->get_vs().erase(this->get_vs().begin() + 2);
+//     }	
 }
 
 void pm::sort_v(void)
@@ -489,8 +511,11 @@ void pm::sort_v(void)
 	fill_vs_pend();
 	std::cout << YELLOW << "pend print" << RESET << std::endl;
 	print_vs_pend();
-	// baniry_sort();
-	
+	baniry_sort();
+	std::cout << RED << "baniry_sort " << std::endl;
+	print_vs_main();
+	print_vs_pend();
+	// print_vs_odd();
 	// for(int i = 0; this->limit > 1; i++)
 	// {
 	// handl_vs();
