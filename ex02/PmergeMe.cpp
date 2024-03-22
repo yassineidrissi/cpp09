@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/22 02:53:27 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/22 04:41:14 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,6 +364,15 @@ void pm::fill_vs_pend()
 		this->get_vs_pend().push_back(this->get_vs()[i]);
 }
 
+
+void pm::fill_vs_odd()
+{
+	std::vector<int> vmain = this->get_v();
+	std::vector<std::vector<int> > vodd = this->get_vs_odd();
+	for(unsigned int i = 0; i < vodd[0].size();++i)
+		vmain.push_back(vodd[0][i]);
+}
+
 // void pm::baniry_sort()
 // {
 // 	std::vector<std::vector<int> >& m = this->get_vs_main();
@@ -515,6 +524,10 @@ void pm::sort_v(void)
 	std::cout << RED << "baniry_sort " << std::endl;
 	print_vs_main();
 	print_vs_pend();
+	vstov();
+	std::cout << RED << "finish loop " << RESET << std::endl;
+	fill_vs_odd();
+	print_v();
 	// print_vs_odd();
 	// for(int i = 0; this->limit > 1; i++)
 	// {

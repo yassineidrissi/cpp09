@@ -6,7 +6,7 @@
 /*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/22 02:01:15 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/22 02:55:52 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ class pm
 		void fill_double_v(void);
 		void fill_vs_main();
 		void fill_vs_pend();
+		void fill_vs_odd();
 		void generate_vs();;
 		void vstov();
 		
