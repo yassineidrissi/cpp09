@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/22 18:14:58 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:32:09 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,18 +489,21 @@ void pm::handl_vs_first()
         for (int i = 0; i < (this->size/2); ++i)
             merge(i);
     this->limit = j;
-	// std::cout << "size id size : " << this->get_vs().size() << std::endl;
-    // if(this->get_vs().size() == 3)
-    // {
-	// 	std::vector<int> v = this->get_vs()[2];
-	// 	std::vector<std::vector<int> > vodd = this->get_vs_odd();
-	// 	for(unsigned int i = 0; i < v.size(); ++i)
-	// 	{
-	// 		vodd[0].push_back(v[i]);
-	// 		std::cout << "this odd : " << v[i] << std::endl;
-	// 	}
+	// std::cout << RED << "size id size : " << this->get_vs().size() << std::endl;
+    if(this->get_vs().size() == 3)
+    {
+		std::vector<int> v = this->get_vs()[2];
+		std::vector<std::vector<int> > vodd = this->get_vs_odd();
+		for(unsigned int i = 0; i < v.size(); ++i)
+		{
+			if(vodd.empty())
+				vodd.push_back(std::vector<int>());
+			vodd[0].push_back(v[i]);
+			std::cout << RED << "this odd : " << v[i] << RESET << std::endl;
+		}
+		this->get_vs()[2].clear();
     //     this->get_vs().erase(this->get_vs().begin() + 2);
-    // }	
+    }	
 }
 
 void pm::sort_v(void)
