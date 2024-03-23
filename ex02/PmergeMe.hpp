@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/22 21:01:01 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:07:25 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ class pm
 		void fill_vs_odd();
 		void generate_vs();;
 		void vstov();
+		void odd_insert();
 		
 		//******* Print Functions ********//
 		void print_l(void);

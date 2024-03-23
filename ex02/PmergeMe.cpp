@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/23 21:04:23 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:05:51 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,6 +477,26 @@ void pm::handl_vs_first()
     }	
 }
 
+void pm::odd_insert()
+{
+    std::vector<int>& odd = this->get_vs_odd();
+    std::vector<std::vector<int> >& pend = this->get_vs_pend();
+
+    if (!odd.empty()) {
+		for(unsigned int i = 0; i < odd.size(); ++i)
+		{
+			for(unsigned int j = 0; j < pend[0].size(); ++j)
+			{
+				if(lastOddElement < pend[0][j])
+				{
+					pend[0].insert(pend[0].begin() + j, lastOddElement);
+					// break;
+				}
+			}
+		}			
+    }
+}
+
 void pm::sort_v(void)
 {
 	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
@@ -521,37 +541,12 @@ void pm::sort_v(void)
 	std::cout << RED << "this is pend" << RESET << std::endl;
 	fill_vs_pend();
 	print_vs_pend();
-	// fill_double_vs();
-	// print_v();
-	// generate_vs();
-	// for (int i = 0; j > 0; j--)
-	// {
-	// fill_double_v();
-	// handl_vs();
-	// std::cout << RED << "1" << RESET << std::endl;
-	// print_vs();
-	// split_mp();
-	// std::cout << RED << "now vs is spleated" << RESET << std::endl;
-	// baniry_sort();
-	// print_vs();
-	// std::cout << RED << "2" << RESET << std::endl;
-	// std::cout << RED << "now vs is sorted" << RESET << std::endl;
-	// merge(0);
-	// std::cout << RED << "3" << RESET << std::endl;
-	// print_vs();
+	fill_vs_main();
+	fill_vs_pend();
+	odd_insert();
 	std::cout << RED << "******************************************" << RESET << std::endl;
-		
-	// }
-	// fill_vs_main();
-	// fill_vs_pend();
-    // for(int i = 0; is < this->limit; --this->limit)
-	// {
-	// 	if()
-	// }
-	// if(!this->limit)
-	// else
-	// 	this->limit--;
-		// print_vs();
+	print_vs_main();
+	print_vs_pend();
 }
 
 void pm::sort_l(void)
