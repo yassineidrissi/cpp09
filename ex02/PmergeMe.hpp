@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/22 18:28:18 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/22 21:01:01 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class pm
 		std::list<int> l;
 		std::vector<std::vector<int> > vs_main;
 		std::vector<std::vector<int> > vs_pend;
-		std::vector<std::vector<int> > vs_odd;
+		std::vector<int> vs_odd;
 		std::chrono::microseconds Vtime;
 		std::chrono::microseconds Ltime;
 	public:
@@ -89,7 +89,7 @@ class pm
 		void handl_vs();
 		void handl_vs_first();
 		void sort_vs();
-		std::vector<std::vector<int> >& get_vs_odd();
+		std::vector<int>& get_vs_odd();
 		
 		///******* Exeception ************//
 		class pmException : public std::exception

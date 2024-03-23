@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/22 18:32:09 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/22 23:44:09 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ std::vector<std::vector<int> >& pm::get_vs_pend()
 	return this->vs_pend;
 }
 
-std::vector<std::vector<int> >& pm::get_vs_odd()
+std::vector<int>& pm::get_vs_odd()
 {
 	return this->vs_odd;
 }
@@ -339,13 +339,19 @@ void pm::print_vs_pend()
 
 void pm::print_vs_odd()
 {
-	std::cout << RED;
-		std::cout << "indice 0 " << std::endl;
-	for(unsigned long i = 0; i < this->get_vs_odd()[0].size(); ++i)
-	{
-		std::cout << this->get_vs_odd()[0][i] << std::endl;
-	}
-	std::cout << RESET << std::endl;
+    std::cout << RED;
+    std::cout << "indice 0 " << std::endl;
+	std::vector<int> vs_odd = this->get_vs_odd();
+    if (!vs_odd.empty()) {
+        for(unsigned long i = 0; i < vs_odd.size(); ++i)
+        {
+            // if (i < vs_odd.size() && !vs_odd[i].empty()) {
+                int nb = vs_odd[i];
+                std::cout << nb << std::endl;
+            // }
+        }
+    }
+    std::cout << RESET << std::endl;
 }
 
 void pm::fill_vs_main()
@@ -367,26 +373,11 @@ void pm::fill_vs_pend()
 
 void pm::fill_vs_odd()
 {
-	std::vector<int> vmain = this->get_v();
-	std::vector<std::vector<int> > vodd = this->get_vs_odd();
-	for(unsigned int i = 0; i < vodd[0].size();++i)
-		vmain.push_back(vodd[0][i]);
+	// std::vector<int> vmain = this->get_v();
+	// std::vector<std::vector<int> vodd = this->get_vs_odd();
+	// for(unsigned int i = 0; i < get_vs_odd().size();++i)
+		get_vs_main().push_back(get_vs_odd());
 }
-
-// void pm::baniry_sort()
-// {
-// 	std::vector<std::vector<int> >& m = this->get_vs_main();
-// 	std::vector<std::vector<int> >& p = this->get_vs_pend();
-// 	for(unsigned long i = 0; i < p.size(); ++i)
-// 	{
-// 		for(unsigned long j = 0; j < m.size(); ++j)
-// 		{
-// 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
-// 				m.insert(m.begin() + j, p[i]);
-// 		}
-// 	}
-// 	p.clear();
-// }
 
 void pm::split_mp()
 {
@@ -437,10 +428,7 @@ void pm::vstov()
 	tmp.clear();
 	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
 		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
-		{
 			tmp.push_back(this->get_vs()[i][j]);
-		}
-	// this->get_v() = tmp;
 }
 
 void pm::baniry_sort()
@@ -464,22 +452,6 @@ void pm::baniry_sort()
 		}
 	}
 	//! i will neeed this after 
-	// if(this->get_vs_odd().size() > 0)
-	// {
-	// 	for(unsigned long i = 0; i < odd.size(); ++i)
-	// 	{
-	// 		if( odd[0][odd[0].size() -1] < p[i][p[i].size() -1])
-	// 		{
-	// 			odd.insert(odd.begin() + i, p[0]);
-	// 			p[0].clear(); //! need to check
-	// 			break ;
-	// 		}
-	// 	}
-	// }
-	// int size 
-	// for(unsigned long i = j; i < m.size(); ++i)
-	// 	tmp.push_back(m[i]);
-	// m.clear();
 }
 
 void pm::handl_vs_first()
@@ -493,12 +465,12 @@ void pm::handl_vs_first()
     if(this->get_vs().size() == 3)
     {
 		std::vector<int> v = this->get_vs()[2];
-		std::vector<std::vector<int> > vodd = this->get_vs_odd();
+		// std::vector<int> vodd = this->get_vs_odd();
 		for(unsigned int i = 0; i < v.size(); ++i)
 		{
-			if(vodd.empty())
-				vodd.push_back(std::vector<int>());
-			vodd[0].push_back(v[i]);
+			// if(vodd.empty())
+			// 	vodd.push_back(std::vector<int>());
+			this->get_vs_odd().push_back(v[i]);
 			std::cout << RED << "this odd : " << v[i] << RESET << std::endl;
 		}
 		this->get_vs()[2].clear();
@@ -512,6 +484,7 @@ void pm::sort_v(void)
 	handl_vs_first();
 	vstov();
 	std::cout << "First sort " << std::endl;
+	// std::cout << get_vs_odd().size() << std::endl;
 	print_v();
     vstov();
 	fill_double_v();
@@ -529,47 +502,20 @@ void pm::sort_v(void)
 	print_vs_main();
 	print_vs_pend();
 	vstov();
-	std::cout << RED << "finish loop " << RESET << std::endl;
-	// fill_vs_odd();
-	print_v();
-	// print_vs_odd();
-	// for(int i = 0; this->limit > 1; i++)
-	// {
-	// handl_vs();
-	// fill_vs_main();
-	// 	std::cout << RED << "print_vs_main()" << RESET << std::endl;
-	// 	print_vs_main();
-	// 	std::cout << RED << "print_vs_pend()" << RESET << std::endl;
-	// 	fill_vs_pend();
-	// 	print_vs_pend();
-	//     baniry_sort();
-	// 	std::cout << RED << "now vs is full " << i << " And the limit is " << this->limit << RESET << std::endl;
-	// 	baniry_sort();
-	// 	// sort_vs();
-	// 	vstov();		
-	// }
-	// fill_double_v();
-	// handl_vs();
-	// fill_vs_main();
-	// std::cout << RED << "print_vs_main()" << RESET << std::endl;
-	// print_vs_main();
-	// std::cout << RED << "print_vs_pend()" << RESET << std::endl;
-	// fill_vs_pend();
-	// print_vs_pend();
-	// vstov();
-	// std::cout << RED << "print_v" << RESET << std::endl;
-	// print_v();
-	// std::cout << RED << "now vs is full" << RESET << std::endl;
-	// handl_vs();
-	// fill_vs_main();
-	// std::cout << RED << "print_vs_main()" << RESET << std::endl;
-	// print_vs_main();
-	// std::cout << RED << "print_vs_pend()" << RESET << std::endl;
-	// fill_vs_pend();
-	// print_vs_pend();
-	// std::cout << RED << "now vs is full" << RESET << std::endl;	
-	
 	std::cout << RED << "PRINT V" <<  RESET << std::endl;
+	print_v();
+	// std::cout << GREEN 
+	std::cout << RED << "finish loop " << RESET << std::endl;
+	fill_vs_odd();
+	std::cout << RED << "PRINT V" <<  RESET << std::endl;
+	print_v();	
+	fill_double_v();
+	fill_vs_main();
+	print_vs_main();
+	std::cout << RED << "this is pend" << RESET << std::endl;
+	fill_vs_pend();
+	print_vs_pend();
+	// fill_double_vs();
 	// print_v();
 	// generate_vs();
 	// for (int i = 0; j > 0; j--)
