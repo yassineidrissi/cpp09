@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/24 20:47:22 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/24 23:01:59 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,9 +373,10 @@ void pm::baniry_sort()
 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
 			{
 				m.insert(m.begin() + j, p[i]);
-				p[i].clear(); //! need to check
+				// p[i].clear(); //! need to check
 				j++;
 			}
+			
 		}
 	}
 	tmp = m;
@@ -435,79 +436,6 @@ void pm::odd_insert()
     }
 }
 
-void pm::fill_final(void)
-{
-    std::vector<std::vector<int> >& m = this->get_vs_main();
-    std::vector<std::vector<int> >& p = this->get_vs_pend();
-    std::vector<int>& v = this->get_v();
-    v.clear();
-    unsigned int j = 0;
-    unsigned int i = 0;
-    while(j < p.size() && i < m.size())
-    {
-        if(m[i][0] < p[j][0]) // Changed m[0][i] to m[i][0]
-        {
-            v.push_back(m[i][0]); // Changed m[0][i] to m[i][0]
-            std::cout << "i is " << i << " and " << m[i][0] << std::endl; // Changed m[0][i] to m[i][0]
-            i++;
-        }
-        else
-        {
-            v.push_back(p[j][0]); // Changed p[0][j] to p[j][0]
-            std::cout << "j is " << j << " and " << p[j][0] << std::endl; // Changed p[0][j] to p[j][0]
-            j++;
-        }
-        std::cout << "i is " << i << " j is " << j << std::endl;
-    }
-    while(i < m.size())
-    {
-        v.push_back(m[i][0]); // Changed m[0][i] to m[i][0]
-        i++;
-    }
-    while(j < p.size())
-    {
-        v.push_back(p[j][0]); // Changed p[0][j] to p[j][0]
-        j++;
-    }
-}
-
-// void pm::fill_final(void)
-// {
-// 	std::vector<std::vector<int> >& m = this->get_vs_main();
-// 	std::vector<std::vector<int> >& p = this->get_vs_pend();
-// 	std::vector<int>& v = this->get_v();
-// 	v.clear();
-// 	unsigned int j = 0;
-// 	unsigned int i = 0;
-// 	while(j < p.size() && i < m.size())
-// 	{
-// 		if(m[0][i] < p[0][j])
-// 		{
-// 			v.push_back(m[0][i]);
-// 			// m.pop_front();
-// 			std::cout << "i is " << i << " and " << m[0][i] << std::endl;
-// 			i++;
-// 		}
-// 		else
-// 		{
-// 			v.push_back(p[0][j]);
-// 			// p.pop_front();
-// 			std::cout << "j is " << j << " and " << p[0][j] << std::endl;
-// 			j++;
-// 		}
-// 		std::cout << "i is " << i << " j is " << j << std::endl;
-// 	}
-// 	while(i < m.size())
-// 	{
-// 		v.push_back(m[0][i]);
-// 		i++;
-// 	}
-// 	while(j < p.size())
-// 	{
-// 		v.push_back(p[0][j]);
-// 		j++;
-// 	}
-// }
 
 
 void pm::sort_v(void)
@@ -561,8 +489,10 @@ void pm::sort_v(void)
 	std::cout << RED << "******************************************" << RESET << std::endl;
 	print_vs_main();
 	print_vs_pend();
-	fill_final();
-	print_v();
+	// fill_final();
+	baniry_sort();
+	// print_vs_main();	
+	// print_v();
 }
 
 void pm::sort_l(void)
