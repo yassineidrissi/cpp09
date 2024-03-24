@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/23 22:05:51 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/24 02:51:09 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -487,10 +487,15 @@ void pm::odd_insert()
 		{
 			for(unsigned int j = 0; j < pend[0].size(); ++j)
 			{
-				if(lastOddElement < pend[0][j])
+				if(odd[i] < pend[0][j] ||  j == pend[[0]])
 				{
-					pend[0].insert(pend[0].begin() + j, lastOddElement);
-					// break;
+					pend[0].insert(pend[0].begin() + j,odd[i]);
+					break  ;
+				}
+				else if(j == pend[0].size() - 1)
+				{
+					pend[0].push_back(odd[i]);
+					break ;
 				}
 			}
 		}			
@@ -544,6 +549,7 @@ void pm::sort_v(void)
 	fill_vs_main();
 	fill_vs_pend();
 	odd_insert();
+	std::cout << this->vs_odd[0] << std::endl;
 	std::cout << RED << "******************************************" << RESET << std::endl;
 	print_vs_main();
 	print_vs_pend();
