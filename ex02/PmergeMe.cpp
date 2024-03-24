@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/24 02:51:09 by yassine          ###   ########.fr       */
+/*   Updated: 2024/03/24 20:47:22 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ std::vector<std::vector<int> >& pm::get_vs()
 
 void pm::fill_double_v(void)
 {
-	// std::vector<std::vector<int> > vs = this->get_vs();
 	this->get_vs().clear();
 	for(size_t i = 0; i < get_v().size(); ++i)
 	{
@@ -117,7 +116,6 @@ void pm::fill(void)
 	{
 		this->set_v(std::stoi(this->get_ln()[i]));	
 		this->set_l(std::stoi(this->get_ln()[i]));
-		// this->fill_double_v();
 	}
 }
 
@@ -141,11 +139,7 @@ void  pm::parcing(char **av)
 	this->limit = j - 1;
 	this->fill();
 	this->fill_double_v();
-	// this->limit = 0;
-	// print_vs();
-	// 	for (size_t i = 0; i < this->get_v().size(); i++)
-	// 		std::cout << RED << this->get_v()[i] << RESET << std::endl;
-	// this->print_l();
+
 }
 
 //************* Print Functions ***************//
@@ -197,73 +191,9 @@ void pop_front(std::vector<T>& vec, int i) {
     }
 }
 
-// void pm::merge(int l,int m,int b)
-// {
-// 	int n1 = m - l + 1;
-// 	int n2 = b - m;
-// 	int L[n1], R[n2];
-// 	for (int i = 0; i < n1; i++)
-// 		L[i] = this->get_v()[l + i];
-// 	for (int j = 0; j < n2; j++)
-// 		R[j] = this->get_v()[m + 1 + j];
-// 	int i = 0;
-// 	int j = 0;
-// 	int k = l;
-// 	while (i < n1 && j < n2)
-// 	{
-// 		if (L[i] <= R[j])
-// 		{
-// 			this->get_v()[k] = L[i]; //33 482
-// 			i++;
-// 		}
-// 		else
-// 		{
-// 			this->get_v()[k] = R[j];//320 498
-// 			j++;
-// 		}
-// 		k++;
-// 	}
-// 	while (i < n1)
-// 	{
-// 		this->get_v()[k] = L[i];
-// 		i++;
-// 		k++;
-// 	}
-// 	while (j < n2)
-// 	{
-// 		this->get_v()[k] = R[j];
-// 		j++;
-// 		k++;
-// 	}
-// }
-
-// void pm::sort_v(int l, int b)
-// {
-// 	if (b - l + 1 < 2)
-// 	{
-// 		for(int j = l;j < b; ++j)
-// 		{
-// 			if(this->get_v()[j] > this->get_v()[j + 1])
-// 			{
-// 				int temp = this->get_v()[j];
-// 				this->get_v()[j] = this->get_v()[j + 1];
-// 				this->get_v()[j + 1] = temp;
-// 			}
-// 		}
-// 	}
-// 	else
-// 	{
-// 		int m = (l + b) / 2;
-// 		this->sort_v(l, m);
-// 		this->sort_v(m + 1, b);
-// 		this->merge(l, m , b);
-// 	}
-// }
-
 void pm::merge(int l)
 {
 	std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
-	// std::cout << "end of vector :"<< l + 1 << " " << get_vs()[l + 1][this->get_vs()[l + 1].size() -1] << std::endl;
 	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
 	{
 		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
@@ -277,7 +207,6 @@ void pm::merge(int l)
 	}
 	else
 	{
-		// std::cout << "merge 1: " << this->get_vs()[l].size() << " " << this->get_vs()[l + 1].size() << std::endl;
 		unsigned long indexFrom = l; // Assuming you want to merge from this index...
     	unsigned long indexTo = l + 1; // ...into this index.
 
@@ -485,22 +414,101 @@ void pm::odd_insert()
     if (!odd.empty()) {
 		for(unsigned int i = 0; i < odd.size(); ++i)
 		{
-			for(unsigned int j = 0; j < pend[0].size(); ++j)
+			for(unsigned int j = 0; j < pend.size(); ++j)
 			{
-				if(odd[i] < pend[0][j] ||  j == pend[[0]])
+				if(odd[i] < pend[j][0])
 				{
-					pend[0].insert(pend[0].begin() + j,odd[i]);
+					std::vector<int> v;
+					v.push_back(odd[i]);
+					pend.insert(pend.begin() + j, v);
 					break  ;
 				}
-				else if(j == pend[0].size() - 1)
+				else if(j == pend.size() - 1)
 				{
-					pend[0].push_back(odd[i]);
-					break ;
+					std::vector<int> v;
+					v.push_back(odd[i]);
+					pend.push_back(v);
+					break  ;
 				}
 			}
 		}			
     }
 }
+
+void pm::fill_final(void)
+{
+    std::vector<std::vector<int> >& m = this->get_vs_main();
+    std::vector<std::vector<int> >& p = this->get_vs_pend();
+    std::vector<int>& v = this->get_v();
+    v.clear();
+    unsigned int j = 0;
+    unsigned int i = 0;
+    while(j < p.size() && i < m.size())
+    {
+        if(m[i][0] < p[j][0]) // Changed m[0][i] to m[i][0]
+        {
+            v.push_back(m[i][0]); // Changed m[0][i] to m[i][0]
+            std::cout << "i is " << i << " and " << m[i][0] << std::endl; // Changed m[0][i] to m[i][0]
+            i++;
+        }
+        else
+        {
+            v.push_back(p[j][0]); // Changed p[0][j] to p[j][0]
+            std::cout << "j is " << j << " and " << p[j][0] << std::endl; // Changed p[0][j] to p[j][0]
+            j++;
+        }
+        std::cout << "i is " << i << " j is " << j << std::endl;
+    }
+    while(i < m.size())
+    {
+        v.push_back(m[i][0]); // Changed m[0][i] to m[i][0]
+        i++;
+    }
+    while(j < p.size())
+    {
+        v.push_back(p[j][0]); // Changed p[0][j] to p[j][0]
+        j++;
+    }
+}
+
+// void pm::fill_final(void)
+// {
+// 	std::vector<std::vector<int> >& m = this->get_vs_main();
+// 	std::vector<std::vector<int> >& p = this->get_vs_pend();
+// 	std::vector<int>& v = this->get_v();
+// 	v.clear();
+// 	unsigned int j = 0;
+// 	unsigned int i = 0;
+// 	while(j < p.size() && i < m.size())
+// 	{
+// 		if(m[0][i] < p[0][j])
+// 		{
+// 			v.push_back(m[0][i]);
+// 			// m.pop_front();
+// 			std::cout << "i is " << i << " and " << m[0][i] << std::endl;
+// 			i++;
+// 		}
+// 		else
+// 		{
+// 			v.push_back(p[0][j]);
+// 			// p.pop_front();
+// 			std::cout << "j is " << j << " and " << p[0][j] << std::endl;
+// 			j++;
+// 		}
+// 		std::cout << "i is " << i << " j is " << j << std::endl;
+// 	}
+// 	while(i < m.size())
+// 	{
+// 		v.push_back(m[0][i]);
+// 		i++;
+// 	}
+// 	while(j < p.size())
+// 	{
+// 		v.push_back(p[0][j]);
+// 		j++;
+// 	}
+// }
+
 
 void pm::sort_v(void)
 {
@@ -549,10 +557,12 @@ void pm::sort_v(void)
 	fill_vs_main();
 	fill_vs_pend();
 	odd_insert();
-	std::cout << this->vs_odd[0] << std::endl;
+	// std::cout << this->vs_odd[0] << std::endl;
 	std::cout << RED << "******************************************" << RESET << std::endl;
 	print_vs_main();
 	print_vs_pend();
+	fill_final();
+	print_v();
 }
 
 void pm::sort_l(void)
