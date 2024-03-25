@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/24 23:35:04 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:43:46 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,14 +447,17 @@ void pm::sort_v(void)
 	vstov();
 	std::cout << "First sort " << std::endl;
 	// std::cout << get_vs_odd().size() << std::endl;
-	for(unsigned long i = 0; this->limit > 0; ++i)
+	for(unsigned long i = 0; this->limit - 1 > 0; ++i)
 	{
+		std::this_thread::sleep_for(std::chrono::seconds(10));
+		std::cout << RED << "i is " << i << " limit is " << this->limit << RESET << std::endl;
 		fill_double_v();
 		handl_vs();
 		fill_vs_main();
 		fill_vs_pend();
 		baniry_sort();
 		vstov();
+		// usleep(1000);00
 	}
 	// print_v();
     // vstov();
