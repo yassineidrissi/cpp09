@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/25 21:43:46 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/27 21:01:04 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void pop_front(std::vector<T>& vec, int i) {
 
 void pm::merge(int l)
 {
-	std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
+	// std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
 	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
 	{
 		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
@@ -222,7 +222,7 @@ void pm::merge(int l)
       }
 	}
 	std::cout << "l merge :" << l << std::endl;
-	print_vs();	
+	// print_vs();	
 }
 
 void pm::print_vs(void)
@@ -446,19 +446,20 @@ void pm::sort_v(void)
 	handl_vs_first();
 	vstov();
 	std::cout << "First sort " << std::endl;
+	print_v();
 	// std::cout << get_vs_odd().size() << std::endl;
-	for(unsigned long i = 0; this->limit - 1 > 0; ++i)
-	{
-		std::this_thread::sleep_for(std::chrono::seconds(10));
-		std::cout << RED << "i is " << i << " limit is " << this->limit << RESET << std::endl;
+	// for(unsigned long i = 0; this->limit > 0; ++i)
+	// {
+		// std::this_thread::sleep_for(std::chrono::seconds(10));
+		// std::cout << RED << "i is " << i << " limit is " << this->limit << RESET << std::endl;
 		fill_double_v();
 		handl_vs();
 		fill_vs_main();
 		fill_vs_pend();
 		baniry_sort();
 		vstov();
-		// usleep(1000);00
-	}
+		// usleep(1000);
+	// }
 	// print_v();
     // vstov();
 	// fill_double_v();
