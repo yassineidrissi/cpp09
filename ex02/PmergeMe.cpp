@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/27 21:01:04 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/03/31 20:29:13 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,20 +392,16 @@ void pm::handl_vs_first()
         for (int i = 0; i < (this->size/2); ++i)
             merge(i);
     this->limit = j;
-	// std::cout << RED << "size id size : " << this->get_vs().size() << std::endl;
     if(this->get_vs().size() == 3)
     {
 		std::vector<int> v = this->get_vs()[2];
 		// std::vector<int> vodd = this->get_vs_odd();
 		for(unsigned int i = 0; i < v.size(); ++i)
 		{
-			// if(vodd.empty())
-			// 	vodd.push_back(std::vector<int>());
 			this->get_vs_odd().push_back(v[i]);
 			std::cout << RED << "this odd : " << v[i] << RESET << std::endl;
 		}
 		this->get_vs()[2].clear();
-    //     this->get_vs().erase(this->get_vs().begin() + 2);
     }	
 }
 
@@ -447,10 +443,8 @@ void pm::sort_v(void)
 	vstov();
 	std::cout << "First sort " << std::endl;
 	print_v();
-	// std::cout << get_vs_odd().size() << std::endl;
-	// for(unsigned long i = 0; this->limit > 0; ++i)
-	// {
-		// std::this_thread::sleep_for(std::chrono::seconds(10));
+	for(unsigned long i = 0; this->limit > 0; ++i)
+	{
 		// std::cout << RED << "i is " << i << " limit is " << this->limit << RESET << std::endl;
 		fill_double_v();
 		handl_vs();
@@ -458,56 +452,13 @@ void pm::sort_v(void)
 		fill_vs_pend();
 		baniry_sort();
 		vstov();
-		// usleep(1000);
-	// }
-	// print_v();
-    // vstov();
-	// fill_double_v();
-	// handl_vs();
-	// std::cout << GREEN << ">>>>>****************************************************************" << RESET << std::endl;
-	// print_vs();
-	// fill_vs_main();
-	// fstd::cout << YELLOW << "main print" << RESET << std::endl;
-	// print_vs_main();
-	// fill_vs_pend();
-	// std::cout << YELLOW << "pend print" << RESET << std::endl;
-	// print_vs_pend();
-	// baniry_sort();
-	// std::cout << RED << "baniry_sort " << std::endl;
-	// print_vs_main();
-	// print_vs_pend();
-	// // vmaintovs();
-	// print_v();
-	// std::cout << RED << "PRINT V" <<  RESET << std::endl;
-	// print_vs();
-	// vstov();
-	// std::cout << RED << "PRINT V 2" <<  RESET << std::endl;
-	// print_v();
-	// print_vs();
-	// // std::cout << GREEN 
-	// std::cout << RED << "finish loop " << RESET << std::endl;
+	}
 	fill_vs_odd();
-	// std::cout << RED << "PRINT V" <<  RESET << std::endl;
-	// print_v();	
-	// fill_double_v();
-	// std::cout << GREEN << "AFTRE FILL loop " << RESET << std::endl;
-	// print_vs();
-	// fill_vs_main();
-	// print_vs_main();
-	// std::cout << RED << "this is pend" << RESET << std::endl;
-	// fill_vs_pend();
-	// print_vs_pend();
-	// fill_vs_main();
-	// fill_vs_pend();
 	odd_insert();
-	// std::cout << this->vs_odd[0] << std::endl;
 	std::cout << RED << "******************************************" << RESET << std::endl;
 	print_vs_main();
 	print_vs_pend();
-	// fill_final();
 	baniry_sort();
-	// print_vs_main();	
-	// print_v();
 }
 
 void pm::sort_l(void)
