@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/31 20:29:13 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:50:17 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void pop_front(std::vector<T>& vec, int i) {
 
 void pm::merge(int l)
 {
-	// std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
+	std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
 	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
 	{
 		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
@@ -443,16 +443,16 @@ void pm::sort_v(void)
 	vstov();
 	std::cout << "First sort " << std::endl;
 	print_v();
-	for(unsigned long i = 0; this->limit > 0; ++i)
-	{
-		// std::cout << RED << "i is " << i << " limit is " << this->limit << RESET << std::endl;
-		fill_double_v();
-		handl_vs();
-		fill_vs_main();
-		fill_vs_pend();
-		baniry_sort();
-		vstov();
-	}
+	// for(unsigned long i = 0; this->limit > 0; ++i)
+	// {
+	// 	std::cout << RED << "i is " << i << " limit is " << this->limit << RESET << std::endl;
+	// 	fill_double_v();
+	// 	handl_vs();
+	// 	fill_vs_main();
+	// 	fill_vs_pend();
+	// 	baniry_sort();
+	// 	vstov();
+	// }
 	fill_vs_odd();
 	odd_insert();
 	std::cout << RED << "******************************************" << RESET << std::endl;
