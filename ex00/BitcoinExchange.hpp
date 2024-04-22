@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/04/22 22:20:01 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:24:45 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 // 	double value;
 // }bit;
 
-class RPN
+class bit
 {
 	public:
 		std::map<std::time_t, double>bitData;
