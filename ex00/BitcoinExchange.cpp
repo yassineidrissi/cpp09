@@ -68,8 +68,8 @@ void fillData(bit &b)
                 if(key > b.maxData)
                     b.maxData = key;
                 if(key < b.minData)
-                    b.minData = key;
                 b.bitData[key] = value; // insert new data into b.data
+                    b.minData = key;
             }//! im not sure if we need to catch here 
             catch (std::invalid_argument const &e) 
             {
