@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/04/23 05:14:12 by yassine          ###   ########.fr       */
+/*   Updated: 2024/05/13 22:09:19 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,10 +163,11 @@ void pm::print_ln(void)
 	std::cout << RESET << std::endl;
 }
 
-
 void pm::printBefor(void)
 {
-	std::cout << YELLOW << "Before :  ";
+	std::cout << YELLOW << "Before (vector) :  ";
+	this->print_ln();
+	std::cout << YELLOW << "Before (vector) :  ";
 	this->print_ln();
 }
 
@@ -424,18 +425,32 @@ void pm::odd_insert()
 
 void pm::sort_v(void)
 {
-	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
-	handl_vs_first();
-	vstov();
-	std::cout << "First sort " << std::endl;
-	print_v();
-	fill_vs_odd();
-	odd_insert();
-	std::cout << RED << "******************************************" << RESET << std::endl;
-	print_vs_main();
-	print_vs_pend();
-	baniry_sort();
+	Vec pend;
+	Vec main;
+	Vec rest;
+
+	if (this->vs().size() == 1)
+		return ;
+	if (this->vs)
+	{
+		reset.push_back(this->vs())
+	}
+	
 }
+// void pm::sort_v(void)
+// {
+// 	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
+// 	handl_vs_first();
+// 	vstov();
+// 	std::cout << "First sort " << std::endl;
+// 	print_v();
+// 	fill_vs_odd();
+// 	odd_insert();
+// 	std::cout << RED << "******************************************" << RESET << std::endl;
+// 	print_vs_main();
+// 	print_vs_pend();
+// 	baniry_sort();
+// }
 
 void pm::sort_l(void)
 {
