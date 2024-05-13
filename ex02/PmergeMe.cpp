@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/13 22:09:19 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/13 23:43:19 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,13 +428,17 @@ void pm::sort_v(void)
 	Vec pend;
 	Vec main;
 	Vec rest;
+	Vec vs = this->vs();
 
-	if (this->vs().size() == 1)
+	if (vs.size() == 1)
 		return ;
-	if (this->vs)
+	if (vs.size() % 2 != 0)
 	{
-		reset.push_back(this->vs())
+		rest.push_back(this->vs().back());
+		this->vs().pop_back();
 	}
+	std::cout << "im here " << std::endl;
+	
 	
 }
 // void pm::sort_v(void)
