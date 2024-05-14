@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/13 23:43:19 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:13:44 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,7 +372,7 @@ void pm::baniry_sort()
 	//! i will neeed this after 
 }
 
-void pm::handl_vs_first()
+void pm::pair_vs()
 {
 	int j = 0;
 	 for (;this->get_vs().size() > 3 ; j++)
@@ -428,23 +428,23 @@ void pm::sort_v(void)
 	Vec pend;
 	Vec main;
 	Vec rest;
-	Vec vs = this->vs();
+	Vec vs = this->vs;
 
 	if (vs.size() == 1)
 		return ;
 	if (vs.size() % 2 != 0)
 	{
-		rest.push_back(this->vs().back());
-		this->vs().pop_back();
+		rest.push_back(this->vs.back());
+		this->vs.pop_back();
 	}
 	std::cout << "im here " << std::endl;
-	
-	
+	// exit(1);
 }
+
 // void pm::sort_v(void)
 // {
 // 	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
-// 	handl_vs_first();
+// 	pair_vs();
 // 	vstov();
 // 	std::cout << "First sort " << std::endl;
 // 	print_v();

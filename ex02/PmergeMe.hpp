@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/13 22:33:00 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:13:30 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ class pm
 		void baniry_sort();
 		void split_mp();
 		void handl_vs();
-		void handl_vs_first();
+		void pair_vs();
 		void sort_vs();
 		std::vector<int>& get_vs_odd();
 		

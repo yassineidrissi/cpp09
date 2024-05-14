@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
+/*   PmergeMe1.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/04/23 02:32:33 by yassine          ###   ########.fr       */
+/*   Updated: 2024/05/14 20:13:30 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,7 +371,7 @@ void pm::baniry_sort()
 	//! i will neeed this after 
 }
 
-void pm::handl_vs_first()
+void pm::pair_vs()
 {
 	int j = 0;
 	 for (;this->get_vs().size() > 3 ; j++)
@@ -425,7 +425,7 @@ void pm::odd_insert()
 void pm::sort_v(void)
 {
 	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
-	handl_vs_first();
+	pair_vs();
 	vstov();
 	std::cout << "First sort " << std::endl;
 	print_v();
