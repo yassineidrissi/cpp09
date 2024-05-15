@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/14 23:15:24 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:27:45 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ class pm
 		void handl_vs();
 		void pair_vs(Vec& odd);
 		void sort_vs();
+		void createChains(void)
 		std::vector<int>& get_vs_odd();
 		
 		///******* Exeception ************//

@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/15 03:44:36 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:27:05 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,36 +372,6 @@ void pm::baniry_sort()
 	//! i will neeed this after 
 }
 
-void pm::pair_vs(Vec& odd)
-{
-	Vec tmp;
-	for (Vec::iterator it = this->vs.begin();it != vs.begin();it+=2)
-	{
-		if (it + 1 != this->vs.end())
-		{
-			if(*it > *(it + 1))
-			{
-				this->v = *it;
-				*it = *(it + 1);
-				*(it + 1) = this->v;
-				
-			}
-			MiniVec fvec; 
-			for(MiniVec::iterator it1 = it->begin();it1 != it->end(); it1++)
-				fvec.push_back(*it1);
-			for(MiniVec::iterator it2 = (it + 1)->begin(); it2 != it->end(); it2++)
-				fvec.push_back(*it2);
-			tmp.push_back(fvec);
-			fvec.clear();
-			
-		}
-		else
-			odd.push_back(*it);
-		this->vs = tmp;
-		tmp.clear();
-	}
-}
-
 void pm::odd_insert()
 {
     MiniVec& odd = this->get_vs_odd();
@@ -431,6 +401,81 @@ void pm::odd_insert()
     }
 }
 
+void pm::createChains()
+{
+    int index = 0;
+    for (Vec::iterator it = this->vs.begin(); it != this->vs.end(); ++it, ++index)
+    {
+        if (index % 2 != 0)
+            this->vs_pend.push_back(*it);
+        else
+            this->vs_main.push_back(*it);
+    }
+
+    for (Vec::iterator re = this->vs_odd.begin(); re != this->vs_odd.end(); ++re)
+    {
+        this->vs_pend.push_back(*re);
+    }
+}
+
+void pm::unpair_vs()
+{
+	std::vector<std::vector<int> > tmp;
+	for(unsigned long i = 0; i < this->get_vs().size(); i+=2)
+	{
+		if(i + 1 < this->get_vs().size())
+		{
+			if(this->get_vs()[i] > this->get_vs()[i + 1])
+			{
+				std::vector<int> tmpVec = this->get_vs()[i];
+				this->get_vs()[i] = this->get_vs()[i + 1];
+				this->get_vs()[i + 1] = tmpVec;
+			}
+			std::vector<int> oneVec;
+			for(unsigned long j = 0; j < this->get_vs()[i].size(); j++)
+				oneVec.push_back(this->get_vs()[i][j]);
+			for(unsigned long j = 0; j < this->get_vs()[i + 1].size(); j++)
+				oneVec.push_back(this->get_vs()[i + 1][j]);
+			tmp.push_back(oneVec);
+			oneVec.clear();
+		}
+		else
+			this->get_vs_odd().push_back(this->get_vs()[i]);
+	}
+	this->get_vs() = tmp;
+	tmp.clear();
+}
+
+void pm::pair_vs(Vec& odd)
+{
+	Vec tmp;
+	for (Vec::iterator it = this->vs.begin();it != vs.end();it+=2)
+	{
+		if (it + 1 != this->vs.end())
+		{
+			if(*it > *(it + 1))
+			{
+				this->v = *it;
+				*it = *(it + 1);
+				*(it + 1) = this->v;
+			}
+			MiniVec fvec; 
+			for(MiniVec::iterator it1 = it->begin();it1 != it->end(); it1++)
+				fvec.push_back(*it1);
+			for(MiniVec::iterator it2 = (it + 1)->begin(); it2 != (it + 1)->end(); it2++)
+				fvec.push_back(*it2);
+			tmp.push_back(fvec);
+			fvec.clear();
+			
+		}
+		else
+			odd.push_back(*it);
+	}
+	this->vs = tmp;
+	tmp.clear();
+}
+
+
 
 
 void pm::sort_v(void)
@@ -438,19 +483,21 @@ void pm::sort_v(void)
 	Vec pend;
 	Vec main;
 	Vec odd;
-	Vec vs = this->vs;
+	// Vec& vs = this->vs;
 
-	if (vs.size() == 1)
+	if (this->vs.size() == 1)
 		return ;
-	if (vs.size() % 2 != 0)
+	std::cout << "im here " << vs.size() << std::endl;
+	if (this->vs.size() % 2 != 0)
 	{
 		odd.push_back(this->vs.back());
 		this->vs.pop_back();
 	}
 	pair_vs(odd);
 	sort_v();
+	unpair_vs();
+	fill_vs_main();
 	
-	std::cout << "im here " << std::endl;
 	// exit(1);
 }
 
