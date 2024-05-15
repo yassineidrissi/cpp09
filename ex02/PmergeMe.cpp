@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/14 20:13:44 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/15 03:44:36 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,29 +372,39 @@ void pm::baniry_sort()
 	//! i will neeed this after 
 }
 
-void pm::pair_vs()
+void pm::pair_vs(Vec& odd)
 {
-	int j = 0;
-	 for (;this->get_vs().size() > 3 ; j++)
-        for (int i = 0; i < (this->size/2); ++i)
-            merge(i);
-    this->limit = j;
-    if(this->get_vs().size() == 3)
-    {
-		std::vector<int> v = this->get_vs()[2];
-		// std::vector<int> vodd = this->get_vs_odd();
-		for(unsigned int i = 0; i < v.size(); ++i)
+	Vec tmp;
+	for (Vec::iterator it = this->vs.begin();it != vs.begin();it+=2)
+	{
+		if (it + 1 != this->vs.end())
 		{
-			this->get_vs_odd().push_back(v[i]);
-			std::cout << RED << "this odd : " << v[i] << RESET << std::endl;
+			if(*it > *(it + 1))
+			{
+				this->v = *it;
+				*it = *(it + 1);
+				*(it + 1) = this->v;
+				
+			}
+			MiniVec fvec; 
+			for(MiniVec::iterator it1 = it->begin();it1 != it->end(); it1++)
+				fvec.push_back(*it1);
+			for(MiniVec::iterator it2 = (it + 1)->begin(); it2 != it->end(); it2++)
+				fvec.push_back(*it2);
+			tmp.push_back(fvec);
+			fvec.clear();
+			
 		}
-		this->get_vs()[2].clear();
-    }	
+		else
+			odd.push_back(*it);
+		this->vs = tmp;
+		tmp.clear();
+	}
 }
 
 void pm::odd_insert()
 {
-    std::vector<int>& odd = this->get_vs_odd();
+    MiniVec& odd = this->get_vs_odd();
     std::vector<std::vector<int> >& pend = this->get_vs_pend();
 
     if (!odd.empty()) {
@@ -427,16 +437,19 @@ void pm::sort_v(void)
 {
 	Vec pend;
 	Vec main;
-	Vec rest;
+	Vec odd;
 	Vec vs = this->vs;
 
 	if (vs.size() == 1)
 		return ;
 	if (vs.size() % 2 != 0)
 	{
-		rest.push_back(this->vs.back());
+		odd.push_back(this->vs.back());
 		this->vs.pop_back();
 	}
+	pair_vs(odd);
+	sort_v();
+	
 	std::cout << "im here " << std::endl;
 	// exit(1);
 }

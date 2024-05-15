@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/14 20:13:30 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/14 23:15:24 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include <thread>
 
 typedef std::vector<std::vector<int> > Vec;
-
+typedef std::vector<int> MiniVec;
 class pm
 {
 	private:
@@ -92,7 +92,7 @@ class pm
 		void baniry_sort();
 		void split_mp();
 		void handl_vs();
-		void pair_vs();
+		void pair_vs(Vec& odd);
 		void sort_vs();
 		std::vector<int>& get_vs_odd();
 		
