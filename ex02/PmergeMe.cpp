@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/15 20:27:05 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:48:06 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ std::vector<std::vector<int> >& pm::get_vs_pend()
 	return this->vs_pend;
 }
 
-std::vector<int>& pm::get_vs_odd()
+Vec& pm::get_vs_odd()
 {
 	return this->vs_odd;
 }
@@ -263,21 +263,21 @@ void pm::print_vs_pend()
 	}
 }
 
-void pm::print_vs_odd()
-{
-    std::cout << RED;
-    std::cout << "indice 0 " << std::endl;
-	std::vector<int> vs_odd = this->get_vs_odd();
-    if (!vs_odd.empty()) 
-	{
-        for(unsigned long i = 0; i < vs_odd.size(); ++i)
-        {
-                int nb = vs_odd[i];
-                std::cout << nb << std::endl;
-        }
-    }
-    std::cout << RESET << std::endl;
-}
+// void pm::print_vs_odd()
+// {
+//     std::cout << RED;
+//     std::cout << "indice 0 " << std::endl;
+// 	Vec& vs_odd = this->get_vs_odd();
+//     if (!vs_odd.empty()) 
+// 	{
+//         for(unsigned long i = 0; i < vs_odd.size(); ++i)
+//         {
+//                 int nb = vs_odd[i];
+//                 std::cout << nb << std::endl;
+//         }
+//     }
+//     std::cout << RESET << std::endl;
+// }
 
 void pm::fill_vs_main()
 {
@@ -296,10 +296,10 @@ void pm::fill_vs_pend()
 }
 
 
-void pm::fill_vs_odd()
-{
-	get_vs_main().push_back(get_vs_odd());
-}
+// void pm::fill_vs_odd()
+// {
+// 	get_vs_main().push_back(get_vs_odd());
+// }
 
 void pm::split_mp()
 {
@@ -372,32 +372,49 @@ void pm::baniry_sort()
 	//! i will neeed this after 
 }
 
-void pm::odd_insert()
-{
-    MiniVec& odd = this->get_vs_odd();
-    std::vector<std::vector<int> >& pend = this->get_vs_pend();
+// void pm::odd_insert()
+// {
+//     MiniVec& odd = this->get_vs_odd();
+//     std::vector<std::vector<int> >& pend = this->get_vs_pend();
 
-    if (!odd.empty()) {
-		for(unsigned int i = 0; i < odd.size(); ++i)
-		{
-			for(unsigned int j = 0; j < pend.size(); ++j)
-			{
-				if(odd[i] < pend[j][0])
-				{
-					std::vector<int> v;
-					v.push_back(odd[i]);
-					pend.insert(pend.begin() + j, v);
-					break  ;
-				}
-				else if(j == pend.size() - 1)
-				{
-					std::vector<int> v;
-					v.push_back(odd[i]);
-					pend.push_back(v);
-					break  ;
-				}
-			}
-		}			
+//     if (!odd.empty()) {
+// 		for(unsigned int i = 0; i < odd.size(); ++i)
+// 		{
+// 			for(unsigned int j = 0; j < pend.size(); ++j)
+// 			{
+// 				if(odd[i] < pend[j][0])
+// 				{
+// 					std::vector<int> v;
+// 					v.push_back(odd[i]);
+// 					pend.insert(pend.begin() + j, v);
+// 					break  ;
+// 				}
+// 				else if(j == pend.size() - 1)
+// 				{
+// 					std::vector<int> v;
+// 					v.push_back(odd[i]);
+// 					pend.push_back(v);
+// 					break  ;
+// 				}
+// 			}
+// 		}			
+//     }
+// }
+
+bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
+{
+    return a.back() <= b.back();
+}
+
+void pm::InsertPaindInMain()
+{
+    for (Vec::const_iterator it = this->vs_pend.begin(); it != this->vs_pend.end(); ++it)
+    {
+        // Find the insertion point using lower_bound
+        Vec::iterator insertionPoint = std::lower_bound(this->vs.begin(), this->vs.end(), *it, Compare);
+
+        // Insert the vector at the insertion point
+        this->vs.insert(insertionPoint, *it);
     }
 }
 
@@ -480,10 +497,10 @@ void pm::pair_vs(Vec& odd)
 
 void pm::sort_v(void)
 {
-	Vec pend;
-	Vec main;
-	Vec odd;
-	// Vec& vs = this->vs;
+	// Vec& pend = this->vs_pend;
+	// Vec& main = this->vs_main;
+	Vec& odd = this->vs_odd;
+
 
 	if (this->vs.size() == 1)
 		return ;
@@ -497,8 +514,6 @@ void pm::sort_v(void)
 	sort_v();
 	unpair_vs();
 	fill_vs_main();
-	
-	// exit(1);
 }
 
 // void pm::sort_v(void)
