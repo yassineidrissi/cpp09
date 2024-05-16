@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:52 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/15 20:48:06 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/16 22:56:12by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void pm::merge(int l)
 
 void pm::print_vs(void)
 {
-	// std::cout << "size is " << this->get_vs().size() << std::endl;
+	std::cout << "size is " << this->get_vs().size() << std::endl;
 	for(unsigned long i = 0; i < this->get_vs().size(); ++i) {
 		std::cout << "indice " << i << std::endl;
 		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j) {
@@ -278,15 +278,6 @@ void pm::print_vs_pend()
 //     }
 //     std::cout << RESET << std::endl;
 // }
-
-void pm::fill_vs_main()
-{
-	this->get_vs_main().clear();
-	this->get_vs_main().push_back(this->get_vs()[0]);
-	this->get_vs_main().push_back(this->get_vs()[1]);
-	for(unsigned long i = 3; i < this->get_vs().size(); i+=2)
-		this->get_vs_main().push_back(this->get_vs()[i]);
-}
 
 void pm::fill_vs_pend()
 {
@@ -401,23 +392,6 @@ void pm::baniry_sort()
 //     }
 // }
 
-bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
-{
-    return a.back() <= b.back();
-}
-
-void pm::InsertPaindInMain()
-{
-    for (Vec::const_iterator it = this->vs_pend.begin(); it != this->vs_pend.end(); ++it)
-    {
-        // Find the insertion point using lower_bound
-        Vec::iterator insertionPoint = std::lower_bound(this->vs.begin(), this->vs.end(), *it, Compare);
-
-        // Insert the vector at the insertion point
-        this->vs.insert(insertionPoint, *it);
-    }
-}
-
 void pm::createChains()
 {
     int index = 0;
@@ -463,6 +437,7 @@ void pm::unpair_vs()
 	tmp.clear();
 }
 
+
 void pm::pair_vs(Vec& odd)
 {
 	Vec tmp;
@@ -492,13 +467,37 @@ void pm::pair_vs(Vec& odd)
 	tmp.clear();
 }
 
+void pm::Chaine_vs()
+{
+	int index = 0;
+	for(Vec::iterator it = this->vs.begin(); it != this->vs.end(); it++)
+	{
+		if (index % 2 != 0)
+			this->vs_pend.push_back(*it);
+		else
+			this->vs_main.push_back(*it);
+		index++;
+	}
+}
 
+bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
+{
+	return a.back() <= b.back();
+}
 
+void pm::InsertPaid()
+{
+	for(Vec::iterator it = this->vs_pend.begin(); it != this->vs_pend.end(); it++)
+	{
+		Vec::iterator insertionPoint = std::lower_bound(this->vs_main.begin(), this->vs_main.end(), *it, Compare);
+		this->vs_main.insert(insertionPoint, *it);
+	}
+}
 
 void pm::sort_v(void)
 {
 	// Vec& pend = this->vs_pend;
-	// Vec& main = this->vs_main;
+	Vec main;
 	Vec& odd = this->vs_odd;
 
 
@@ -511,9 +510,16 @@ void pm::sort_v(void)
 		this->vs.pop_back();
 	}
 	pair_vs(odd);
+	print_vs();
+	print_vs_main();
+	print_vs_pend();
+	// print_vs_odd();
+	std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep for 1 second
+	// print_vs();
 	sort_v();
 	unpair_vs();
-	fill_vs_main();
+	Chaine_vs();
+	InsertPaid();
 }
 
 // void pm::sort_v(void)
