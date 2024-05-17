@@ -392,6 +392,15 @@ void pm::baniry_sort()
 //     }
 // }
 
+void pm::printVector(const Vec &sequence) {
+    for (Vec::const_iterator vec_it = sequence.begin(); vec_it != sequence.end(); ++vec_it) {
+        for (MiniVec::const_iterator num_it = vec_it->begin(); num_it != vec_it->end(); ++num_it) {
+            std::cout << *num_it << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
 void pm::createChains()
 {
     int index = 0;
@@ -409,90 +418,90 @@ void pm::createChains()
     }
 }
 
-void pm::unpair_vs()
-{
-	std::vector<std::vector<int> > tmp;
-	unsigned long size = this->get_vs()[0].size() / 2;
-	for(unsigned long i = 0; i < this->get_vs().size(); i+=2)
-	{
-		MiniVec v1, v2;
-		for(unsigned long j = 0; j < size; ++j)
-		{
-			v1.push_back(this->get_vs()[i][j]);
-			v2.push_back(this->get_vs()[i][j + size]);
-		}
-		tmp.push_back(v1);
-		tmp.push_back(v2);
-	
-	}
-	this->get_vs() = tmp;
-	tmp.clear();
+void pm::unpair_vs() {
+    Vec temp;
+    for (size_t i = 0; i < this->vs.size(); ++i) {
+        for (size_t j = 0; j < this->vs[i].size(); ++j) {
+            MiniVec singleElement;
+            singleElement.push_back(this->vs[i][j]);
+            temp.push_back(singleElement);
+        }
+    }
+    this->vs = temp;
 }
 
 
-void pm::pair_vs(Vec& odd)
-{
-	Vec tmp;
-	for (Vec::iterator it = this->vs.begin();it != vs.end();it+=2)
-	{
-		if (it + 1 != this->vs.end())
-		{
-			if(*it > *(it + 1))
-			{
-				this->v = *it;
-				*it = *(it + 1);
-				*(it + 1) = this->v;
-			}
-			MiniVec fvec; 
-			for(MiniVec::iterator it1 = it->begin();it1 != it->end(); it1++)
-				fvec.push_back(*it1);
-			for(MiniVec::iterator it2 = (it + 1)->begin(); it2 != (it + 1)->end(); it2++)
-				fvec.push_back(*it2);
-			tmp.push_back(fvec);
-			fvec.clear();
-			
-		}
-		else
-			odd.push_back(*it);
-	}
-	this->vs = tmp;
-	tmp.clear();
+
+
+
+void pm::pair_vs(Vec& odd) {
+    Vec tmp;
+    for (Vec::iterator it = this->vs.begin(); it != vs.end(); it += 2) {
+        if (it + 1 != this->vs.end()) {
+            if (*it > *(it + 1)) {
+                this->v = *it;
+                *it = *(it + 1);
+                *(it + 1) = this->v;
+            }
+            MiniVec fvec;
+            for (MiniVec::iterator it1 = it->begin(); it1 != it->end(); it1++)
+                fvec.push_back(*it1);
+            for (MiniVec::iterator it2 = (it + 1)->begin(); it2 != (it + 1)->end(); it2++)
+                fvec.push_back(*it2);
+            tmp.push_back(fvec);
+            fvec.clear();
+        } else {
+            odd.push_back(*it);
+        }
+    }
+    this->vs = tmp;
+    tmp.clear();
+    // Debug print
+    std::cout << "After pair_vs: ";
+    printVector(this->vs);
+    std::cout << "Odd elements: ";
+    printVector(odd);
 }
 
-void pm::Chaine_vs()
-{
-	int index = 0;
-	for(Vec::iterator it = this->vs.begin(); it != this->vs.end(); it++)
-	{
-		if (index % 2 != 0)
-			this->vs_pend.push_back(*it);
-		else
-			this->vs_main.push_back(*it);
-		index++;
-	}
-	for(Vec::iterator re = this->vs_odd.begin(); re != this->vs_odd.end(); re++)
-	{
-		this->vs_pend.push_back(*re);
-	}
-	std::cout << "im in Chaine_vs" << std::endl;
-	print_vs_main();
-	std::cout << "im in Chaine_vs 2" << std::endl;
-	print_vs_pend();
+void pm::Chaine_vs() {
+    Vec mainChain;
+    Vec pend;
+    Vec& remain = this->vs_odd;
+
+    if (this->vs.size() % 2 != 0) {
+        remain.push_back(this->vs.back());
+        this->vs.pop_back();
+    }
+	//! need to check this
+    for (size_t i = 0; i < this->vs.size(); i += 2) {
+        if (this->vs[i][0] < this->vs[i + 1][0]) {
+            mainChain.push_back(this->vs[i]);
+            pend.push_back(this->vs[i + 1]);
+        } else {
+            mainChain.push_back(this->vs[i + 1]);
+            pend.push_back(this->vs[i]);
+        }
+    }
+	for (Vec::iterator it = remain.begin(); it != remain.end(); ++it)
+		pend.push_back(*it);
+    this->vs_main = mainChain;
+    this->vs_pend = pend;
+    remain.clear();
 }
 
-bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
-{
-	return a.back() <= b.back();
+
+bool compareMiniVecs(const MiniVec &a, const MiniVec &b) {
+    return a.back() < b.back();
 }
 
-void pm::InsertPaid()
-{
-	for(Vec::iterator it = this->vs_pend.begin(); it != this->vs_pend.end(); it++)
-	{
-		Vec::iterator insertionPoint = std::lower_bound(this->vs_main.begin(), this->vs_main.end(), *it, Compare);
-		this->vs_main.insert(insertionPoint, *it);
-	}
+void pm::InsertPaid() {
+    for (Vec::iterator pair = this->vs_pend.begin(); pair != this->vs_pend.end(); ++pair) {
+        Vec::iterator insertionPoint = std::lower_bound(this->vs_main.begin(), this->vs_main.end(), *pair, compareMiniVecs);
+        this->vs_main.insert(insertionPoint, *pair);
+    }
 }
+
+
 
 void pm::sort_v(void)
 {
@@ -506,17 +515,13 @@ void pm::sort_v(void)
 		this->vs.pop_back();
 	}
 	pair_vs(this->vs_odd);
-	std::cout << "First sort " << std::endl;
-	print_vs();
-	std::cout << "Second sort " << std::endl;
-	print_vs_main();
-	std::cout << "Third sort " << std::endl;
-	print_vs_pend();
-	std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep for 1 second
+	std::this_thread::sleep_for(std::chrono::seconds(10)); // sleep for 1 second
 	sort_v();
 	unpair_vs();
 	Chaine_vs();
 	InsertPaid();
+	this->vs = this->vs_main;
+	this->vs_main.clear();
 }
 
 // void pm::sort_v(void)
