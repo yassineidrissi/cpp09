@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:34:36 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/17 01:11:38 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/17 23:56:59 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ int main(int ac, char **av)
 			p.parcing(av);
 			p.printBefor();
 			p.sort();
-			// p.print_vs();
-			// p.print_vs_main();
 			p.printAfter();
-			// p.printTime();
-			// while(1);
+			p.printTime();
 		}
 	}
 	catch(const std::exception& e)

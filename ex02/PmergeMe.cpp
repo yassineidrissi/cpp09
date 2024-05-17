@@ -174,7 +174,7 @@ void pm::printBefor(void)
 void pm::printAfter(void)
 {
 	std::cout << GREEN << "After  :  ";
-	this->print_vs();
+	printVector(this->vs);
 }
 
 void pm::printTime(void)
@@ -363,42 +363,13 @@ void pm::baniry_sort()
 	//! i will neeed this after 
 }
 
-// void pm::odd_insert()
-// {
-//     MiniVec& odd = this->get_vs_odd();
-//     std::vector<std::vector<int> >& pend = this->get_vs_pend();
-
-//     if (!odd.empty()) {
-// 		for(unsigned int i = 0; i < odd.size(); ++i)
-// 		{
-// 			for(unsigned int j = 0; j < pend.size(); ++j)
-// 			{
-// 				if(odd[i] < pend[j][0])
-// 				{
-// 					std::vector<int> v;
-// 					v.push_back(odd[i]);
-// 					pend.insert(pend.begin() + j, v);
-// 					break  ;
-// 				}
-// 				else if(j == pend.size() - 1)
-// 				{
-// 					std::vector<int> v;
-// 					v.push_back(odd[i]);
-// 					pend.push_back(v);
-// 					break  ;
-// 				}
-// 			}
-// 		}			
-//     }
-// }
-
 void pm::printVector(const Vec &sequence) {
     for (Vec::const_iterator vec_it = sequence.begin(); vec_it != sequence.end(); ++vec_it) {
         for (MiniVec::const_iterator num_it = vec_it->begin(); num_it != vec_it->end(); ++num_it) {
             std::cout << *num_it << " ";
         }
-        std::cout << std::endl;
     }
+	std::cout << RESET << std::endl;
 }
 
 void pm::createChains()
@@ -456,10 +427,6 @@ void pm::pair_vs(Vec& odd) {
     }
     this->vs = tmp;
     tmp.clear();
-    // Debug print
-    std::cout << "After pair_vs: ";
-    printVector(this->vs);
-    std::cout << "Odd elements: ";
     printVector(odd);
 }
 
@@ -508,14 +475,14 @@ void pm::sort_v(void)
 
 	if (this->vs.size() == 1)
 		return ;
-	std::cout << "im here " << vs.size() << std::endl;
+	// std::cout << "im here " << vs.size() << std::endl;
 	if (this->vs.size() % 2 != 0)
 	{
 		this->vs_odd.push_back(this->vs.back());
 		this->vs.pop_back();
 	}
 	pair_vs(this->vs_odd);
-	std::this_thread::sleep_for(std::chrono::seconds(10)); // sleep for 1 second
+	// std::this_thread::sleep_for(std::chrono::seconds(10)); // sleep for 1 second
 	sort_v();
 	unpair_vs();
 	Chaine_vs();
@@ -524,20 +491,6 @@ void pm::sort_v(void)
 	this->vs_main.clear();
 }
 
-// void pm::sort_v(void)
-// {
-// 	std::cout << "Sort_v : This->limit is " << this->limit << std::endl;
-// 	pair_vs();
-// 	vstov();
-// 	std::cout << "First sort " << std::endl;
-// 	print_v();
-// 	fill_vs_odd();
-// 	odd_insert();
-// 	std::cout << RED << "******************************************" << RESET << std::endl;
-// 	print_vs_main();
-// 	print_vs_pend();
-// 	baniry_sort();
-// }
 
 void pm::sort_l(void)
 {
@@ -556,7 +509,7 @@ void pm::sort(void)
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	
     start = std::chrono::high_resolution_clock::now();
-	// this->sort_l();
+	this->sort_l();
 	end = std::chrono::high_resolution_clock::now();
 	this->Ltime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }
