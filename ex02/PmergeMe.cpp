@@ -412,26 +412,18 @@ void pm::createChains()
 void pm::unpair_vs()
 {
 	std::vector<std::vector<int> > tmp;
+	unsigned long size = this->get_vs()[0].size() / 2;
 	for(unsigned long i = 0; i < this->get_vs().size(); i+=2)
 	{
-		if(i + 1 < this->get_vs().size())
+		MiniVec v1, v2;
+		for(unsigned long j = 0; j < size; ++j)
 		{
-			if(this->get_vs()[i] > this->get_vs()[i + 1])
-			{
-				std::vector<int> tmpVec = this->get_vs()[i];
-				this->get_vs()[i] = this->get_vs()[i + 1];
-				this->get_vs()[i + 1] = tmpVec;
-			}
-			std::vector<int> oneVec;
-			for(unsigned long j = 0; j < this->get_vs()[i].size(); j++)
-				oneVec.push_back(this->get_vs()[i][j]);
-			for(unsigned long j = 0; j < this->get_vs()[i + 1].size(); j++)
-				oneVec.push_back(this->get_vs()[i + 1][j]);
-			tmp.push_back(oneVec);
-			oneVec.clear();
+			v1.push_back(this->get_vs()[i][j]);
+			v2.push_back(this->get_vs()[i][j + size]);
 		}
-		else
-			this->get_vs_odd().push_back(this->get_vs()[i]);
+		tmp.push_back(v1);
+		tmp.push_back(v2);
+	
 	}
 	this->get_vs() = tmp;
 	tmp.clear();
@@ -478,6 +470,14 @@ void pm::Chaine_vs()
 			this->vs_main.push_back(*it);
 		index++;
 	}
+	for(Vec::iterator re = this->vs_odd.begin(); re != this->vs_odd.end(); re++)
+	{
+		this->vs_pend.push_back(*re);
+	}
+	std::cout << "im in Chaine_vs" << std::endl;
+	print_vs_main();
+	std::cout << "im in Chaine_vs 2" << std::endl;
+	print_vs_pend();
 }
 
 bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
@@ -496,26 +496,23 @@ void pm::InsertPaid()
 
 void pm::sort_v(void)
 {
-	// Vec& pend = this->vs_pend;
-	Vec main;
-	Vec& odd = this->vs_odd;
-
 
 	if (this->vs.size() == 1)
 		return ;
 	std::cout << "im here " << vs.size() << std::endl;
 	if (this->vs.size() % 2 != 0)
 	{
-		odd.push_back(this->vs.back());
+		this->vs_odd.push_back(this->vs.back());
 		this->vs.pop_back();
 	}
-	pair_vs(odd);
+	pair_vs(this->vs_odd);
+	std::cout << "First sort " << std::endl;
 	print_vs();
+	std::cout << "Second sort " << std::endl;
 	print_vs_main();
+	std::cout << "Third sort " << std::endl;
 	print_vs_pend();
-	// print_vs_odd();
 	std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep for 1 second
-	// print_vs();
 	sort_v();
 	unpair_vs();
 	Chaine_vs();
