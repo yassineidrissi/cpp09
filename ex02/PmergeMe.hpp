@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/17 20:04:56 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/18 01:50:49 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ class pm
 		Vec vs_odd;
 		std::chrono::microseconds Vtime;
 		std::chrono::microseconds Ltime;
-	public:
 		int limit;
+	public:
 		static bool Compare(const std::vector<int>& a, const std::vector<int>& b);
 		void Chaine_vs(void);
 		void InsertPaid(void);
