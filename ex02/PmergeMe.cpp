@@ -112,10 +112,12 @@ void pm::fill_double_v(void)
 
 void pm::fill(void)
 {
+	// Lst::iterator it = this->ls.begin();
 	for (size_t i = 0; i < this->get_ln().size(); i++)
 	{
-		this->set_v(std::stoi(this->get_ln()[i]));	
-		this->set_l(std::stoi(this->get_ln()[i]));
+		this->v.push_back(std::stoi(this->get_ln()[i]));	
+		// it->push_back(std::stoi(this->get_ln()[i]));
+		// it++;
 	}
 }
 
@@ -135,8 +137,8 @@ void  pm::parcing(char **av)
 		if (j > 3000)
 			throw pm::pmException();
     }
-	this->size = j;
-	this->limit = j - 1;
+	// this->size = j;
+	// this->limit = j - 1;
 	this->fill();
 	this->fill_double_v();
 

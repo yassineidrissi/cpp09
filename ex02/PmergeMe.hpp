@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/18 01:50:49 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/18 02:04:49 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 typedef std::vector<std::vector<int> > Vec;
 typedef std::vector<int> MiniVec;
+typedef std::list<std::list<int> > Lst;
+typedef std::list<int> MiniLst;
 class pm
 {
 	private:
@@ -35,6 +37,7 @@ class pm
 		std::vector<int> v;
 		std::vector<std::vector<int> > vs;
 		std::list<int> l;
+		Lst ls;
 		std::vector<std::vector<int> > vs_main;
 		std::vector<std::vector<int> > vs_pend;
 		Vec vs_odd;
