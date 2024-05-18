@@ -333,7 +333,6 @@ void pm::baniry_sort()
 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
 			{
 				m.insert(m.begin() + j, p[i]);
-				// p[i].clear(); //! need to check
 				j++;
 			}
 			
@@ -341,7 +340,6 @@ void pm::baniry_sort()
 	}
 	p.clear();
 	tmp = m;
-	//! i will neeed this after 
 }
 
 void pm::printVector(const Vec &sequence) {
@@ -365,21 +363,26 @@ void pm::createChains()
     }
 
     for (Vec::iterator re = this->vs_odd.begin(); re != this->vs_odd.end(); ++re)
-    {
-        this->vs_pend.push_back(*re);
-    }
+	{
+		this->vs_pend.push_back(*re);
+	}
 }
 
 void pm::unpair_vs() {
-    Vec temp;
+    Vec tmp;
+	size_t size = this->vs[0].size() / 2;
     for (size_t i = 0; i < this->vs.size(); ++i) {
-        for (size_t j = 0; j < this->vs[i].size(); ++j) {
-            MiniVec singleElement;
-            singleElement.push_back(this->vs[i][j]);
-            temp.push_back(singleElement);
+		MiniVec v1, v2;
+        for (size_t j = 0; j < size; ++j) {
+            // MiniVec singleElement;
+            v1.push_back(this->vs[i][j]);
+            v2.push_back(this->vs[i][j + size]);
         }
+		tmp.push_back(v1);
+		tmp.push_back(v2);	
     }
-    this->vs = temp;
+    this->vs = tmp;
+	tmp.clear();
 }
 
 void pm::pair_vs(Vec& odd) {
@@ -411,24 +414,28 @@ void pm::Chaine_vs() {
     Vec pend;
     Vec& remain = this->vs_odd;
 
-    if (this->vs.size() % 2 != 0) {
-        remain.push_back(this->vs.back());
-        this->vs.pop_back();
-    }
+    // if (this->vs.size() % 2 != 0) {
+    //     remain.push_back(this->vs.back());
+    //     this->vs.pop_back();
+    // }
 	//! need to check this
-    for (size_t i = 0; i < this->vs.size(); i += 2) {
-        if (this->vs[i][0] < this->vs[i + 1][0]) {
-            mainChain.push_back(this->vs[i]);
-            pend.push_back(this->vs[i + 1]);
+    for (size_t i = 0; i < this->vs.size(); ++i) {
+        // if (this->vs[i][0] < this->vs[i + 1][0]) {
+		if(i % 2)
+		{
+			this->vs_main.push_back(this->vs[i]);
+            // mainChain.push_back(this->vs[i]);
+            // pend.push_back(this->vs[i + 1]);
         } else {
-            mainChain.push_back(this->vs[i + 1]);
-            pend.push_back(this->vs[i]);
+			this->vs_pend.push_back(this->vs[i]);
+            // mainChain.push_back(this->vs[i + 1]);
+            // pend.push_back(this->vs[i]);
         }
     }
 	for (Vec::iterator it = remain.begin(); it != remain.end(); ++it)
 		pend.push_back(*it);
-    this->vs_main = mainChain;
-    this->vs_pend = pend;
+    // this->vs_main = mainChain;
+    // this->vs_pend = pend;
     remain.clear();
 }
 
@@ -443,8 +450,6 @@ void pm::InsertPaid() {
         this->vs_main.insert(insertionPoint, *pair);
     }
 }
-
-
 
 void pm::sort_v(void)
 {

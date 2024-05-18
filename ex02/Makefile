@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+         #
+#    By: yassine <yassine@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 17:47:01 by yaidriss          #+#    #+#              #
-#    Updated: 2024/03/05 01:46:34 by yaidriss         ###   ########.fr        #
+#    Updated: 2024/05/18 04:07:07 by yassine          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC =  PmergeMe.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o : %.cpp
-	@$(CC) $(FLAGE) -c $< -o $@
+	@$(CC) -g $(FLAGE) -c $< -o $@
 
 $(NAME) : $(OBJ)
 	@$(CC) $(FLAGE) -o $(NAME) $(OBJ)
