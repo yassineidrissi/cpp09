@@ -175,6 +175,7 @@ void pm::printAfter(void)
 {
 	std::cout << GREEN << "After  :  ";
 	printVector(this->vs);
+	std::cout << RESET << std::endl;
 }
 
 void pm::printTime(void)
@@ -263,34 +264,12 @@ void pm::print_vs_pend()
 	}
 }
 
-// void pm::print_vs_odd()
-// {
-//     std::cout << RED;
-//     std::cout << "indice 0 " << std::endl;
-// 	Vec& vs_odd = this->get_vs_odd();
-//     if (!vs_odd.empty()) 
-// 	{
-//         for(unsigned long i = 0; i < vs_odd.size(); ++i)
-//         {
-//                 int nb = vs_odd[i];
-//                 std::cout << nb << std::endl;
-//         }
-//     }
-//     std::cout << RESET << std::endl;
-// }
-
 void pm::fill_vs_pend()
 {
 	this->get_vs_pend().clear();
 	for(unsigned long i = 2; i < this->get_vs().size() - 1 ; i+=2)           
 		this->get_vs_pend().push_back(this->get_vs()[i]);
 }
-
-
-// void pm::fill_vs_odd()
-// {
-// 	get_vs_main().push_back(get_vs_odd());
-// }
 
 void pm::split_mp()
 {
@@ -401,10 +380,6 @@ void pm::unpair_vs() {
     this->vs = temp;
 }
 
-
-
-
-
 void pm::pair_vs(Vec& odd) {
     Vec tmp;
     for (Vec::iterator it = this->vs.begin(); it != vs.end(); it += 2) {
@@ -427,7 +402,6 @@ void pm::pair_vs(Vec& odd) {
     }
     this->vs = tmp;
     tmp.clear();
-    printVector(odd);
 }
 
 void pm::Chaine_vs() {
@@ -472,17 +446,14 @@ void pm::InsertPaid() {
 
 void pm::sort_v(void)
 {
-
 	if (this->vs.size() == 1)
 		return ;
-	// std::cout << "im here " << vs.size() << std::endl;
 	if (this->vs.size() % 2 != 0)
 	{
 		this->vs_odd.push_back(this->vs.back());
 		this->vs.pop_back();
 	}
 	pair_vs(this->vs_odd);
-	// std::this_thread::sleep_for(std::chrono::seconds(10)); // sleep for 1 second
 	sort_v();
 	unpair_vs();
 	Chaine_vs();
@@ -509,7 +480,7 @@ void pm::sort(void)
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	
     start = std::chrono::high_resolution_clock::now();
-	this->sort_l();
+	// this->sort_l();
 	end = std::chrono::high_resolution_clock::now();
 	this->Ltime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }
