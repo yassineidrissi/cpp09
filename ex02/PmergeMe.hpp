@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/18 02:04:49 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/19 00:36:09 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef std::vector<std::vector<int> > Vec;
 typedef std::vector<int> MiniVec;
 typedef std::list<std::list<int> > Lst;
 typedef std::list<int> MiniLst;
+typedef Vec vecVec;
 class pm
 {
 	private:
@@ -92,17 +93,17 @@ class pm
 
 		//******* Sort Functions ********//
 		void sort(void);
-		void sort_v(void);
+		void sort_v(Vec& digits);
 		void sort_l(void);
 		void merge(int l);
 		void baniry_sort();
 		void split_mp();
 		void handl_vs();
-		void pair_vs(Vec& odd);
+		void pair_vs(void);
 		void unpair_vs(void);
-		void sort_vs();
-		void createChains(void);
-		void InsertPaindInMain();
+		void sort_vs(Vec& digits);
+		// void createChains(void);
+		// void InsertPaindInMain();
 		Vec& get_vs_odd();
 		void printVector(const Vec& sequence);	
 		///******* Exeception ************//

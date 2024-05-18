@@ -350,123 +350,380 @@ void pm::printVector(const Vec &sequence) {
     }
 	std::cout << RESET << std::endl;
 }
-
-void pm::createChains()
-{
-    int index = 0;
-    for (Vec::iterator it = this->vs.begin(); it != this->vs.end(); ++it, ++index)
-    {
-        if (index % 2 != 0)
-            this->vs_pend.push_back(*it);
-        else
-            this->vs_main.push_back(*it);
-    }
-
-    for (Vec::iterator re = this->vs_odd.begin(); re != this->vs_odd.end(); ++re)
-	{
-		this->vs_pend.push_back(*re);
-	}
-}
-
-void pm::unpair_vs() {
-    Vec tmp;
-	size_t size = this->vs[0].size() / 2;
-    for (size_t i = 0; i < this->vs.size(); ++i) {
-		MiniVec v1, v2;
-        for (size_t j = 0; j < size; ++j) {
-            // MiniVec singleElement;
-            v1.push_back(this->vs[i][j]);
-            v2.push_back(this->vs[i][j + size]);
-        }
-		tmp.push_back(v1);
-		tmp.push_back(v2);	
-    }
-    this->vs = tmp;
-	tmp.clear();
-}
-
-void pm::pair_vs(Vec& odd) {
-    Vec tmp;
-    for (Vec::iterator it = this->vs.begin(); it != vs.end(); it += 2) {
-        if (it + 1 != this->vs.end()) {
-            if (*it > *(it + 1)) {
-                this->v = *it;
-                *it = *(it + 1);
-                *(it + 1) = this->v;
-            }
-            MiniVec fvec;
-            for (MiniVec::iterator it1 = it->begin(); it1 != it->end(); it1++)
-                fvec.push_back(*it1);
-            for (MiniVec::iterator it2 = (it + 1)->begin(); it2 != (it + 1)->end(); it2++)
-                fvec.push_back(*it2);
-            tmp.push_back(fvec);
-            fvec.clear();
-        } else {
-            odd.push_back(*it);
-        }
-    }
-    this->vs = tmp;
-    tmp.clear();
-}
+//!!!!!!!!
+// void pm::createChains()
+// {
+//     // int index = 0;
+//     // for (Vec::iterator it = this->vs.begin(); it != this->vs.end(); ++it, ++index)
+//     // {
+//     //     if (index % 2 != 0)
+//     //         this->vs_pend.push_back(*it);
+//     //     else
+//     //         this->vs_main.push_back(*it);
+//     // }
+// 	// std::cout << "vs_odd" << std::endl;
+// 	// printVector(this->vs_odd);
+// 	// std::cout << "vs_pend" << std::endl;
+// 	// printVector(this->vs_pend);
+//     // // for (Vec::iterator re = this->vs_odd.begin();this->vs_odd.size() && re != this->vs_odd.end(); ++re)
+// 	// // {
+// 	// // 	this->vs_pend.push_back(*re);
+// 	// // }
+// 	// this->vs_odd.clear();
+// 	Vec& digits = this->vs;
+// 	Vec& main = this->vs_main;
+// 	Vec& pend = this->vs_pend;
+// 	Vec& remain = this->vs_odd;
+// 	int index = 0;
+//     Vec::iterator it = digits.begin();
+//     while (it != digits.end())
+//     {
+//         if (index % 2 != 0)
+//             main.push_back(*it);
+//         else
+//             pend.push_back(*it);
+//         index++;
+//         it++;
+//     }
+    
+//     Vec::iterator re = remain.begin();
+//     while(re != remain.end())
+//     {
+//         pend.push_back(*re);
+//         re++;
+//     }
+// }
 
 void pm::Chaine_vs() {
-    Vec mainChain;
-    Vec pend;
-    Vec& remain = this->vs_odd;
+    // Vec& remain = this->vs_odd;
+	int i = 0;
 
-    // if (this->vs.size() % 2 != 0) {
-    //     remain.push_back(this->vs.back());
-    //     this->vs.pop_back();
-    // }
 	//! need to check this
-    for (size_t i = 0; i < this->vs.size(); ++i) {
+    for (Vec::iterator it = this->vs.begin(); it != this->vs.end(); ++it) {
         // if (this->vs[i][0] < this->vs[i + 1][0]) {
 		if(i % 2)
 		{
-			this->vs_main.push_back(this->vs[i]);
-            // mainChain.push_back(this->vs[i]);
-            // pend.push_back(this->vs[i + 1]);
+			this->vs_main.push_back(*it);
         } else {
-			this->vs_pend.push_back(this->vs[i]);
-            // mainChain.push_back(this->vs[i + 1]);
-            // pend.push_back(this->vs[i]);
+			this->vs_pend.push_back(*it);
+
         }
+		i++;
     }
-	for (Vec::iterator it = remain.begin(); it != remain.end(); ++it)
-		pend.push_back(*it);
-    // this->vs_main = mainChain;
-    // this->vs_pend = pend;
-    remain.clear();
+	// for (Vec::iterator it1 = this->vs_odd.begin(); it1 != this->vs.end(); ++it1)
+	// 	this->vs_pend.push_back(*it1);
+	// for(unsigned long i = 0; i < this->vs_odd.size(); ++i)
+	// 	this->vs_pend.push_back(this->vs_odd[i]);
+	this->vs_odd.clear();
 }
+
+void pm::unpair_vs() {
+    // Vec tmp;
+	// size_t size = this->vs[0].size() / 2;
+    // for (size_t i = 0; i < this->vs.size(); ++i) {
+	// 	MiniVec v1, v2;
+    //     for (size_t j = 0; j < size; ++j) {
+    //         // MiniVec singleElement;
+    //         v1.push_back(this->vs[i][j]);
+    //         v2.push_back(this->vs[i][j + size]);
+    //     }
+	// 	tmp.push_back(v1);
+	// 	tmp.push_back(v2);	
+    // }
+    // this->vs = tmp;
+	// tmp.clear();
+	Vec& digits = this->vs;
+	// Vec& main = this->vs_main;
+	// Vec& pend = this->vs_pend;
+	// Vec& remain = this->vs_odd;
+	Vec newOne;
+
+    size_t size = digits[0].size() / 2;
+
+    for (size_t i = 0; i < digits.size(); ++i)
+    {
+        std::vector<int> vec1, vec2;
+        for (size_t j = 0; j < size; ++j)
+        {
+            vec1.push_back(digits[i][j]);
+            vec2.push_back(digits[i][j + size]);
+        }
+        newOne.push_back(vec1);
+        newOne.push_back(vec2);
+    }
+    digits = newOne;
+    newOne.clear();
+}
+
+void pm::pair_vs() {
+    // Vec tmp;
+    // for (Vec::iterator it = this->vs.begin(); it != vs.end(); it += 2) {
+    //     if (it + 1 != this->vs.end()) {
+	// 		MiniVec temp;
+    //         if (*it > *(it + 1)) {
+    //             temp = *it;
+    //             *it = *(it + 1);
+    //             *(it + 1) = temp;
+    //         }
+    //         MiniVec fvec;
+    //         for (MiniVec::iterator it1 = it->begin(); it1 != it->end(); it1++)
+    //             fvec.push_back(*it1);
+    //         for (MiniVec::iterator it2 = (it + 1)->begin(); it2 != (it + 1)->end(); it2++)
+    //             fvec.push_back(*it2);
+    //         tmp.push_back(fvec);
+    //         fvec.clear();
+    //     } else {
+    //         this->vs_odd.push_back(*it);
+    //     }
+    // }
+    // this->vs = tmp;
+    // tmp.clear();
+		Vec& digits = this->vs;
+	// Vec& main = this->vs_main;
+	// Vec& pend = this->vs_pend;
+	Vec& rest = this->vs_odd;
+	Vec tmp;
+    for (Vec::iterator it = digits.begin(); it != digits.end(); it += 2) 
+    {
+        if (it + 1 != digits.end()) 
+        { 
+            if ((*it) > *(it + 1)) {
+                std::vector<int> tmpVec = *it;
+                *it = *(it + 1);
+                *(it + 1) = tmpVec;
+            }
+            std::vector<int> oneVec;
+            for (std::vector<int>::iterator one = it->begin(); one != it->end(); one++) {
+                oneVec.push_back(*one);
+            }
+            for (std::vector<int>::iterator two = (it + 1)->begin(); two != (it + 1)->end(); two++) {
+                oneVec.push_back(*two);
+            }
+            tmp.push_back(oneVec);
+            oneVec.clear();
+        } 
+        else 
+        {
+            // If there's no next vector, just push the current one
+            rest.push_back(*it);
+        }
+    } 
+    digits = tmp;
+    tmp.clear();
+}
+
 
 
 bool compareMiniVecs(const MiniVec &a, const MiniVec &b) {
-    return a.back() < b.back();
+    return a.back() <= b.back();
+}
+
+// bool Compare(const std::vector<int> &a, const std::vector<int> &b)
+// {
+//     return a.back() <= b.back();
+// }
+
+bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
+{
+    return a.back() <= b.back();
 }
 
 void pm::InsertPaid() {
-    for (Vec::iterator pair = this->vs_pend.begin(); pair != this->vs_pend.end(); ++pair) {
-        Vec::iterator insertionPoint = std::lower_bound(this->vs_main.begin(), this->vs_main.end(), *pair, compareMiniVecs);
-        this->vs_main.insert(insertionPoint, *pair);
+		// Vec& digits = this->vs;
+	Vec& main = this->vs_main;
+	Vec& Paind = this->vs_pend;
+	// Vec& remain = this->vs_odd;
+    // for (Vec::iterator pair = this->vs_pend.begin(); pair != this->vs_pend.end(); ++pair) {
+    //     Vec::iterator insertionPoint = std::lower_bound(this->vs_main.begin(), this->vs_main.end(), *pair, compareMiniVecs);
+    //     this->vs_main.insert(insertionPoint, *pair);
+    // }
+
+    for ( Vec::const_iterator it = Paind.begin(); it != Paind.end(); ++it)
+    {
+        // Find the insertion point using lower_bound
+        Vec::iterator insertionPoint = std::lower_bound(main.begin(), main.end(), *it, Compare);
+
+        // Insert the vector at the insertion point
+        main.insert(insertionPoint, *it);
     }
 }
 
-void pm::sort_v(void)
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+void pairVector(vecVec &digits, vecVec &rest) {
+    vecVec tmp;
+    for (vecVec::iterator it = digits.begin(); it != digits.end(); it += 2) 
+    {
+        if (it + 1 != digits.end()) 
+        { 
+            if ((*it) > *(it + 1)) {
+                std::vector<int> tmpVec = *it;
+                *it = *(it + 1);
+                *(it + 1) = tmpVec;
+            }
+            std::vector<int> oneVec;
+            for (std::vector<int>::iterator one = it->begin(); one != it->end(); one++) {
+                oneVec.push_back(*one);
+            }
+            for (std::vector<int>::iterator two = (it + 1)->begin(); two != (it + 1)->end(); two++) {
+                oneVec.push_back(*two);
+            }
+            tmp.push_back(oneVec);
+            oneVec.clear();
+        } 
+        else 
+        {
+            // If there's no next vector, just push the current one
+            rest.push_back(*it);
+        }
+    } 
+    digits = tmp;
+    tmp.clear();
+}
+
+void unpairVector(vecVec& digits)
 {
-	if (this->vs.size() == 1)
-		return ;
-	if (this->vs.size() % 2 != 0)
-	{
-		this->vs_odd.push_back(this->vs.back());
-		this->vs.pop_back();
-	}
-	pair_vs(this->vs_odd);
-	sort_v();
-	unpair_vs();
-	Chaine_vs();
-	InsertPaid();
-	this->vs = this->vs_main;
-	this->vs_main.clear();
+    vecVec newOne;
+
+    size_t size = digits[0].size() / 2;
+
+    for (size_t i = 0; i < digits.size(); ++i)
+    {
+        std::vector<int> vec1, vec2;
+        for (size_t j = 0; j < size; ++j)
+        {
+            vec1.push_back(digits[i][j]);
+            vec2.push_back(digits[i][j + size]);
+        }
+        newOne.push_back(vec1);
+        newOne.push_back(vec2);
+    }
+    digits = newOne;
+    newOne.clear();
+}
+
+    
+void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
+{
+    int index = 0;
+    vecVec::iterator it = digits.begin();
+    while (it != digits.end())
+    {
+        if (index % 2 != 0)
+            main.push_back(*it);
+        else
+            pend.push_back(*it);
+        index++;
+        it++;
+    }
+    
+    vecVec::iterator re = remain.begin();
+    while(re != remain.end())
+    {
+        pend.push_back(*re);
+        re++;
+    }
+}
+
+vecVec getDigits(char **argv, int argc)
+{
+    vecVec digits;
+    for(int i = 1; i < argc; i++)
+    {
+        std::vector<int> vec_int;
+        char *endPtr;
+        long num = std::strtol(argv[i], &endPtr, 10);
+        if(*endPtr != '\0' || num < INT_MIN || num > INT_MAX)
+            throw std::invalid_argument("Invalid argument => " + std::string(argv[i]));
+        vec_int.push_back(static_cast<int>(num));
+        digits.push_back(vec_int);
+        vec_int.clear();
+    }
+    return digits;
+}
+
+bool Compare(const std::vector<int> &a, const std::vector<int> &b)
+{
+    return a.back() <= b.back();
+}
+
+void InsertPaindInMain(vecVec &main, vecVec &Paind)
+{
+
+    for (vecVec::const_iterator it = Paind.begin(); it != Paind.end(); ++it)
+    {
+        // Find the insertion point using lower_bound
+        vecVec::iterator insertionPoint = std::lower_bound(main.begin(), main.end(), *it, Compare);
+
+        // Insert the vector at the insertion point
+        main.insert(insertionPoint, *it);
+    }
+}
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// void pm::sort_v(Vec& digits)
+// {
+// 	Vec& remain = this->vs_odd;
+// 	Vec& mainChain = this->vs_main;
+// 	Vec& pend = this->vs_pend;
+// 	// if (this->vs.size() == 1)
+// 	// 	return ;
+// 	// if (this->vs.size() % 2 != 0)
+// 	// {
+// 	// 	this->vs_odd.push_back(this->vs.back());
+// 	// 	this->vs.pop_back();
+// 	// }
+// 	// pair_vs();
+// 	// pairVector()
+// 	// sort_v();
+// 	// unpair_vs();
+// 	// Chaine_vs();
+// 	// createChains();
+// 	// InsertPaid();
+// 	// this->vs = this->vs_main;
+// 	// this->vs_main.clear();
+
+// 	if (digits.size() == 1)
+//         return ; // Fixed the return statement
+//     std::cout << "im here" << digits.size() << std::endl;
+//     if (digits.size() % 2 != 0)
+//     {
+//         remain.push_back(digits.back());
+//         digits.pop_back();
+//     }
+//     pairVector(digits, remain); // Fixed the function call
+//     // std::this_thread::sleep_for(std::chrono::seconds(10));
+//     // sort_v(digits);
+//     unpairVector(digits);
+//     createChains(digits, mainChain, pend, remain);
+//     InsertPaindInMain(mainChain, pend);
+//     digits = mainChain;
+//     mainChain.clear();
+// }
+vecVec mergeInsertion(vecVec &digits)
+{
+    vecVec pend;
+    vecVec mainChain;
+    vecVec remain;
+
+    if (digits.size() == 1)
+        return digits; // Fixed the return statement
+    std::cout << "im here" << digits.size() << std::endl;
+    if (digits.size() % 2 != 0)
+    {
+        remain.push_back(digits.back());
+        digits.pop_back();
+    }
+    pairVector(digits, remain); // Fixed the function call
+    // std::this_thread::sleep_for(std::chrono::seconds(10));
+    mergeInsertion(digits);
+    unpairVector(digits);
+    createChains(digits, mainChain, pend, remain);
+    InsertPaindInMain(mainChain, pend);
+    digits = mainChain;
+    mainChain.clear();
+    return digits;
 }
 
 
@@ -482,7 +739,8 @@ void pm::sort(void)
 	std::chrono::high_resolution_clock::time_point end;
 	
 	start = std::chrono::high_resolution_clock::now();
-	this->sort_v();
+	// this->sort_v(this->vs);
+	mergeInsertion(this->vs);
 	end = std::chrono::high_resolution_clock::now();
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	
