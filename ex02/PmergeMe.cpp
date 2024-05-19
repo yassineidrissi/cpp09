@@ -456,59 +456,27 @@ void pm::unpair_vs() {
 }
 
 void pm::pair_vs() {
-    // Vec tmp;
-    // for (Vec::iterator it = this->vs.begin(); it != vs.end(); it += 2) {
-    //     if (it + 1 != this->vs.end()) {
-	// 		MiniVec temp;
-    //         if (*it > *(it + 1)) {
-    //             temp = *it;
-    //             *it = *(it + 1);
-    //             *(it + 1) = temp;
-    //         }
-    //         MiniVec fvec;
-    //         for (MiniVec::iterator it1 = it->begin(); it1 != it->end(); it1++)
-    //             fvec.push_back(*it1);
-    //         for (MiniVec::iterator it2 = (it + 1)->begin(); it2 != (it + 1)->end(); it2++)
-    //             fvec.push_back(*it2);
-    //         tmp.push_back(fvec);
-    //         fvec.clear();
-    //     } else {
-    //         this->vs_odd.push_back(*it);
-    //     }
-    // }
-    // this->vs = tmp;
-    // tmp.clear();
-		Vec& digits = this->vs;
-	// Vec& main = this->vs_main;
-	// Vec& pend = this->vs_pend;
-	Vec& rest = this->vs_odd;
-	Vec tmp;
-    for (Vec::iterator it = digits.begin(); it != digits.end(); it += 2) 
-    {
-        if (it + 1 != digits.end()) 
-        { 
-            if ((*it) > *(it + 1)) {
-                std::vector<int> tmpVec = *it;
+    Vec tmp;
+    for (Vec::iterator it = this->vs.begin(); it != vs.end(); it += 2) {
+        if (it + 1 != this->vs.end()) {
+			MiniVec temp;
+            if (*it > *(it + 1)) {
+                temp = *it;
                 *it = *(it + 1);
-                *(it + 1) = tmpVec;
+                *(it + 1) = temp;
             }
-            std::vector<int> oneVec;
-            for (std::vector<int>::iterator one = it->begin(); one != it->end(); one++) {
-                oneVec.push_back(*one);
-            }
-            for (std::vector<int>::iterator two = (it + 1)->begin(); two != (it + 1)->end(); two++) {
-                oneVec.push_back(*two);
-            }
-            tmp.push_back(oneVec);
-            oneVec.clear();
-        } 
-        else 
-        {
-            // If there's no next vector, just push the current one
-            rest.push_back(*it);
+            MiniVec fvec;
+            for (MiniVec::iterator it1 = it->begin(); it1 != it->end(); it1++)
+                fvec.push_back(*it1);
+            for (MiniVec::iterator it2 = (it + 1)->begin(); it2 != (it + 1)->end(); it2++)
+                fvec.push_back(*it2);
+            tmp.push_back(fvec);
+            fvec.clear();
+        } else {
+            this->vs_odd.push_back(*it);
         }
-    } 
-    digits = tmp;
+    }
+    this->vs = tmp;
     tmp.clear();
 }
 
@@ -739,7 +707,8 @@ void pm::sort_v(void)
         rest.push_back(digits.back());
         digits.pop_back();
     }
-    pairVector(digits, rest); // Fixed the function call
+    // pairVector(digits, rest); // Fixed the function call
+    pair_vs();
     // std::this_thread::sleep_for(std::chrono::seconds(10));
     sort_v();
     unpairVector(digits);
