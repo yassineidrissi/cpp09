@@ -701,14 +701,15 @@ void InsertPaindInMain(vecVec &main, vecVec &Paind)
 //     digits = mainChain;
 //     mainChain.clear();
 // }
-vecVec mergeInsertion(vecVec &digits)
+void pm::sort_v(void)
 {
+	vecVec& digits = this->vs;
     vecVec pend;
     vecVec mainChain;
     vecVec remain;
 
     if (digits.size() == 1)
-        return digits; // Fixed the return statement
+        return;// digits; // Fixed the return statement
     std::cout << "im here" << digits.size() << std::endl;
     if (digits.size() % 2 != 0)
     {
@@ -717,13 +718,13 @@ vecVec mergeInsertion(vecVec &digits)
     }
     pairVector(digits, remain); // Fixed the function call
     // std::this_thread::sleep_for(std::chrono::seconds(10));
-    mergeInsertion(digits);
+    sort_v();
     unpairVector(digits);
     createChains(digits, mainChain, pend, remain);
     InsertPaindInMain(mainChain, pend);
     digits = mainChain;
     mainChain.clear();
-    return digits;
+    // return digits;
 }
 
 
@@ -740,7 +741,7 @@ void pm::sort(void)
 	
 	start = std::chrono::high_resolution_clock::now();
 	// this->sort_v(this->vs);
-	mergeInsertion(this->vs);
+	sort_v();
 	end = std::chrono::high_resolution_clock::now();
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	

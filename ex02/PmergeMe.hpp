@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/19 00:36:09 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/19 01:45:30 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ class pm
 
 		//******* Sort Functions ********//
 		void sort(void);
-		void sort_v(Vec& digits);
+		void sort_v(void);
 		void sort_l(void);
 		void merge(int l);
 		void baniry_sort();
