@@ -701,28 +701,51 @@ void InsertPaindInMain(vecVec &main, vecVec &Paind)
 //     digits = mainChain;
 //     mainChain.clear();
 // }
+// {
+//     vecVec pend;
+//     vecVec mainChain;
+//     vecVec rest;
+
+//     if (digits.size() == 1)
+//         return;// digits; // Fixed the return statement
+//     std::cout << "im here" << digits.size() << std::endl;
+//     if (digits.size() % 2 != 0)
+//     {
+//         this->vs_odd.push_back(digits.back());
+//         digits.pop_back();
+//     }
+//     pairVector(digits, rest); // Fixed the function call
+//     // std::this_thread::sleep_for(std::chrono::seconds(10));
+//     sort_v(digits);
+//     unpairVector(digits);
+//     createChains(digits, mainChain, pend, rest);
+//     InsertPaindInMain(mainChain, pend);
+//     digits = mainChain;
+//     mainChain.clear();
+//     // return digits;
+// }
 void pm::sort_v(void)
 {
-	// vecVec& digits = this->vs;
+	vecVec& digits = this->vs;
     vecVec pend;
     vecVec mainChain;
     vecVec rest;
 
-    if (this->vs.size() == 1)
-        return;// digits; // Fixed the return statement
-    std::cout << "im here" << this->vs.size() << std::endl;
-    if (this->vs.size() % 2 != 0)
+    if (digits.size() == 1)
+        return ;//digits; // Fixed the return statement
+    std::cout << "im here" << digits.size() << std::endl;
+    if (digits.size() % 2 != 0)
     {
-        this->vs_odd.push_back(this->vs.back());
-        this->vs.pop_back();
+        rest.push_back(digits.back());
+        digits.pop_back();
     }
-    pairVector(this->vs, rest); // Fixed the function call
+    pairVector(digits, rest); // Fixed the function call
     // std::this_thread::sleep_for(std::chrono::seconds(10));
     sort_v();
-    unpairVector(this->vs);
-    createChains(this->vs, mainChain, pend, rest);
+    unpairVector(digits);
+    createChains(digits, mainChain, pend, rest);
     InsertPaindInMain(mainChain, pend);
-    this->vs = mainChain;
+    digits = mainChain;
     mainChain.clear();
     // return digits;
 }
