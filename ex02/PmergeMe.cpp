@@ -703,24 +703,24 @@ void InsertPaindInMain(vecVec &main, vecVec &Paind)
 // }
 void pm::sort_v(void)
 {
-	vecVec& digits = this->vs;
+	// vecVec& digits = this->vs;
     vecVec pend;
     vecVec mainChain;
-    vecVec remain;
+    vecVec rest;
 
     if (this->vs.size() == 1)
         return;// digits; // Fixed the return statement
     std::cout << "im here" << this->vs.size() << std::endl;
-    if (digits.size() % 2 != 0)
+    if (this->vs.size() % 2 != 0)
     {
-        remain.push_back(this->vs.back());
+        this->vs_odd.push_back(this->vs.back());
         this->vs.pop_back();
     }
-    pairVector(this->vs, remain); // Fixed the function call
+    pairVector(this->vs, rest); // Fixed the function call
     // std::this_thread::sleep_for(std::chrono::seconds(10));
     sort_v();
     unpairVector(this->vs);
-    createChains(this->vs, mainChain, pend, remain);
+    createChains(this->vs, mainChain, pend, rest);
     InsertPaindInMain(mainChain, pend);
     this->vs = mainChain;
     mainChain.clear();
