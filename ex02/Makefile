@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yassine <yassine@student.42.fr>            +#+  +:+       +#+         #
+#    By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 17:47:01 by yaidriss          #+#    #+#              #
-#    Updated: 2024/05/18 04:07:07 by yassine          ###   ########.fr        #
+#    Updated: 2024/05/26 19:20:35 by yaidriss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 FLAGE = -Wall -Wextra -Werror -g -std=c++98
 NAME = PmergeMe 
-SRC =  PmergeMe.cpp main.cpp
+SRC =  PmergeMe.cpp Lmerge.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o : %.cpp

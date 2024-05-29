@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/19 03:10:10 by yassine          ###   ########.fr       */
+/*   Updated: 2024/05/26 10:48:19 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ class pm
 		void print_vs_main();
 		void print_vs_pend();
 		void print_vs_odd();
+		template <typename Container>
+        void printSequence(const std::string& label, const Container& seq);
+
 
 		//******* Sort Functions ********//
 		void sort(void);
@@ -102,10 +105,8 @@ class pm
 		void pair_vs(void);
 		void unpair_vs(void);
 		void sort_vs(Vec& digits);
-		// void createChains(void);
-		// void InsertPaindInMain();
 		Vec& get_vs_odd();
-		void printVector(const Vec& sequence);	
+		void printVector(const Vec& );	
 		///******* Exeception ************//
 		class pmException : public std::exception
 		{

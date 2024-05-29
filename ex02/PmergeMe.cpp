@@ -701,29 +701,42 @@ void pm::sort_v(void)
 
     if (digits.size() == 1)
         return ;//digits; // Fixed the return statement
-    std::cout << "im here" << digits.size() << std::endl;
     if (digits.size() % 2 != 0)
     {
         rest.push_back(digits.back());
         digits.pop_back();
     }
-    // pairVector(digits, rest); // Fixed the function call
     pair_vs();
-    // std::this_thread::sleep_for(std::chrono::seconds(10));
     sort_v();
     unpairVector(digits);
     createChains(digits, mainChain, pend, rest);
     InsertPaindInMain(mainChain, pend);
     digits = mainChain;
     mainChain.clear();
-    // return digits;
 }
 
 
 void pm::sort_l(void)
 {
-	this->get_l().sort();
-	this->print_l();
+	std::list<int>& l = this->l;
+	std::list<int> pend;
+	std::list<int> mainChain;
+	std::list<int> rest;
+
+	if (l.size() == 1)
+		return ;//l; // Fixed the return statement
+	if (l.size() % 2 != 0)
+	{
+		rest.push_back(l.back());
+		l.pop_back();
+	}
+	pairVector(l, rest);
+	sort_l();
+	unpairVector(l);
+	createChains(l, mainChain, pend, rest);
+	InsertPaindInMain(mainChain, pend);
+	l = mainChain;
+	mainChain.clear();
 }
 
 void pm::sort(void)
@@ -732,13 +745,13 @@ void pm::sort(void)
 	std::chrono::high_resolution_clock::time_point end;
 	
 	start = std::chrono::high_resolution_clock::now();
-	// this->sort_v(this->vs);
+	this->sort_v(this->vs);
 	sort_v();
 	end = std::chrono::high_resolution_clock::now();
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	
     start = std::chrono::high_resolution_clock::now();
-	// this->sort_l();
+	this->sort_l();
 	end = std::chrono::high_resolution_clock::now();
 	this->Ltime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }
