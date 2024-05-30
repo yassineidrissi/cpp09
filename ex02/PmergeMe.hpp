@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/26 10:48:19 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/30 23:10:15 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ class pm
 		std::vector<std::vector<int> > vs;
 		std::list<int> l;
 		Lst ls;
+		LST l_odd;
 		std::vector<std::vector<int> > vs_main;
 		std::vector<std::vector<int> > vs_pend;
 		Vec vs_odd;
@@ -98,6 +99,8 @@ class pm
 		void sort(void);
 		void sort_v(void);
 		void sort_l(void);
+		void pair_l(void);
+		void chain(Lst& d, Lst& main, Lst& pend, Lst& rest);
 		void merge(int l);
 		void baniry_sort();
 		void split_mp();
