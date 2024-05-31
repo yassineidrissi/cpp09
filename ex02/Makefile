@@ -6,14 +6,14 @@
 #    By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 17:47:01 by yaidriss          #+#    #+#              #
-#    Updated: 2024/05/31 19:51:05 by yaidriss         ###   ########.fr        #
+#    Updated: 2024/05/31 20:10:34 by yaidriss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 FLAGE = -Wall -Wextra -Werror -g -std=c++98
 NAME = PmergeMe 
-SRC =  PmergeMe.cpp main.cpp
+SRC =  PmergeMe.cpp LmergeMe.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o : %.cpp

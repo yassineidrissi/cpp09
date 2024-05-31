@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:36:45 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/31 19:50:12 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:00:39 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,18 @@ void pm::chaine_l(Lst& d, Lst& main, Lst& pend, int reset)
 {
 	//unpaire
 	Lst newl;
-	size_t size = l[0].size()/2;
+	// size_t size = l[0].size()/2;
+	Lst::iterator it = d.begin();
+	size_t i = std::distance(it, l.end())/2;
 	for (size_t i = 0; i < d.size(); ++i)
 	{
 		MiniLst l1, l2;
 		for(size_t j = 0; j < size; ++j)
 		{
-			l1.push_back(l[i][j]);
-			l2.push_back(l[i][j + size]);
+			std::advance(it, j);
+			l1.push_back(*it);
+			std::advance(it, size);
+			l2.push_back(*it);
 		}
 		newl.push_back(l1);
 		newl.push_back(l2);
