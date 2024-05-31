@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/30 23:10:15 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/05/31 19:32:01 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,17 @@ class pm
 		std::vector<std::vector<int> > vs;
 		std::list<int> l;
 		Lst ls;
-		LST l_odd;
+		Lst l_odd;
 		std::vector<std::vector<int> > vs_main;
 		std::vector<std::vector<int> > vs_pend;
 		Vec vs_odd;
 		std::chrono::microseconds Vtime;
 		std::chrono::microseconds Ltime;
-		int limit;
+
 	public:
 		static bool Compare(const std::vector<int>& a, const std::vector<int>& b);
 		void Chaine_vs(void);
+		void chaine_l(Lst& d, Lst& main, Lst& pend, Lst& rest);
 		void InsertPaid(void);
 		//***** Orthodox Methodes *********//
 		pm();
@@ -91,8 +92,6 @@ class pm
 		void print_vs_main();
 		void print_vs_pend();
 		void print_vs_odd();
-		template <typename Container>
-        void printSequence(const std::string& label, const Container& seq);
 
 
 		//******* Sort Functions ********//

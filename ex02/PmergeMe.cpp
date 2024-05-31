@@ -291,15 +291,15 @@ void pm::generate_vs()
 			get_v().push_back(this->get_vs()[i][j]);
 }
 
-void pm::handl_vs()
-{
-	std::cout << GREEN << "******************** handl_vs " << this->limit << " " << RESET << std::endl;
+// void pm::handl_vs()
+// {
+// 	std::cout << GREEN << "******************** handl_vs " << this->limit << " " << RESET << std::endl;
 
-    for (int j = 0; j < this->limit - 1; j++)
-        for (int i = 0; i < (this->size/2); ++i)
-            merge(i);
-    this->limit--;
-}
+//     for (int j = 0; j < this->limit - 1; j++)
+//         for (int i = 0; i < (this->size/2); ++i)
+//             merge(i);
+//     this->limit--;
+// }
 
 void pm::vstov()
 {
@@ -465,7 +465,7 @@ void pairVector(vecVec &digits, vecVec &rest) {
 
 void unpairVector(vecVec& digits)
 {
-    vecVec newOne;
+    Vec newOne;
 
     size_t size = digits[0].size() / 2;
 
@@ -488,7 +488,7 @@ void unpairVector(vecVec& digits)
 void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
 {
     int index = 0;
-    vecVec::iterator it = digits.begin();
+    Vec::iterator it = digits.begin();
     while (it != digits.end())
     {
         if (index % 2 != 0)
@@ -499,7 +499,7 @@ void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
         it++;
     }
     
-    vecVec::iterator re = remain.begin();
+    Vec::iterator re = remain.begin();
     while(re != remain.end())
     {
         pend.push_back(*re);
@@ -532,10 +532,10 @@ bool Compare(const std::vector<int> &a, const std::vector<int> &b)
 void InsertPaindInMain(vecVec &main, vecVec &Paind)
 {
 
-    for (vecVec::const_iterator it = Paind.begin(); it != Paind.end(); ++it)
+    for (Vec::const_iterator it = Paind.begin(); it != Paind.end(); ++it)
     {
         // Find the insertion point using lower_bound
-        vecVec::iterator insertionPoint = std::lower_bound(main.begin(), main.end(), *it, Compare);
+        Vec::iterator insertionPoint = std::lower_bound(main.begin(), main.end(), *it, Compare);
 
         // Insert the vector at the insertion point
         main.insert(insertionPoint, *it);
@@ -578,7 +578,7 @@ void pm::sort(void)
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	
     start = std::chrono::high_resolution_clock::now();
-	this->sort_l();
+	// this->sort_l();
 	end = std::chrono::high_resolution_clock::now();
 	this->Ltime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }
