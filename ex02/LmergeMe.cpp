@@ -6,11 +6,17 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:36:45 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/05/31 22:00:39 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/02 00:14:16 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+
+static bool Compare_l(const MiniLst& a, const MiniLst& b)
+{
+    return a.size() < b.size();
+}
 
 void pm::pair_l(void)
 {
@@ -41,51 +47,93 @@ void pm::pair_l(void)
 	tmp.clear();
 }
 
-
-void pm::chaine_l(Lst& d, Lst& main, Lst& pend, int reset)
+void pm::chaine_l(Lst& d, Lst& main, Lst& pend, Lst& rest)
 {
 	//unpaire
-	Lst newl;
+	// Lst newl;
 	// size_t size = l[0].size()/2;
-	Lst::iterator it = d.begin();
-	size_t i = std::distance(it, l.end())/2;
-	for (size_t i = 0; i < d.size(); ++i)
-	{
-		MiniLst l1, l2;
-		for(size_t j = 0; j < size; ++j)
-		{
-			std::advance(it, j);
-			l1.push_back(*it);
-			std::advance(it, size);
-			l2.push_back(*it);
-		}
-		newl.push_back(l1);
-		newl.push_back(l2);
-	}
-	d = newl;
-	newl.clear();
+	// Lst::iterator it = d.begin();
+	// size_t i = std::distance(it, d.end())/2;
+	// size_t size = d.front().size()/2;
+	// for (size_t i = 0; i < d.size(); ++i)
+	// {
+	// 	MiniLst l1, l2;
+	// 	for(size_t j = 0; j < size; ++j)
+	// 	{
+	// 		std::advance(it, j);
+	// 		l1.push_back(*it);
+	// 		std::advance(it, size + j);
+	// 		l2.push_back(*it);
+	// 	}
+	// 	newl.push_back(l1);
+	// 	newl.push_back(l2);
+	// }
+	// d = newl;
+	// newl.clear();
 	// createChains 
-	int index = 0;
-	Lst::iterator it = d.begin();
-	while (it != d.end())
-	{
-		if (index % 2 == 0)
-			main.push_back(*it);
-		else
-			pend.push_back(*it);
-		++index;
-		++it;
-	}
-	Lst::iterator re = reset.begin();
-	while (re != reset.end())
-	{
-		pend.push_back(*re);
-		++re;
-	}
+	    Lst newOne;
+
+    size_t size = d.front().size() / 2;
+
+    for (Lst::iterator digitList = d.begin(); digitList != d.end(); ++digitList)
+    {
+        MiniLst list1, list2;
+        MiniLst::iterator it = digitList->begin();
+        for (size_t j = 0; j < size; ++j)
+        {
+            list1.push_back(*it);
+            ++it;
+        }
+        for (size_t j = size; j < 2*size; ++j)
+        {
+            list2.push_back(*it);
+            ++it;
+        }
+        newOne.push_back(list1);
+        newOne.push_back(list2);
+    }
+    d = newOne;
+    newOne.clear();
+	// createchaine
+	// int index = 0;
+	// Lst::iterator it2 = d.begin();
+	// while (it2 != d.end())
+	// {
+	// 	if (index % 2 == 0)
+	// 		main.push_back(*it);
+	// 	else
+	// 		pend.push_back(*it);
+	// 	++index;
+	// 	++it2;
+	// }
+	// Lst::iterator re = rest.begin();
+	// while (re != rest.end())
+	// {
+	// 	pend.push_back(*re);
+	// 	++re;
+	// }
+	 int index = 0;
+    Lst::iterator it = d.begin();
+    while (it != d.end())
+    {
+        if (index % 2 != 0)
+            main.push_back(*it);
+        else
+            pend.push_back(*it);
+        index++;
+        it++;
+    }
+    
+    Lst::iterator re = rest.begin();
+    while(re != rest.end())
+    {
+        pend.push_back(*re);
+        re++;
+    }
 	//insertPaid
-	for(Lst::iterator it = pend.begin(); it != pend.end(); std::next(it))
+	for(Lst::iterator it = pend.begin(); it != pend.end(); ++it)
 	{
-		Lst::iterator it1 = std::lower_bound(main.begin(), main.end(), *it, Compare);
+		Lst::iterator it1 = std::lower_bound(main.begin(), main.end(), *it, Compare_l);
 		main.insert(it1, *it);
 	}
 
@@ -107,7 +155,7 @@ void pm::sort_l(void)
 	}
 	pair_l();
 	sort_l();
-	chaine_l(d, main, pend, reset);
+	chaine_l(d, main, pend, rest);
 	d = main;
 	main.clear();
 }

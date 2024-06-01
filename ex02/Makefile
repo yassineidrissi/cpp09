@@ -6,7 +6,7 @@
 #    By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 17:47:01 by yaidriss          #+#    #+#              #
-#    Updated: 2024/05/31 20:10:34 by yaidriss         ###   ########.fr        #
+#    Updated: 2024/06/02 00:39:59 by yaidriss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,11 @@ all : $(NAME)
 clean :
 	@rm -f $(OBJ)
 	@echo "\033[31m Delete object files🗑\033[31m"
+
 fclean : clean
 	@rm -f $(NAME)
 	@echo "\033[31m Delete exucted file🗑\033[31m"
+
 re : fclean all
 
 run : re 

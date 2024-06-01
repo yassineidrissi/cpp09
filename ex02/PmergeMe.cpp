@@ -578,7 +578,7 @@ void pm::sort(void)
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	
     start = std::chrono::high_resolution_clock::now();
-	// this->sort_l();
+	this->sort_l();
 	end = std::chrono::high_resolution_clock::now();
 	this->Ltime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 }
