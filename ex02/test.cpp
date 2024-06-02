@@ -77,7 +77,6 @@ void pm::sort_l(void) {
     }
 
     pair_l();
-    if (this->ls.size() == 1) return; // Ensure we stop recursion when there's only one pair left
     sort_l();
     chaine_l(d, main, pend, rest);
     this->ls = main;

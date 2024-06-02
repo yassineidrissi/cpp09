@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/02 00:23:40 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/02 21:56:26 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ class pm
         std::vector<std::string>& get_ln();
 		void set_ln(std::string l);
 		std::vector<int>& get_v();
+		Lst& get_ls();
 		void set_v(int v);
 		std::list<int>& get_l();
 		void set_l(int l);
@@ -77,17 +78,11 @@ class pm
 		void fill_vs_pend();
 		void fill_vs_odd();
 		void fill_final();
+		void fill_double_l(void);
 		void generate_vs();;
 		void vstov();
 		void odd_insert();
 		
-		    void add_to_ls(int value) {
-        ls.push_back(value);
-    }
-
-    const Lst& get_ls() const {
-        return ls;
-    }
 
 		//******* Print Functions ********//
 		void print_l(void);
@@ -117,6 +112,7 @@ class pm
 		void sort_vs(Vec& digits);
 		Vec& get_vs_odd();
 		void printVector(const Vec& );	
+		void printList(const Lst &sequence);
 		///******* Exeception ************//
 		class pmException : public std::exception
 		{

@@ -82,6 +82,11 @@ Vec& pm::get_vs_odd()
 	return this->vs_odd;
 }
 
+Lst& pm::get_ls()
+{
+	return this->ls;
+}
+
 //************** Functions *****************//
 void pm::split()
 {
@@ -110,10 +115,24 @@ void pm::fill_double_v(void)
 	std::cout << "get_vs size :" << this->get_vs().size() << std::endl;
 }
 
+void pm::fill_double_l(void)
+{
+	this->get_ls().clear();
+	for(std::list<int>::iterator it = this->get_l().begin(); it != this->get_l().end(); it++)
+	{
+		std::list<int> l;
+		l.push_back(*it);
+		this->get_ls().push_back(l);
+	}
+}
+
 void pm::fill(void)
 {
 	for (size_t i = 0; i < this->get_ln().size(); i++)
+	{
 		this->v.push_back(std::stoi(this->get_ln()[i]));	
+		this->l.push_back(std::stoi(this->get_ln()[i]));
+	}
 }
 
 void  pm::parcing(char **av)
@@ -136,6 +155,7 @@ void  pm::parcing(char **av)
 	// this->limit = j - 1;
 	this->fill();
 	this->fill_double_v();
+	this->fill_double_l();
 
 }
 
@@ -173,6 +193,7 @@ void pm::printAfter(void)
 	std::cout << GREEN << "After  :  ";
 	printVector(this->vs);
 	std::cout << RESET << std::endl;
+	printList(this->ls);
 }
 
 void pm::printTime(void)
@@ -339,6 +360,15 @@ void pm::printVector(const Vec &sequence) {
             std::cout << *num_it << " ";
         }
     }
+	std::cout << RESET << std::endl;
+}
+
+void pm::printList(const Lst &sequence) {
+	for (Lst::const_iterator vec_it = sequence.begin(); vec_it != sequence.end(); ++vec_it) {
+		for (MiniLst::const_iterator num_it = vec_it->begin(); num_it != vec_it->end(); ++num_it) {
+			std::cout << *num_it << " ";
+		}
+	}
 	std::cout << RESET << std::endl;
 }
 

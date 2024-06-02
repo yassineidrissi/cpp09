@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:36:45 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/02 00:14:16 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/02 21:54:42 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@ void pm::pair_l(void)
 	Lst tmp;
 	for (Lst::iterator it = this->ls.begin(); it != this->ls.end(); std::advance(it, 2))
 	{
+		std::cout << "it: " << *it->begin() << std::endl;
 		if (std::next(it) != this->ls.end())
 		{
 			MiniLst temp;
 			if(*it > *std::next(it))
 			{
- 				MiniLst temp = *it;
+ 				temp = *it;
                 *it = *std::next(it);
                 *std::next(it) = temp;
 			}
 			MiniLst flst;
 			for (MiniLst::iterator it1 = it->begin(); it1 != it->end(); it1++)
 				flst.push_back(*it1);
-			for (MiniLst::iterator it2 = std::next(it)->begin(); it2 != std::next(it)->end(); ++it2)
+			for (MiniLst::iterator it2 = std::next(it)->begin(); it2 != std::next(it)->end(); it2++)
 				flst.push_back(*it2);
 			tmp.push_back(flst);
 			flst.clear();
@@ -153,6 +154,7 @@ void pm::sort_l(void)
 		rest.push_back(d.back());
 		d.pop_back();
 	}
+	std::cout << "im here " << *this->ls.begin()->begin() << std::endl;
 	pair_l();
 	sort_l();
 	chaine_l(d, main, pend, rest);
