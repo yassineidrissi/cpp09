@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:36:45 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/02 21:54:42 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:18:21 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ static bool Compare_l(const MiniLst& a, const MiniLst& b)
 void pm::pair_l(void)
 {
 	Lst tmp;
+	// std::cout <<  "pair_l" << this 
 	for (Lst::iterator it = this->ls.begin(); it != this->ls.end(); std::advance(it, 2))
 	{
-		std::cout << "it: " << *it->begin() << std::endl;
+		// std::cout << "it: " << *it->begin() << std::endl;
 		if (std::next(it) != this->ls.end())
 		{
 			MiniLst temp;
@@ -48,7 +49,7 @@ void pm::pair_l(void)
 	tmp.clear();
 }
 
-void pm::chaine_l(Lst& d, Lst& main, Lst& pend, Lst& rest)
+void pm::chaine_l(Lst& d, Lst& main, Lst& pend_l, Lst& rest)
 {
 	//unpaire
 	// Lst newl;
@@ -103,16 +104,21 @@ void pm::chaine_l(Lst& d, Lst& main, Lst& pend, Lst& rest)
 	// 	if (index % 2 == 0)
 	// 		main.push_back(*it);
 	// 	else
-	// 		pend.push_back(*it);
+	// 		pend_l.push_back(*it);
 	// 	++index;
 	// 	++it2;
 	// }
 	// Lst::iterator re = rest.begin();
 	// while (re != rest.end())
 	// {
-	// 	pend.push_back(*re);
+	// 	pend_l.push_back(*re);
 	// 	++re;
 	// }
+	//!!!!!!
+	std::cout << RED << "im here create chaine L" << std::endl;
+	printList(d);
+	std::cout << RESET;
+	// (void) rest;
 	 int index = 0;
     Lst::iterator it = d.begin();
     while (it != d.end())
@@ -120,7 +126,7 @@ void pm::chaine_l(Lst& d, Lst& main, Lst& pend, Lst& rest)
         if (index % 2 != 0)
             main.push_back(*it);
         else
-            pend.push_back(*it);
+            pend_l.push_back(*it);
         index++;
         it++;
     }
@@ -128,25 +134,28 @@ void pm::chaine_l(Lst& d, Lst& main, Lst& pend, Lst& rest)
     Lst::iterator re = rest.begin();
     while(re != rest.end())
     {
-        pend.push_back(*re);
+        pend_l.push_back(*re);
         re++;
     }
-	//insertPaid
-	for(Lst::iterator it = pend.begin(); it != pend.end(); ++it)
+	//!!insertPaid
+	for(Lst::iterator it = pend_l.begin(); it != pend_l.end(); ++it)
 	{
 		Lst::iterator it1 = std::lower_bound(main.begin(), main.end(), *it, Compare_l);
 		main.insert(it1, *it);
 	}
-
+	this->ls = d;
 }
 
 void pm::sort_l(void)
 {
 	Lst& d = this->ls;
-	Lst pend;
-	Lst main;
+	Lst pend_l;
+	Lst& main = this->l_main;
 	Lst rest;
 
+	std::cout << "im here L " << *this->ls.begin()->begin() << std::endl;
+	printList(this->ls);
+	// sleep(0);
 	if (d.size() == 1)
 		return;
 	if (d.size() % 2 != 0)
@@ -154,10 +163,9 @@ void pm::sort_l(void)
 		rest.push_back(d.back());
 		d.pop_back();
 	}
-	std::cout << "im here " << *this->ls.begin()->begin() << std::endl;
 	pair_l();
 	sort_l();
-	chaine_l(d, main, pend, rest);
-	d = main;
+	chaine_l(d, main, pend_l, rest);
+	d = this->l_main;
 	main.clear();
 }

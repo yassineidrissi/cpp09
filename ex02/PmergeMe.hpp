@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/02 21:56:26 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:17:40 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <string>
 #include <algorithm> // Include this at the top of your file
 #include <thread>
+#include <unistd.h>
 
 typedef std::vector<std::vector<int> > Vec;
 typedef std::vector<int> MiniVec;
@@ -40,6 +41,7 @@ class pm
 		std::list<int> l;
 		Lst ls;
 		Lst l_odd;
+		Lst l_main;
 		std::vector<std::vector<int> > vs_main;
 		std::vector<std::vector<int> > vs_pend;
 		Vec vs_odd;
@@ -111,7 +113,7 @@ class pm
 		void unpair_vs(void);
 		void sort_vs(Vec& digits);
 		Vec& get_vs_odd();
-		void printVector(const Vec& );	
+		void printVector(const Vec&);	
 		void printList(const Lst &sequence);
 		///******* Exeception ************//
 		class pmException : public std::exception

@@ -192,8 +192,9 @@ void pm::printAfter(void)
 {
 	std::cout << GREEN << "After  :  ";
 	printVector(this->vs);
-	std::cout << RESET << std::endl;
+	std::cout << GREEN << "After  :  ";
 	printList(this->ls);
+	std::cout << RESET << std::endl;
 }
 
 void pm::printTime(void)
@@ -436,10 +437,6 @@ void pm::pair_vs() {
     tmp.clear();
 }
 
-bool compareMiniVecs(const MiniVec &a, const MiniVec &b) {
-    return a.back() <= b.back();
-}
-
 bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
 {
     return a.back() <= b.back();
@@ -517,6 +514,10 @@ void unpairVector(vecVec& digits)
     
 void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
 {
+	pm a;
+	std::cout << RED << "im here createChains V" << RESET << std::endl;
+	a.printVector(digits);
+	std::cout << RESET;
     int index = 0;
     Vec::iterator it = digits.begin();
     while (it != digits.end())
@@ -579,6 +580,10 @@ void pm::sort_v(void)
     vecVec mainChain;
     vecVec rest;
 
+	std::cout << "im here V " << *this->vs.begin()->begin() << std::endl;
+	printVector(this->vs);
+
+	// sleep(10);	
     if (digits.size() == 1)
         return ;//digits; // Fixed the return statement
     if (digits.size() % 2 != 0)
@@ -603,10 +608,9 @@ void pm::sort(void)
 	
 	start = std::chrono::high_resolution_clock::now();
 	this->sort_v();
-	sort_v();
 	end = std::chrono::high_resolution_clock::now();
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-	
+	std::cout << "********************************" << std::endl;
     start = std::chrono::high_resolution_clock::now();
 	this->sort_l();
 	end = std::chrono::high_resolution_clock::now();
