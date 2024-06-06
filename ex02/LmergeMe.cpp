@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   LmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:36:45 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/05 23:18:21 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/06 01:51:54 by yassine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static bool Compare_l(const MiniLst& a, const MiniLst& b)
 {
-    return a.size() < b.size();
+    return a.back() <= b.back();
 }
 
 void pm::pair_l(void)
@@ -94,6 +94,7 @@ void pm::chaine_l(Lst& d, Lst& main, Lst& pend_l, Lst& rest)
         newOne.push_back(list1);
         newOne.push_back(list2);
     }
+	d.clear();
     d = newOne;
     newOne.clear();
 	// createchaine
@@ -166,6 +167,6 @@ void pm::sort_l(void)
 	pair_l();
 	sort_l();
 	chaine_l(d, main, pend_l, rest);
-	d = this->l_main;
+	d = main;
 	main.clear();
 }
