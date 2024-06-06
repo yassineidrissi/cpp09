@@ -87,6 +87,11 @@ Lst& pm::get_ls()
 	return this->ls;
 }
 
+void pm::set_size(int size)
+{
+	this->size = size;
+}
+
 //************** Functions *****************//
 void pm::split()
 {
@@ -112,7 +117,6 @@ void pm::fill_double_v(void)
 		v.push_back(get_v()[i]);
 		this->get_vs().push_back(v);
 	}
-	std::cout << "get_vs size :" << this->get_vs().size() << std::endl;
 }
 
 void pm::fill_double_l(void)
@@ -151,7 +155,7 @@ void  pm::parcing(char **av)
 		if (j > 3000)
 			throw pm::pmException();
     }
-	// this->size = j;
+	this->size = j;
 	// this->limit = j - 1;
 	this->fill();
 	this->fill_double_v();
@@ -182,24 +186,24 @@ void pm::print_ln(void)
 
 void pm::printBefor(void)
 {
-	std::cout << YELLOW << "Before (vector) :  ";
+	std::cout << YELLOW << "Before (Vector): ";
 	this->print_ln();
-	std::cout << YELLOW << "Before (vector) :  ";
+	std::cout << YELLOW << "Before   (List): ";
 	this->print_ln();
 }
 
 void pm::printAfter(void)
 {
-	std::cout << GREEN << "After  :  ";
+	std::cout << GREEN << "After  (Vector): ";
 	printVector(this->vs);
-	std::cout << GREEN << "After  :  ";
+	std::cout << GREEN << "After    (List): ";
 	printList(this->ls);
 	std::cout << RESET << std::endl;
 }
 
 void pm::printTime(void)
 {
-	std::cout << YELLOW << 	"Time to proccess a range of    " << this->size << " elements with std::vector : " << this->Vtime.count() << " us" << RESET << std::endl;
+	std::cout << YELLOW << 	"Time to proccess a range of " << this->size << " elements with std::vector : " << this->Vtime.count() << " us" << RESET << std::endl;
 	std::cout << GREEN << "Time to proccess a range of " << this->size << " elements with std::List : " << this->Ltime.count() << " us" << RESET << std::endl;
 }
 
@@ -515,8 +519,8 @@ void unpairVector(vecVec& digits)
 void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
 {
 	pm a;
-	std::cout << RED << "im here createChains V" << RESET << std::endl;
-	a.printVector(digits);
+	// std::cout << RED << "im here createChains V" << RESET << std::endl;
+	// a.printVector(digits);
 	std::cout << RESET;
     int index = 0;
     Vec::iterator it = digits.begin();
@@ -580,8 +584,8 @@ void pm::sort_v(void)
     vecVec mainChain;
     vecVec rest;
 
-	std::cout << "im here V " << *this->vs.begin()->begin() << std::endl;
-	printVector(this->vs);
+	// std::cout << "im here V " << *this->vs.begin()->begin() << std::endl;
+	// printVector(this->vs);
 
 	// sleep(10);	
     if (digits.size() == 1)
@@ -610,7 +614,7 @@ void pm::sort(void)
 	this->sort_v();
 	end = std::chrono::high_resolution_clock::now();
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-	std::cout << "********************************" << std::endl;
+	// std::cout << "********************************" << std::endl;
     start = std::chrono::high_resolution_clock::now();
 	this->sort_l();
 	end = std::chrono::high_resolution_clock::now();

@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/05 23:17:40 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:54:31 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ class pm
 		//******** seters and getters ****//
         std::vector<std::string>& get_ln();
 		void set_ln(std::string l);
+		void set_size(int size);
 		std::vector<int>& get_v();
 		Lst& get_ls();
 		void set_v(int v);

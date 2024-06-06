@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   LmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:36:45 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/06 01:51:54 by yassine          ###   ########.fr       */
+/*   Updated: 2024/06/06 19:51:23 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ void pm::chaine_l(Lst& d, Lst& main, Lst& pend_l, Lst& rest)
 	// 	++re;
 	// }
 	//!!!!!!
-	std::cout << RED << "im here create chaine L" << std::endl;
-	printList(d);
-	std::cout << RESET;
+	// std::cout << RED << "im here create chaine L" << std::endl;
+	// printList(d);
+	// std::cout << RESET;
 	// (void) rest;
 	 int index = 0;
     Lst::iterator it = d.begin();
@@ -154,8 +154,8 @@ void pm::sort_l(void)
 	Lst& main = this->l_main;
 	Lst rest;
 
-	std::cout << "im here L " << *this->ls.begin()->begin() << std::endl;
-	printList(this->ls);
+	// std::cout << "im here L " << *this->ls.begin()->begin() << std::endl;
+	// printList(this->ls);
 	// sleep(0);
 	if (d.size() == 1)
 		return;
