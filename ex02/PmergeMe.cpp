@@ -449,9 +449,9 @@ void pm::InsertPaid() {
     }
 }
 
-void pairVector(vecVec &digits, vecVec &rest) {
-    vecVec tmp;
-    for (vecVec::iterator it = digits.begin(); it != digits.end(); it += 2) 
+void pairVector(Vec &digits, Vec &rest) {
+    Vec tmp;
+    for (Vec::iterator it = digits.begin(); it != digits.end(); it += 2) 
     {
         if (it + 1 != digits.end()) 
         { 
@@ -477,7 +477,7 @@ void pairVector(vecVec &digits, vecVec &rest) {
     tmp.clear();
 }
 
-void unpairVector(vecVec& digits)
+void unpairVector(Vec& digits)
 {
     Vec newOne;
 
@@ -499,7 +499,7 @@ void unpairVector(vecVec& digits)
 }
 
     
-void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
+void createChains(Vec &digits, Vec &main, Vec &pend, Vec &remain)
 {
 	pm a;
 	
@@ -529,7 +529,7 @@ bool Compare(const std::vector<int> &a, const std::vector<int> &b)
     return a.back() <= b.back();
 }
 
-void InsertPaindInMain(vecVec &main, vecVec &Paind)
+void InsertPaindInMain(Vec &main, Vec &Paind)
 {
 
     for (Vec::const_iterator it = Paind.begin(); it != Paind.end(); ++it)
@@ -544,10 +544,10 @@ void InsertPaindInMain(vecVec &main, vecVec &Paind)
 
 void pm::sort_v(void)
 {
-	vecVec& digits = this->vs;
-    vecVec pend;
-    vecVec mainChain;
-    vecVec rest;
+	Vec& digits = this->vs;
+    Vec pend;
+    Vec mainChain;
+    Vec rest;
 
     if (digits.size() == 1)
         return ;

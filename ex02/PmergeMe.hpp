@@ -6,12 +6,12 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 13:29:46 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/08 17:57:54 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:06:25 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
+//********* Libraries **************//
 #include <iostream>
 #include <chrono>
 #include <list>
@@ -34,11 +34,12 @@
 #define RESET "\033[0m"
 #define GREE "\033[33m"
 
+//********* Typedefs ***************//
 typedef std::vector<std::vector<int> > Vec;
 typedef std::vector<int> MiniVec;
 typedef std::list<std::list<int> > Lst;
 typedef std::list<int> MiniLst;
-typedef Vec vecVec;
+
 class pm
 {
 	private:
