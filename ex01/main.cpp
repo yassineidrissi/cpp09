@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 22:50:01 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/03/07 18:46:12 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:53:41 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void parsing(char *av, RPN& r)
 	r.set_ln(r.split(l, ' '));
 	for(size_t i =0 ; i < r.get_ln().size() && !check; i++)
 	{
+		// std::cout << r.get_ln()[i].s ize << std::endl;
 		if(r.get_ln()[i].size() == 1 && (r.get_ln()[i][0] == '-' || r.get_ln()[i][0] == '*' || r.get_ln()[i][0] == '+' || r.get_ln()[i][0] == '/'))
 		{
 			r.set_op((r.get_ln()[i][0]));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yassine <yassine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/03/08 00:32:21 by yassine          ###   ########.fr       */
+/*   Updated: 2024/06/08 21:38:40 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class RPN
 		~RPN();
 		RPN(const RPN &r);
 		RPN &operator=(const RPN &r);
-		void split(std::string &s, char delimiter) ;
+		std::deque<std::string> split(std::string &s, char delimiter) ;
 		int check_v(std::vector<std::string>& c);
 		int opert();
 		std::string get_ln_str(int n);
