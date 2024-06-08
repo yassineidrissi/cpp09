@@ -6,14 +6,14 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:36:45 by yaidriss          #+#    #+#             */
-/*   Updated: 2024/06/08 17:28:49 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:43:36 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 
-static bool Compare_l(const MiniLst& a, const MiniLst& b)
+bool Compare_l(const MiniLst& a, const MiniLst& b)
 {
     return a.back() <= b.back();
 }

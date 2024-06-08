@@ -93,16 +93,6 @@ void pm::set_size(int size)
 }
 
 //************** Functions *****************//
-void pm::split()
-{
-	std::vector<std::string> lines;
-	std::string ln;
-	std::istringstream tokenStream(this->get_ln()[0]);
-	while (std::getline(tokenStream, ln, ' ')) 
-		lines.push_back(ln);
-	
-}
-
 std::vector<std::vector<int> >& pm::get_vs()
 {
 	return this->vs;
@@ -156,7 +146,6 @@ void  pm::parcing(char **av)
 			throw pm::pmException();
     }
 	this->size = j;
-	// this->limit = j - 1;
 	this->fill();
 	this->fill_double_v();
 	this->fill_double_l();
@@ -164,18 +153,18 @@ void  pm::parcing(char **av)
 }
 
 //************* Print Functions ***************//
-void pm::print_l(void)
-{
-	for (std::list<int>::iterator it = this->get_l().begin(); it != this->get_l().end(); it++)
-		std::cout << GREEN << *it << RESET << std::endl;
-}
+// void pm::print_l(void)
+// {
+// 	for (std::list<int>::iterator it = this->get_l().begin(); it != this->get_l().end(); it++)
+// 		std::cout << GREEN << *it << RESET << std::endl;
+// }
 
-void pm::print_v(void)
-{
-	for (size_t i = 0; i < this->get_v().size(); i++)
-		std::cout << GREEN << this->get_v()[i] << " ";
-	std::cout << RESET << std::endl;
-}
+// void pm::print_v(void)
+// {
+// 	for (size_t i = 0; i < this->get_v().size(); i++)
+// 		std::cout << GREEN << this->get_v()[i] << " ";
+// 	std::cout << RESET << std::endl;
+// }
 
 void pm::print_ln(void)
 {
@@ -209,79 +198,79 @@ void pm::printTime(void)
 
 //*************** Sort Functions **************//
 
-template <typename T>
-void pop_front(std::vector<T>& vec, int i) {
-    if (!vec.empty()  && i >= 0 && i < vec.size()) {
-        vec.erase(vec.begin());
-    }
-}
+// template <typename T>
+// void pop_front(std::vector<T>& vec, int i) {
+//     if (!vec.empty()  && i >= 0 && i < vec.size()) {
+//         vec.erase(vec.begin());
+//     }
+// }
 
-void pm::merge(int l)
-{
-	std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
-	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
-	{
-		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
-    	unsigned long indexTo = l; // ...into this index.
- 	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
-   	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
- 	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
-  	  } else {
-   	     std::cout << "Invalid indices provided." << std::endl;
-      }
-	}
-	else
-	{
-		unsigned long indexFrom = l; // Assuming you want to merge from this index...
-    	unsigned long indexTo = l + 1; // ...into this index.
+// void pm::merge(int l)
+// {
+// 	std::cout << "end of vector :"<< l << " "  << get_vs()[l][this->get_vs()[l].size() -1] << std::endl;
+// 	if(this->get_vs()[l][this->get_vs()[l].size() - 1] < this->get_vs()[l + 1][this->get_vs()[l + 1].size() - 1])
+// 	{
+// 		unsigned long indexFrom = l + 1; // Assuming you want to merge from this index...
+//     	unsigned long indexTo = l; // ...into this index.
+//  	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
+//    	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
+//  	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
+//   	  } else {
+//    	     std::cout << "Invalid indices provided." << std::endl;
+//       }
+// 	}
+// 	else
+// 	{
+// 		unsigned long indexFrom = l; // Assuming you want to merge from this index...
+//     	unsigned long indexTo = l + 1; // ...into this index.
 
- 	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
-   	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
+//  	   if(indexFrom < this->get_vs().size() && indexTo < this->get_vs().size() && indexFrom != indexTo) {
+//    	     this->get_vs()[indexTo].insert(this->get_vs()[indexTo].end(), this->get_vs()[indexFrom].begin(), this->get_vs()[indexFrom].end());
 
- 	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
-  	  } else {
-   	     std::cout << "Invalid indices provided." << std::endl;
-      }
-	}
-	std::cout << "l merge :" << l << std::endl;
-}
+//  	       this->get_vs().erase(this->get_vs().begin() + indexFrom);
+//   	  } else {
+//    	     std::cout << "Invalid indices provided." << std::endl;
+//       }
+// 	}
+// 	std::cout << "l merge :" << l << std::endl;
+// }
 
-void pm::print_vs(void)
-{
-	std::cout << "size is " << this->get_vs().size() << std::endl;
-	for(unsigned long i = 0; i < this->get_vs().size(); ++i) {
-		std::cout << "indice " << i << std::endl;
-		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j) {
-			std::cout << this->get_vs()[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-}
+// void pm::print_vs(void)
+// {
+// 	std::cout << "size is " << this->get_vs().size() << std::endl;
+// 	for(unsigned long i = 0; i < this->get_vs().size(); ++i) {
+// 		std::cout << "indice " << i << std::endl;
+// 		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j) {
+// 			std::cout << this->get_vs()[i][j] << " ";
+// 		}
+// 		std::cout << std::endl;
+// 	}
+// }
 
-void pm::print_vs_main()
-{
-	std::cout << GREE;
-	for(unsigned long i = 0; i < this->get_vs_main().size(); ++i) {
-		std::cout << "indice " << i << std::endl;
-		for(unsigned long j = 0; j < this->get_vs_main()[i].size(); ++j) {
-			std::cout << this->get_vs_main()[i][j] << " ";
-		}
-		std::cout << RESET << std::endl;
-	}
+// void pm::print_vs_main()
+// {
+// 	std::cout << GREE;
+// 	for(unsigned long i = 0; i < this->get_vs_main().size(); ++i) {
+// 		std::cout << "indice " << i << std::endl;
+// 		for(unsigned long j = 0; j < this->get_vs_main()[i].size(); ++j) {
+// 			std::cout << this->get_vs_main()[i][j] << " ";
+// 		}
+// 		std::cout << RESET << std::endl;
+// 	}
 
-}
+// }
 
-void pm::print_vs_pend()
-{
-	std::cout << YELLOW;
-	for(unsigned long i = 0; i < this->get_vs_pend().size(); ++i) {
-		std::cout << "indice " << i << std::endl;
-		for(unsigned long j = 0; j < this->get_vs_pend()[i].size(); ++j) {
-			std::cout << this->get_vs_pend()[i][j] << " ";
-		}
-		std::cout << RESET << std::endl;
-	}
-}
+// void pm::print_vs_pend()
+// {
+// 	std::cout << YELLOW;
+// 	for(unsigned long i = 0; i < this->get_vs_pend().size(); ++i) {
+// 		std::cout << "indice " << i << std::endl;
+// 		for(unsigned long j = 0; j < this->get_vs_pend()[i].size(); ++j) {
+// 			std::cout << this->get_vs_pend()[i][j] << " ";
+// 		}
+// 		std::cout << RESET << std::endl;
+// 	}
+// }
 
 void pm::fill_vs_pend()
 {
@@ -290,32 +279,32 @@ void pm::fill_vs_pend()
 		this->get_vs_pend().push_back(this->get_vs()[i]);
 }
 
-void pm::split_mp()
-{
-	std::cout << GREEN << "im in split" << RESET << std::endl;
-	this->get_vs_main().clear();
-	this->get_vs_main().push_back(this->get_vs()[0]);
-	std::cout << BLUE << "get_vs  " << 0 << " " << this->get_vs()[0][this->get_vs()[0].size() - 1] << RESET << std::endl;
-	this->get_vs_main().push_back(this->get_vs()[1]);
-	std::cout << BLUE << "get_vs  " << 1 << " " << this->get_vs()[1][this->get_vs()[1].size() - 1] << RESET << std::endl;
-	for(unsigned long i = 2; i < this->get_vs().size(); ++i)
-	{
-		if(i % 2 == 1)
-			this->get_vs_main().push_back(this->get_vs()[i]);
-		else
-			this->get_vs_pend().push_back(this->get_vs()[i]);
-		std::cout << BLUE << "get_vs  " << i << " " << this->get_vs()[i][this->get_vs()[i].size() - 1] << RESET << std::endl;
-	}
-	this->get_vs() = this->get_vs_main();
-	this->get_vs().push_back(this->get_vs_pend()[0]);
-}
+// void pm::split_mp()
+// {
+// 	std::cout << GREEN << "im in split" << RESET << std::endl;
+// 	this->get_vs_main().clear();
+// 	this->get_vs_main().push_back(this->get_vs()[0]);
+// 	std::cout << BLUE << "get_vs  " << 0 << " " << this->get_vs()[0][this->get_vs()[0].size() - 1] << RESET << std::endl;
+// 	this->get_vs_main().push_back(this->get_vs()[1]);
+// 	std::cout << BLUE << "get_vs  " << 1 << " " << this->get_vs()[1][this->get_vs()[1].size() - 1] << RESET << std::endl;
+// 	for(unsigned long i = 2; i < this->get_vs().size(); ++i)
+// 	{
+// 		if(i % 2 == 1)
+// 			this->get_vs_main().push_back(this->get_vs()[i]);
+// 		else
+// 			this->get_vs_pend().push_back(this->get_vs()[i]);
+// 		std::cout << BLUE << "get_vs  " << i << " " << this->get_vs()[i][this->get_vs()[i].size() - 1] << RESET << std::endl;
+// 	}
+// 	this->get_vs() = this->get_vs_main();
+// 	this->get_vs().push_back(this->get_vs_pend()[0]);
+// }
 
-void pm::generate_vs()
-{
-	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
-		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
-			get_v().push_back(this->get_vs()[i][j]);
-}
+// void pm::generate_vs()
+// {
+// 	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
+// 		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
+// 			get_v().push_back(this->get_vs()[i][j]);
+// }
 
 // void pm::handl_vs()
 // {
@@ -327,37 +316,37 @@ void pm::generate_vs()
 //     this->limit--;
 // }
 
-void pm::vstov()
-{
-	std::vector<int>& tmp = this->get_v();
-	tmp.clear();
-	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
-		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
-			tmp.push_back(this->get_vs()[i][j]);
-	this->get_vs().clear();
-}
+// void pm::vstov()
+// {
+// 	std::vector<int>& tmp = this->get_v();
+// 	tmp.clear();
+// 	for(unsigned long i = 0; i < this->get_vs().size(); ++i)
+// 		for(unsigned long j = 0; j < this->get_vs()[i].size(); ++j)
+// 			tmp.push_back(this->get_vs()[i][j]);
+// 	this->get_vs().clear();
+// }
 
-void pm::baniry_sort()
-{
-	std::vector<std::vector<int> >& m = this->get_vs_main();
-	std::vector<std::vector<int> >& p = this->get_vs_pend();
-	std::vector<std::vector<int> >& tmp = this->get_vs();
-	tmp.clear();
-	for(unsigned long i = 0; i < p.size(); ++i)
-	{
-		for(unsigned long j = 0; j < m.size(); ++j)
-		{
-			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
-			{
-				m.insert(m.begin() + j, p[i]);
-				j++;
-			}
+// void pm::baniry_sort()
+// {
+// 	std::vector<std::vector<int> >& m = this->get_vs_main();
+// 	std::vector<std::vector<int> >& p = this->get_vs_pend();
+// 	std::vector<std::vector<int> >& tmp = this->get_vs();
+// 	tmp.clear();
+// 	for(unsigned long i = 0; i < p.size(); ++i)
+// 	{
+// 		for(unsigned long j = 0; j < m.size(); ++j)
+// 		{
+// 			if(m[j][m[j].size() -1] > p[i][p[i].size() -1])
+// 			{
+// 				m.insert(m.begin() + j, p[i]);
+// 				j++;
+// 			}
 			
-		}
-	}
-	p.clear();
-	tmp = m;
-}
+// 		}
+// 	}
+// 	p.clear();
+// 	tmp = m;
+// }
 
 void pm::printVector(const Vec &sequence) {
     for (Vec::const_iterator vec_it = sequence.begin(); vec_it != sequence.end(); ++vec_it) {
@@ -377,44 +366,44 @@ void pm::printList(const Lst &sequence) {
 	std::cout << RESET << std::endl;
 }
 
-void pm::Chaine_vs() {
-	int i = 0;
+// void pm::Chaine_vs() {
+// 	int i = 0;
 
-	//! need to check this
-    for (Vec::iterator it = this->vs.begin(); it != this->vs.end(); ++it) {
-		if(i % 2)
-		{
-			this->vs_main.push_back(*it);
-        } else {
-			this->vs_pend.push_back(*it);
-        }
-		i++;
-    }
-	this->vs_odd.clear();
-}
+// 	//! need to check this
+//     for (Vec::iterator it = this->vs.begin(); it != this->vs.end(); ++it) {
+// 		if(i % 2)
+// 		{
+// 			this->vs_main.push_back(*it);
+//         } else {
+// 			this->vs_pend.push_back(*it);
+//         }
+// 		i++;
+//     }
+// 	this->vs_odd.clear();
+// }
 
-void pm::unpair_vs() {
+// void pm::unpair_vs() {
 
-	Vec& digits = this->vs;
+// 	Vec& digits = this->vs;
 
-	Vec newOne;
+// 	Vec newOne;
 
-    size_t size = digits[0].size() / 2;
+//     size_t size = digits[0].size() / 2;
 
-    for (size_t i = 0; i < digits.size(); ++i)
-    {
-        std::vector<int> vec1, vec2;
-        for (size_t j = 0; j < size; ++j)
-        {
-            vec1.push_back(digits[i][j]);
-            vec2.push_back(digits[i][j + size]);
-        }
-        newOne.push_back(vec1);
-        newOne.push_back(vec2);
-    }
-    digits = newOne;
-    newOne.clear();
-}
+//     for (size_t i = 0; i < digits.size(); ++i)
+//     {
+//         std::vector<int> vec1, vec2;
+//         for (size_t j = 0; j < size; ++j)
+//         {
+//             vec1.push_back(digits[i][j]);
+//             vec2.push_back(digits[i][j + size]);
+//         }
+//         newOne.push_back(vec1);
+//         newOne.push_back(vec2);
+//     }
+//     digits = newOne;
+//     newOne.clear();
+// }
 
 void pm::pair_vs() {
     Vec tmp;
@@ -459,9 +448,6 @@ void pm::InsertPaid() {
         main.insert(insertionPoint, *it);
     }
 }
-
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 void pairVector(vecVec &digits, vecVec &rest) {
     vecVec tmp;
