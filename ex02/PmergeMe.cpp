@@ -485,10 +485,7 @@ void pairVector(vecVec &digits, vecVec &rest) {
             oneVec.clear();
         } 
         else 
-        {
-            // If there's no next vector, just push the current one
             rest.push_back(*it);
-        }
     } 
     digits = tmp;
     tmp.clear();
@@ -519,8 +516,7 @@ void unpairVector(vecVec& digits)
 void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
 {
 	pm a;
-	// std::cout << RED << "im here createChains V" << RESET << std::endl;
-	// a.printVector(digits);
+	
 	std::cout << RESET;
     int index = 0;
     Vec::iterator it = digits.begin();
@@ -540,23 +536,6 @@ void createChains(vecVec &digits, vecVec &main, vecVec &pend, vecVec &remain)
         pend.push_back(*re);
         re++;
     }
-}
-
-vecVec getDigits(char **argv, int argc)
-{
-    vecVec digits;
-    for(int i = 1; i < argc; i++)
-    {
-        std::vector<int> vec_int;
-        char *endPtr;
-        long num = std::strtol(argv[i], &endPtr, 10);
-        if(*endPtr != '\0' || num < INT_MIN || num > INT_MAX)
-            throw std::invalid_argument("Invalid argument => " + std::string(argv[i]));
-        vec_int.push_back(static_cast<int>(num));
-        digits.push_back(vec_int);
-        vec_int.clear();
-    }
-    return digits;
 }
 
 bool Compare(const std::vector<int> &a, const std::vector<int> &b)
@@ -584,12 +563,8 @@ void pm::sort_v(void)
     vecVec mainChain;
     vecVec rest;
 
-	// std::cout << "im here V " << *this->vs.begin()->begin() << std::endl;
-	// printVector(this->vs);
-
-	// sleep(10);	
     if (digits.size() == 1)
-        return ;//digits; // Fixed the return statement
+        return ;
     if (digits.size() % 2 != 0)
     {
         rest.push_back(digits.back());
@@ -614,7 +589,6 @@ void pm::sort(void)
 	this->sort_v();
 	end = std::chrono::high_resolution_clock::now();
 	this->Vtime = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-	// std::cout << "********************************" << std::endl;
     start = std::chrono::high_resolution_clock::now();
 	this->sort_l();
 	end = std::chrono::high_resolution_clock::now();
