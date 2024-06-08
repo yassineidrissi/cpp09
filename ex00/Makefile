@@ -6,12 +6,12 @@
 #    By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 17:47:01 by yaidriss          #+#    #+#              #
-#    Updated: 2024/02/24 22:21:48 by yaidriss         ###   ########.fr        #
+#    Updated: 2024/06/08 19:54:12 by yaidriss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-FLAGE = -Wall -Wextra -Werror -g -std=c++98
+FLAGE = -Wall -Wextra -Werror -std=c++98
 NAME = btc  
 SRC =  BitcoinExchange.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)

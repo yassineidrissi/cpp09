@@ -63,13 +63,14 @@ void fillData(bit &b)
             std::map<int , std::string> splitLine = split(line, ',');
             std::time_t key = stot(splitLine[0]);
             try {
+
                 double value = std::stod(splitLine[1]);
                 b.bitData[key] = value;
                 if(key > b.maxData)
                     b.maxData = key;
                 if(key < b.minData)
-                b.bitData[key] = value; // insert new data into b.data
                     b.minData = key;
+                b.bitData[key] = value; // insert new data into b.data
             }//! im not sure if we need to catch here 
             catch (std::invalid_argument const &e) 
             {
@@ -84,7 +85,7 @@ void fillData(bit &b)
 }
 
 std::time_t findClosestTime(bit& b, std::time_t inputTime) {
-    std::time_t closestTime = 0; // Initialize to an invalid value
+    std::time_t closestTime = 0; 
     for (std::map<std::time_t, double>::const_iterator it = b.bitData.begin(); it != b.bitData.end(); ++it) 
     {
         if (it->first > inputTime)

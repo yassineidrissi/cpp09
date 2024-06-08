@@ -6,7 +6,7 @@
 /*   By: yaidriss <yaidriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 21:25:25 by yassine           #+#    #+#             */
-/*   Updated: 2024/05/13 20:57:08 by yaidriss         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:34:52 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ class bit
 //************* print Functions ***********//
 int printErr(std::string str,int op);
 void printTime(time_t &tm);
-
 void fillData(bit &b);
 void fillInput(bit &b);
 void printTime(time_t &tm);
