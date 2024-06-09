@@ -430,24 +430,24 @@ void pm::pair_vs() {
     tmp.clear();
 }
 
-bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
-{
-    return a.back() <= b.back();
-}
+// bool pm::Compare(const std::vector<int> &a, const std::vector<int> &b)
+// {
+//     return a.back() <= b.back();
+// }
 
-void pm::InsertPaid() {
-	Vec& main = this->vs_main;
-	Vec& Paind = this->vs_pend;
+// void pm::InsertPaid() {
+// 	Vec& main = this->vs_main;
+// 	Vec& Paind = this->vs_pend;
 
-    for ( Vec::const_iterator it = Paind.begin(); it != Paind.end(); ++it)
-    {
-        // Find the insertion point using lower_bound
-        Vec::iterator insertionPoint = std::lower_bound(main.begin(), main.end(), *it, Compare);
+//     for ( Vec::const_iterator it = Paind.begin(); it != Paind.end(); ++it)
+//     {
+//         // Find the insertion point using lower_bound
+//         Vec::iterator insertionPoint = std::lower_bound(main.begin(), main.end(), *it, Compare);
 
-        // Insert the vector at the insertion point
-        main.insert(insertionPoint, *it);
-    }
-}
+//         // Insert the vector at the insertion point
+//         main.insert(insertionPoint, *it);
+//     }
+// }
 
 void pairVector(Vec &digits, Vec &rest) {
     Vec tmp;
@@ -541,7 +541,7 @@ void InsertPaindInMain(Vec &main, Vec &Paind)
         main.insert(insertionPoint, *it);
     }
 }
-
+static int i = 1;
 void pm::sort_v(void)
 {
 	Vec& digits = this->vs;
@@ -557,10 +557,21 @@ void pm::sort_v(void)
         digits.pop_back();
     }
     pair_vs();
+    std::cout << "After pair " << i++   << std::endl;
+    printVector(digits);
     sort_v();
+    std::cout << "After pair " << --i   << std::endl;
+    printVector(digits);
     unpairVector(digits);
+    std::cout << "After unpair digits " << i << std::endl;
+    printVector(digits);
     createChains(digits, mainChain, pend, rest);
+    std::cout << "After createChains main " << i << std::endl;
+    printVector(mainChain);
     InsertPaindInMain(mainChain, pend);
+    std::cout << "After InsertPaindInMain main " << i << std::endl;
+    printVector(mainChain);
+    // InsertPaid();
     digits = mainChain;
     mainChain.clear();
 }
